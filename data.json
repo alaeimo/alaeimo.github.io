@@ -260,16 +260,16 @@
         "category": "Frameworks & Libraries",
         "items": [
             { "name": "PyTorch", "level": "advanced beginner", "percent": 60, "icon": "/static/img/skills/pytorch.png" },
-            { "name": "TensorFlow", "level": "competent", "percent": 70, "icon": "/static/img/skills/tensorFlow.svg" },
+            { "name": "TensorFlow", "level": "competent", "percent": 70, "icon": "/static/img/skills/tensorflow.svg" },
             { "name": "Keras", "level": "competent", "percent": 70, "icon": "/static/img/skills/keras.svg" },
             { "name": "Scikit-Learn", "level": "competent", "percent": 70, "icon": "/static/img/skills/scikit_learn.svg" },
-            { "name": "OpenCV", "level": "competent", "percent": 70, "icon": "/static/img/skills/openCV.svg" },
-            { "name": "NumPy", "level": "competent", "percent": 70, "icon": "/static/img/skills/numPy.svg" },
+            { "name": "OpenCV", "level": "competent", "percent": 70, "icon": "/static/img/skills/opencv.svg" },
+            { "name": "NumPy", "level": "competent", "percent": 70, "icon": "/static/img/skills/numpy.svg" },
             { "name": "Matplotlib", "level": "competent", "percent": 70, "icon": "/static/img/skills/matplotlib.png" },
             { "name": "Pandas", "level": "competent", "percent": 70, "icon": "/static/img/skills/pandas.svg" },
             { "name": "Django", "level": "proficient", "percent": 80, "icon": "/static/img/skills/django.svg" },
             { "name": "Flask", "level": "proficient", "percent": 80, "icon": "/static/img/skills/flask.svg" },
-            { "name": "FastAPI", "level": "novice", "percent": 50, "icon": "/static/img/skills/fastAPI.svg" },
+            { "name": "FastAPI", "level": "novice", "percent": 50, "icon": "/static/img/skills/fastapi.svg" },
             { "name": "React", "level": "competent", "percent": 70, "icon": "/static/img/skills/react.svg" },
             { "name": "Bootstrap", "level": "competent", "percent": 70, "icon": "/static/img/skills/bootstrap.png" }
         ]
