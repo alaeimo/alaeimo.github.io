@@ -50,8 +50,8 @@ const Taskbar = ({ data, activeSection, onSectionChange, sections, sectionIcons 
                     color,
                   },
                   borderRadius: '50%',
-                  width: 32,
-                  height: 32,
+                  width: { xs: 25, sm: 25, md: 32, lg: 32, xl: 32 },
+                  height: { xs: 25, sm: 25, md: 32, lg: 32, xl: 32 },
                 }}
                 title={section.label}
               >
