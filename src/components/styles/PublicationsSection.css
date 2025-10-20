@@ -1,0 +1,92 @@
+.manuscript-timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-left: 2rem;
+  padding: 0.5rem 0;
+}
+
+.timeline-item {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.timeline-line {
+  position: absolute;
+  left: -1.2rem;
+  top: 1.2rem;
+  width: 2px;
+  height: calc(100% + 1.5rem);
+  background: linear-gradient(to bottom, #90caf9 0%, #2196f3 100%);
+  z-index: 0;
+}
+
+.timeline-node {
+  position: absolute;
+  left: -1.6rem;
+  top: 0.6rem;
+  width: 12px;
+  height: 12px;
+  background: #2196f3;
+  border-radius: 50%;
+  border: 3px solid #e3f2fd;
+  box-shadow: 0 0 6px rgba(33, 150, 243, 0.4);
+  z-index: 2;
+}
+
+.manuscript-card {
+  position: relative;
+  border: 1px solid rgba(33, 150, 243, 0.15);
+  border-radius: 10px;
+  padding: 1rem 1.3rem;
+  width: 100%;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.manuscript-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.12);
+}
+
+.manuscript-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.manuscript-dates {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.manuscript-links {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.manuscript-link {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #7b1fa2;
+  text-decoration: none;
+  background: rgba(123, 31, 162, 0.1);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.manuscript-link:hover {
+  background: rgba(123, 31, 162, 0.2);
+  color: #4a0072;
+}

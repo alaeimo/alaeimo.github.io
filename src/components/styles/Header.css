@@ -1,0 +1,54 @@
+.header {
+  position: relative;
+  overflow: hidden;
+}
+
+.face-image {
+  transition: transform 0.3s ease;
+}
+
+.face-image:hover {
+  transform: scale(1.05);
+}
+
+.contact-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 1px;
+  transition: all 0.3s ease;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1px;
+}
+
+.social-button {
+  transition: all 0.3s ease;
+}
+
+@media print {
+  .header {
+    background: #fff !important;
+    color: #000 !important;
+    box-shadow: none !important;
+  }
+
+  .header canvas {
+    display: none !important;
+  }
+
+  .social-button {
+    display: none !important;
+  }
+
+  .header-footer {
+    border-top: none !important;
+  }
+}

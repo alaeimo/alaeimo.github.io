@@ -1,70 +1,185 @@
-# Getting Started with Create React App
+# 🌐 Mohammad Alaei — Personal Academic Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repository contains the source code for **[alaeimo.ir](https://alaeimo.ir)** — the personal academic website of **Mohammad Alaei**, showcasing his background, research interests, projects, publications, skills, and academic contributions.  
+The site is built with **React + Material UI**, featuring a modular structure, responsive design, and smooth navigation between sections.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Demo
 
-### `npm start`
+- **Primary Domain:** [https://alaeimo.ir](https://alaeimo.ir)  
+- **GitHub Pages Mirror:** [https://alaeimo.github.io](https://alaeimo.github.io)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🧩 Features
 
-### `npm test`
+- 🎓 Academic portfolio with structured sections (Education, Research, Projects, etc.)  
+- 🧠 Data-driven architecture (all content comes from a single `data.json` file)  
+- ✨ Responsive and minimalist UI built with **Material UI (MUI)**  
+- ⚡ Smooth tab-based navigation with animated transitions  
+- 🖼️ Support for category filters, logos, and icons for technologies and social links  
+- 🌈 Deployed via GitHub Pages for reliability and simplicity  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 🛠️ Tech Stack
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| Category | Technologies |
+|-----------|---------------|
+| **Frontend Framework** | React (Create React App) |
+| **UI Library** | Material UI (MUI v5) |
+| **Build Tool** | React Scripts |
+| **Deployment** | GitHub Pages |
+| **Data Source** | Static `data.json` file |
+| **Icons & Logos** | MUI Icons, Custom SVGs |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🧠 Structure Overview
 
-### `npm run eject`
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+src/
+├── components/
+│    ├── Header.jsx
+│    ├── EducationSection.jsx
+│    ├── ProjectsSection.jsx
+│    ├── SkillsSection.jsx
+│    ├── ReferencesSection.jsx
+│    ├── ...
+│
+├── styles/
+│    ├── global.css
+│    ├── EducationSection.css
+│
+├── App.jsx
+└── index.js
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+public/
+├── data.json
+├── static/img/
+│    └── social/
+│         ├── github.svg
+│         ├── linkedin.svg
+│         ├── telegram.svg
+│         └── google-scholar.svg
+└── favicon.ico
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+````
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## ⚙️ Installation and Local Development
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 1️⃣ Clone the repository
+```bash
+git clone https://github.com/alaeimo/alaeimo.github.io.git
+cd alaeimo.github.io
+````
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 2️⃣ Install dependencies
 
-### Code Splitting
+```bash
+npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 3️⃣ Run the development server
 
-### Analyzing the Bundle Size
+```bash
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Then visit: [http://localhost:3000](http://localhost:3000)
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 🧾 Editing Your Data (`data.json`)
 
-### Advanced Configuration
+All personal, academic, and project information is stored in **`public/data.json`**.
+This allows the entire site content to be updated without modifying React components.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Example snippet:
 
-### Deployment
+```json
+{
+  "header": {
+    "name": "Mohammad Alaei",
+    "title": "Researcher in Human–AI Interaction and Cognitive Computing",
+    "social": {
+      "GitHub": "https://github.com/alaeimo",
+      "LinkedIn": "https://linkedin.com/in/alaeimo"
+    }
+  },
+  "research_interests": {
+    "description": "<p>My research lies at the intersection of <strong>human behavior</strong>, <em>cognitive computing</em>, and <strong>AI-driven personalization</strong>...</p>"
+  }
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+💡 **Tip:** You can use basic HTML formatting (`<b>`, `<i>`, `<p>`, `<ul>`, etc.) inside `data.json` text fields for italics, bold, and paragraph breaks.
 
-### `npm run build` fails to minify
+After making changes, simply re-run:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+npm start
+```
+
+or rebuild with:
+
+```bash
+npm run build
+```
+
+---
+
+## 🚀 Deployment
+
+### Option 1: Deploy to GitHub Pages
+
+```bash
+npm run deploy
+```
+
+This automatically builds and publishes the site to:
+➡️ [https://alaeimo.github.io](https://alaeimo.github.io)
+
+### Option 2: Deploy manually to your custom domain
+
+1. Run `npm run build`
+2. Upload the contents of the `build/` folder to your web server (e.g., via FTP or your hosting provider)
+3. Point your DNS records to your hosting (already done for [alaeimo.ir](https://alaeimo.ir))
+
+---
+
+## 👨‍💻 Contributor
+
+**Mohammad Alaei**
+Researcher in Human–AI Interaction, Cognitive Computing, and Personalized Systems
+📍 University of Tabriz, Iran
+🔗 [https://alaeimo.ir](https://alaeimo.ir)
+
+---
+
+## 📜 License
+
+This project is released under the **MIT License**.
+You are free to use, modify, and distribute it with attribution.
+
+```
+MIT License
+
+Copyright (c) 2025 Mohammad Alaei
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction...
+```
+
+---
+
+## 🧭 Acknowledgments
+
+This website is designed and developed by **Mohammad Alaei**, inspired by the principles of clarity, accessibility, and human-centered technology — blending academic precision with design simplicity.
+
+

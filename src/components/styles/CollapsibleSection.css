@@ -1,0 +1,33 @@
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1rem; /* smaller padding */
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.05);
+  transition: background 0.3s ease;
+}
+
+.section-header .material-icons {
+  font-size: 1.6rem; /* smaller icon */
+}
+
+.section-header h4 {
+  font-size: 1.4rem; /* smaller title */
+  font-weight: 700;
+}
+
+@media (max-width: 600px) {
+  .education-timeline {
+    gap: 1rem; /* less space on small screens */
+  }
+  .education-card {
+    padding: 0.8rem 1rem;
+  }
+  .section-header {
+    padding: 0.6rem 0.8rem;
+  }
+  .section-header h4 {
+    font-size: 1.2rem;
+  }
+}

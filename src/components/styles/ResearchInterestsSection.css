@@ -1,0 +1,33 @@
+.research-interests-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding-left: 0.5rem;
+}
+
+.research-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.bullet {
+  color: #1976d2;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+.interest-text {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  color: #1e293b;
+  font-size: 0.95rem;
+}
+
+.no-interests {
+  font-family: "Inter", sans-serif;
+  font-size: 0.95rem;
+  color: #94a3b8;
+  text-align: center;
+}

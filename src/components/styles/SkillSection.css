@@ -1,0 +1,36 @@
+.skill-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 0.5rem 0;
+}
+
+.skill-category {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.category-title {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.3rem;
+}
+
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.skill-card {
+  font-family: "Inter", sans-serif;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+@media (max-width: 600px) {
+  .skill-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+}

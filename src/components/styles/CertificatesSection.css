@@ -1,0 +1,38 @@
+.certificates-timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-left: 2rem;
+  padding: 0.5rem 0;
+}
+
+.timeline-item {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.timeline-line {
+  position: absolute;
+  left: -1.2rem;
+  top: 1.2rem;
+  width: 2px;
+  height: calc(100% + 1.5rem);
+  background: linear-gradient(to bottom, #90caf9 0%, #2196f3 100%);
+  z-index: 0;
+}
+
+.timeline-node {
+  position: absolute;
+  left: -1.6rem;
+  top: 0.6rem;
+  width: 12px;
+  height: 12px;
+  background: #2196f3;
+  border-radius: 50%;
+  border: 3px solid #e3f2fd;
+  box-shadow: 0 0 6px rgba(33, 150, 243, 0.4);
+  z-index: 2;
+}
