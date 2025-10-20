@@ -1,0 +1,603 @@
+{
+    "name": "Mohammad Alaei",
+    "sections": [
+        {
+            "id": "education",
+            "label": "Education"
+        },
+        {
+            "id": "research_interests",
+            "label": "Research Interests"
+        },
+        {
+            "id": "experience",
+            "label": "Experience"
+        },
+        {
+            "id": "academic",
+            "label": "Academic Experience"
+        },
+        {
+            "id": "skills",
+            "label": "Skills"
+        },
+        {
+            "id": "publications",
+            "label": "Publications"
+        },
+        {
+            "id": "awards",
+            "label": "Awards & Honors"
+        },
+        {
+            "id": "projects",
+            "label": "Projects"
+        },
+        {
+            "id": "references",
+            "label": "References"
+        }
+    ],
+    "header": {
+        "name": "Mohammad Alaei",
+        "title": "AI Researcher & Computer Engineer",
+        "description": "I’m a computer engineer, software developer, and AI researcher, passionate about human-centered technologies. I’m a continuous learner, enthusiastic about combining knowledge across different areas of computer science, covering software, hardware, AI, and full-stack development, to create meaningful, impactful, and practical solutions. I enjoy working on interdisciplinary projects and can work independently. In my free time, I like reading psychology books and novels, playing games, spending time in nature, watching movies, listening to music, and being with friends and family.",
+        "contact": [
+            {
+                "icon": "email",
+                "value": "m.alaei.res@gmail.com",
+                "link": "mailto:m.alaei.res@gmail.com"
+            },
+            {
+                "icon": "phone",
+                "value": "+98-914-5354735",
+                "link": null
+            },
+            {
+                "icon": "location_on",
+                "value": "Tehran, Iran",
+                "link": null
+            }
+        ],
+        "social": [
+            {
+                "platform": "GitHub",
+                "link": "https://github.com/alaeimo"
+            },
+            {
+                "platform": "LinkedIn",
+                "link": "https://linkedin.com/in/alaeimo"
+            },
+            {
+                "platform": "Telegram",
+                "link": "https://t.me/alaeimo"
+            }
+        ]
+    },
+    "educations": [
+        {
+            "degree": "Master of Science",
+            "university": "University of Tabriz",
+            "location": "Iran",
+            "field": "Computer Engineering – Computer Systems Architecture",
+            "gpa": "18.93/20",
+            "start_date": "Sep 2018",
+            "end_date": "Sep 2021",
+            "thesis": "Deep Learning–Based Non-Contact Reconstruction of Frontal EEG from Facial Expressions",
+            "supervisor": "Dr. Hadi S. Aghdasi"
+        },
+        {
+            "degree": "Bachelor of Science",
+            "university": "University of Tabriz",
+            "location": "Iran",
+            "field": "Computer Engineering – Computer Hardware Engineering",
+            "gpa": "17.11/20",
+            "start_date": "Sep 2014",
+            "end_date": "Jul 2018",
+            "final_project": "Designing and Building a Robot to Play the Bell Musical Instrument",
+            "supervisor": "Dr. Hadi S. Aghdasi"
+        }
+    ],
+    "research_interests": {
+        "title": "Research Interests",
+        "description": "My research lies at the intersection of **human behavior**, **cognitive computing**, and **AI-driven personalization**, with the aim of creating systems that are not only intelligent but meaningfully *human-centered*.\n\nI am particularly interested in how computational models can deepen our understanding of cognition, emotion, and interaction, how technology might not just *serve* us, but *understand* us. My core research directions include:\n\n - **Personalization and Recommender Systems**: Designing adaptive systems that learn from individual cognitive patterns and preferences to offer genuinely personalized experiences for learning, reflection, and decision support.\n\n - **Human–AI Interaction and Cognitive Computing**: Exploring how AI can collaborate meaningfully with humans-anticipating needs, supporting complex reasoning, and fostering insight-guided by the belief that technology should enhance understanding, not just efficiency.\n\n - **Computational Modeling of Human Behavior**: Developing predictive models that capture the layered dynamics of thought, emotion, and decision-making, grounded in both cognitive science and the philosophy of mind.\n\n - **Affective Computing**: Infusing emotional intelligence into AI systems to recognize, interpret, and respond to human affect, aiming to promote engagement, empathy, and mental well-being.\n\n - **Digital Twins for Self-Knowledge and Human-Aware Systems**: Building computational representations of the self that illuminate patterns of cognition and behavior, connecting technology with self-awareness and long-term human flourishing.\n\nAcross these areas, my goal is to bring together **scientific rigor**, **computational creativity**, and **human meaning**, to build systems that not only advance AI but also help us better understand ourselves."
+    },
+    "work_experiences": [
+        {
+            "position": "Founder & Research Engineer",
+            "company": "Kavida.ir",
+            "start_date": "Mar 2025",
+            "end_date": "Present",
+            "responsibilities": [
+                "Designed and implemented a human-centric platform for goal-oriented networking, enabling structured user profiles and peer/mentor matching.",
+                "Developed algorithms for recommending collaborators based on skills, goals, and experiences, improving theoretical match relevance by an estimated 30–40%.",
+                "Architected the platform infrastructure and data models to support future research in social networks and digital mentorship."
+            ],
+            "technologies": [
+                "Python",
+                "Django",
+                "PostgreSQL",
+                "Telegram Bot API",
+                "PyTorch",
+                "Data Analysis",
+                "React.js"
+            ]
+        },
+        {
+            "position": "Contract Software Engineer",
+            "company": "EFT Project (via Herrmann Innovations)",
+            "start_date": "Sep 2023",
+            "end_date": "May 2025",
+            "responsibilities": [
+                "Engineered a real-time vehicle suspension analysis platform using React.js, JavaScript, HTML/CSS, and Django REST API, integrating IoT sensor data and computer vision algorithms to achieve ∼90% reliability in dynamic vehicle diagnostics.",
+                "Designed and automated a Raspberry Pi–based WiFi camera streaming solution with MJPG Streamer, delivering 50% higher 4K FPS, reducing setup complexity by 40%, and enabling plug-and-play scalability.",
+                "Managed and optimized DevOps infrastructure by configuring Nginx, PostgreSQL, SSL, Git, and automated backups, fortifying data reliability to 95%, enhancing security by 80%, and streamlining collaboration across contributors."
+            ],
+            "technologies": [
+                "React.js",
+                "Django REST API",
+                "JavaScript",
+                "HTML/CSS",
+                "PostgreSQL",
+                "Nginx",
+                "Raspberry Pi",
+                "MJPG Streamer",
+                "Git",
+                "DevOps"
+            ]
+        },
+        {
+            "position": "Co-founder and Developer",
+            "company": "Argon Cloud Service (Full-time)",
+            "start_date": "May 2023",
+            "end_date": "July 2023",
+            "responsibilities": [
+                "Architected a robust and secure web-based platform, granting customers exclusive access to a range of private proxy servers."
+            ],
+            "technologies": []
+        },
+        {
+            "position": "Software Developer and Consultant",
+            "company": "Self-Employed (Part-time)",
+            "start_date": "Jan 2019",
+            "end_date": "Present",
+            "responsibilities": [
+                "Created and managed software across web apps, desktop programs, and AI systems.",
+                "Advised and collaborated with clients to design customized software solutions.",
+                "Developed inventive approaches to solve software challenges effectively."
+            ],
+            "technologies": []
+        }
+    ],
+    "academic_experiences": [
+        {
+            "position": "Research Internship",
+            "organization": "National Elite Foundation of Iran and JobVision",
+            "location": "Remote",
+            "employment_type": "Part-time",
+            "start_date": "Oct 2020",
+            "end_date": "Mar 2021",
+            "responsibilities": [
+                "Collaborated as a key member of a six-person research team.",
+                "Identified vital soft skills demanded by companies for employee recruitment.",
+                "Analyzed games and defined methodologies for appraising soft skills through them.",
+                "Evaluated the credibility and efficacy of the selected games.",
+                "Investigated prevalent and crucial games for assessing soft skills."
+            ]
+        },
+        {
+            "position": "Research Assistant",
+            "organization": "Humanoid Robots and Cognitive Technology Research Lab, University of Tabriz",
+            "employment_type": "Part-time",
+            "start_date": "Sep 2018",
+            "end_date": "Feb 2019",
+            "responsibilities": [
+                "Utilized advanced deep learning methods for in-depth brain signal analysis.",
+                "Verified and selected diverse datasets for brain signal analysis.",
+                "Generated comprehensive reports summarizing research findings.",
+                "Conducted literature reviews to inform research directions."
+            ]
+        },
+        {
+            "position": "Software Developer",
+            "organization": "National Elite Foundation of Iran, University of Tabriz",
+            "employment_type": "Part-time",
+            "start_date": "Oct 2019",
+            "end_date": "Sep 2020",
+            "responsibilities": [
+                "Collaborated with a team to craft spatial geometry training tool.",
+                "Utilized HTC Vive and Unity to implement the project.",
+                "Employed programming expertise for VR environment’s functionalities.",
+                "Devised user-friendly menus enhancing user experience."
+            ]
+        }
+    ],
+    "skill_levels": [
+        {
+            "name": "familiar",
+            "range": "20–40",
+            "description": "Basic awareness; limited practical use"
+        },
+        {
+            "name": "novice",
+            "range": "40–55",
+            "description": "Can follow tutorials or basic workflows"
+        },
+        {
+            "name": "advanced beginner",
+            "range": "55–70",
+            "description": "Can handle simple tasks with guidance"
+        },
+        {
+            "name": "competent",
+            "range": "70–80",
+            "description": "Independent on common problems"
+        },
+        {
+            "name": "proficient",
+            "range": "80–90",
+            "description": "Efficient, adaptable, strong command"
+        },
+        {
+            "name": "expert",
+            "range": "90–100",
+            "description": "Deep understanding, can design and optimize systems"
+        }
+    ],
+    "skills": [
+        {
+        "category": "Programming Languages",
+        "items": [
+            { "name": "Python", "level": "expert", "percent": 85, "icon": "/static/img/skills/python.svg" },
+            { "name": "Java", "level": "competent", "percent": 70, "icon": "/static/img/skills/java.svg" },
+            { "name": "C/C++", "level": "advanced beginner", "percent": 55, "icon": "/static/img/skills/c-c++.png" },
+            { "name": "C#", "level": "advanced beginner", "percent": 65, "icon": "/static/img/skills/csharp.png" },
+            { "name": "SQL", "level": "novice", "percent": 65, "icon": "/static/img/skills/sql.svg" },
+            { "name": "JavaScript", "level": "competent", "percent": 70, "icon": "/static/img/skills/javascript.svg" }
+        ]
+        },
+        {
+        "category": "Frameworks & Libraries",
+        "items": [
+            { "name": "PyTorch", "level": "advanced beginner", "percent": 60, "icon": "/static/img/skills/pytorch.png" },
+            { "name": "TensorFlow", "level": "competent", "percent": 70, "icon": "/static/img/skills/tensorFlow.svg" },
+            { "name": "Keras", "level": "competent", "percent": 70, "icon": "/static/img/skills/keras.svg" },
+            { "name": "Scikit-Learn", "level": "competent", "percent": 70, "icon": "/static/img/skills/scikit_learn.svg" },
+            { "name": "OpenCV", "level": "competent", "percent": 70, "icon": "/static/img/skills/openCV.svg" },
+            { "name": "NumPy", "level": "competent", "percent": 70, "icon": "/static/img/skills/numPy.svg" },
+            { "name": "Matplotlib", "level": "competent", "percent": 70, "icon": "/static/img/skills/matplotlib.png" },
+            { "name": "Pandas", "level": "competent", "percent": 70, "icon": "/static/img/skills/pandas.svg" },
+            { "name": "Django", "level": "proficient", "percent": 80, "icon": "/static/img/skills/django.svg" },
+            { "name": "Flask", "level": "proficient", "percent": 80, "icon": "/static/img/skills/flask.svg" },
+            { "name": "FastAPI", "level": "novice", "percent": 50, "icon": "/static/img/skills/fastAPI.svg" },
+            { "name": "React", "level": "competent", "percent": 70, "icon": "/static/img/skills/react.svg" },
+            { "name": "Bootstrap", "level": "competent", "percent": 70, "icon": "/static/img/skills/bootstrap.png" }
+        ]
+        },
+        {
+        "category": "Tools",
+        "items": [
+            { "name": "Unity", "level": "advanced beginner", "percent": 55, "icon": "/static/img/skills/unity.svg" },
+            { "name": "CodeVision AVR", "level": "advanced beginner", "percent": 55, "icon": "/static/img/skills/codevision-avr.jfif" },
+            { "name": "Git", "level": "advanced beginner", "percent": 55, "icon": "/static/img/skills/git.svg" },
+            { "name": "Proteus", "level": "advanced beginner", "percent": 55, "icon": "/static/img/skills/proteus.png" },
+            { "name": "MySQL", "level": "competent", "percent": 70, "icon": "/static/img/skills/mysql.svg" },
+            { "name": "SQLite", "level": "competent", "percent": 70, "icon": "/static/img/skills/sqlite.svg" },
+            { "name": "PostgreSQL", "level": "competent", "percent": 70, "icon": "/static/img/skills/postgresql.svg" }
+        ]
+        },
+        {
+        "category": "Platforms",
+        "items": [
+            { "name": "Linux", "level": "advanced beginner", "percent": 50, "icon": "/static/img/skills/linux.svg" },
+            { "name": "Web", "level": "proficient", "percent": 85, "icon": "/static/img/skills/web.svg" },
+            { "name": "Windows", "level": "proficient", "percent": 80, "icon": "/static/img/skills/windows.svg" },
+            { "name": "Raspberry Pi", "level": "competent", "percent": 70, "icon": "/static/img/skills/raspberry_pi.svg" },
+            { "name": "Arduino", "level": "competent", "percent": 70, "icon": "/static/img/skills/arduino.svg" }
+        ]
+        },
+        {
+        "category": "Language Skills",
+        "items": [
+            { "name": "English", "level": "Academic Proficiency", "percent": 60, "icon": "/static/img/skills/english.svg" },
+            { "name": "Azerbaijani", "level": "Mother Tongue", "percent": 100, "icon": "/static/img/skills/turkish.png" },
+            { "name": "Persian", "level": "Native", "percent": 100, "icon": "/static/img/skills/persian.svg" }
+        ]
+        }
+    ],
+    "publications": [
+        {
+            "authors": [
+                "Mohammad Alaei",
+                "Shabnam Oskouei",
+                "Hadi S. Aghdasi"
+            ],
+            "title": "Deep Learning–Based Non-Contact Reconstruction of Frontal EEG from Facial Expressions",
+            "journal": "Submitted to Physica Scripta",
+            "year": 2025,
+            "url": "",
+            "code": "",
+            "pdf": ""
+        },
+        {
+            "authors": [
+                "Seyedeh Mahrokh Alaei",
+                "Mohammad Alaei",
+                "Arman Zafaranchi"
+            ],
+            "title": "An Explainable Human Facial Expression Recognition Model Based on CNN, Gabor Filters, and SVM",
+            "journal": "Submitted to The Visual Computer",
+            "year": 2025,
+            "url": "",
+            "code": "",
+            "pdf": ""
+        }
+    ],
+    "awards": [
+        {
+            "title": "Member of the Exceptional Talent Group",
+            "organization": "University of Tabriz, Iran",
+            "start_date": "Sep 2017",
+            "end_date": "Sep 2021",
+            "description": "Recognized as a member of the Exceptional Talent Group for outstanding academic performance.",
+            "pdf": ""
+        },
+        {
+            "title": "First Rank in Master’s Degree",
+            "organization": "University of Tabriz, Iran",
+            "start_date": "2021",
+            "end_date": "2021",
+            "description": "Achieved the first rank among students in the Master’s degree program.",
+            "pdf": ""
+        },
+        {
+            "title": "Third Rank in Bachelor’s Degree",
+            "organization": "University of Tabriz, Iran",
+            "start_date": "2018",
+            "end_date": "2018",
+            "description": "Achieved the third rank among students in the Bachelor’s degree program.",
+            "pdf": ""
+        },
+        {
+            "title": "Admitted as Exceptional Talent for Master’s Degree",
+            "organization": "University of Tabriz, Iran",
+            "start_date": "2018",
+            "end_date": "2018",
+            "description": "Selected as an exceptional talent for admission to the Master’s degree program.",
+            "pdf": ""
+        }
+    ],
+    "certificates": [
+        {
+            "name": "Certificate for Completion of Deep Learning Interactive Track and Course Project",
+            "issuer": "Neuromatch Academy",
+            "date": "Aug 2023",
+            "description": "Completed intensive deep learning training and project",
+            "pdf": ""
+        },
+        {
+            "name": "Certificate of Game Development Workshop in VR/AR",
+            "issuer": "University of Tabriz",
+            "date": "Nov 2019",
+            "description": "Participated in workshop on virtual reality and augmented reality game development",
+            "pdf": ""
+        }
+    ],
+    "projects": [
+        {
+            "title": "A Transfer Learning Based Approach to Facial Emotion Recognition",
+            "category": "Computer Vision",
+            "subtitle": "Computer Vision, Deep Learning, Transfer Learning, Image Processing",
+            "responsibilities": [
+                "Designed an open-source AI model to classify facial images into seven distinct emotions",
+                "Applied transfer learning techniques to improve generalization and training efficiency"
+            ],
+            "technologies": [
+                "Python",
+                "PyTorch",
+                "Pandas",
+                "NumPy",
+                "Matplotlib"
+            ],
+            "start_date": "Aug 2023",
+            "end_date": "Aug 2023",
+            "image": "static/img/projects/FER.jpeg",
+            "code": "",
+            "pdf": ""
+        },
+        {
+            "title": "Extracting Key Face Components from Face Images",
+            "category": "Computer Vision",
+            "subtitle": "Computer Vision, Deep Learning, Image Processing",
+            "responsibilities": [
+                "Implemented video analysis for detecting 3D facial landmarks",
+                "Extracted facial attributes such as eyes, eyebrows, nose, and lips using MediaPipe"
+            ],
+            "technologies": [
+                "Python",
+                "OpenCV",
+                "MediaPipe",
+                "NumPy",
+                "Keras"
+            ],
+            "start_date": "Mar 2022",
+            "end_date": "Mar 2022",
+            "image": "static/img/projects/KFC.png",
+            "code": "",
+            "pdf": ""
+        },
+        {
+            "title": "Facial Expression Recognition by Deep Learning Using Gabor and SVM Algorithms",
+            "category": "Deep Learning",
+            "subtitle": "Computer Vision, Deep Learning, Image Processing",
+            "responsibilities": [
+                "Utilized Gabor filter bank for facial feature extraction",
+                "Reduced feature dimensions using LDA algorithm",
+                "Implemented SVM for multi-class emotion classification"
+            ],
+            "technologies": [
+                "Python",
+                "NumPy",
+                "OpenCV",
+                "Scikit-learn",
+                "Keras"
+            ],
+            "start_date": "Jan 2022",
+            "end_date": "Jan 2022",
+            "image": "static/img/projects/FERGaborSVM.jpg",
+            "code": "",
+            "pdf": ""
+        },
+        {
+            "title": "Advanced Web-Based Accounting Platform",
+            "category": "Web Development",
+            "subtitle": "Web Development, Financial Services, Data Analysis",
+            "responsibilities": [
+                "Developed a full-stack web platform for company-wide financial management",
+                "Optimized workflows for speed, accuracy, and clarity of operations"
+            ],
+            "technologies": [
+                "Python",
+                "Django",
+                "MySQL",
+                "Pandas",
+                "NumPy",
+                "Bootstrap",
+                "Git"
+            ],
+            "start_date": "Jan 2022",
+            "end_date": "Jan 2022",
+            "image": "static/img/projects/Talasamar.jpg",
+            "code": "",
+            "pdf": ""
+        },
+        {
+            "title": "Dynamic Web Application for Enhanced Online Profiles and Skill-Based Discovery",
+            "category": "Software Development",
+            "subtitle": "Software Development, Web Development, Online Portfolios",
+            "responsibilities": [
+                "Developed a website for interactive profile creation and resume management",
+                "Integrated a Telegram bot for automated skill-based specialist discovery"
+            ],
+            "technologies": [
+                "Python",
+                "Python Telegram Bot API",
+                "PostgreSQL",
+                "Django",
+                "Bootstrap",
+                "Git"
+            ],
+            "start_date": "Oct 2021",
+            "end_date": "Oct 2021",
+            "image": "static/img/projects/Profile.jpg",
+            "code": "",
+            "pdf": ""
+        },
+        {
+            "title": "Development of a Two-Wheeled Inverted Pendulum Mobile Robot",
+            "category": "Robotics",
+            "subtitle": "Robotic, Electronic, Robot Control",
+            "responsibilities": [
+                "Built a self-balancing two-wheeled robot using sensor fusion and PID control",
+                "Designed control algorithms for motion stability and precision"
+            ],
+            "technologies": [
+                "C++",
+                "Arduino programming",
+                "GY-953 Module"
+            ],
+            "start_date": "May 2020",
+            "end_date": "May 2020",
+            "image": "static/img/projects/self-balancing-robot.jpg",
+            "code": "",
+            "pdf": ""
+        },
+        {
+            "title": "Dynamic Content Management System for Small Businesses",
+            "category": "Web Development",
+            "subtitle": "Software Development, Web Development, CMS",
+            "responsibilities": [
+                "Developed a CMS to manage posts, media, and articles for small businesses",
+                "Optimized usability and scalability for content-heavy applications"
+            ],
+            "technologies": [
+                "Python",
+                "Flask",
+                "Bootstrap",
+                "SQLAlchemy",
+                "MySQL",
+                "Git"
+            ],
+            "start_date": "Jun 2019",
+            "end_date": "Jun 2019",
+            "image": "static/img/projects/cms-dashboard.jpg",
+            "code": "",
+            "pdf": ""
+        },
+        {
+            "title": "Obstacle-Crossing and Maze-Solving Robot",
+            "category": "Robotics",
+            "subtitle": "Robotic, Electronic, Robot Control",
+            "responsibilities": [
+                "Designed an autonomous robot capable of navigating mazes",
+                "Implemented obstacle detection and avoidance using ultrasonic sensors"
+            ],
+            "technologies": [
+                "C programming",
+                "AVR ATMega32 Microcontroller",
+                "Ultrasonic Sensors"
+            ],
+            "start_date": "Oct 2019",
+            "end_date": "Oct 2019",
+            "image": "static/img/projects/maze-solver-robot.jpg",
+            "code": "",
+            "pdf": ""
+        },
+        {
+            "title": "Hardware and Software Exploit Alert System: A Protective Application",
+            "category": "Cybersecurity",
+            "subtitle": "Cybersecurity, Vulnerability Assessment, Threat Detection",
+            "responsibilities": [
+                "Developed a system to detect hardware and software vulnerabilities in real time",
+                "Collected live configuration data and monitored hacker forums for emerging threats",
+                "Performed vulnerability scanning and automated alert reporting"
+            ],
+            "technologies": [
+                "Python",
+                "PyQT",
+                "Mechanize",
+                "BeautifulSoup",
+                "SQLite"
+            ],
+            "start_date": "Nov 2018",
+            "end_date": "Nov 2018",
+            "image": "static/img/projects/ExploitFinder.jpg",
+            "code": "",
+            "pdf": ""
+        }
+    ],
+    "references": [
+        {
+            "name": "Leyli Mohammad Khanli",
+            "position": "Professor, Department of Computer Engineering, University of Tabriz, Iran",
+            "email": "l-khanli@tabrizu.ac.ir",
+            "phone": "+98 41-33393725",
+            "mobile": "+98 914-3138652"
+        },
+        {
+            "name": "Seyed Hadi Aghdasi Alamdari",
+            "position": "Assistant Professor, Department of Computer Engineering, University of Tabriz, Iran",
+            "email": ["aghdasi@tabrizu.ac.ir", "aghdasi.ha@gmail.com"],
+            "phone": "+98 41-33393753",
+            "mobile": "+98 914-4060184"
+        },
+        {
+            "name": "Mina Zolfy Lighvan",
+            "position": "Associate Professor, Department of Computer Engineering, University of Tabriz, Iran",
+            "email": "mzolfy@tabrizu.ac.ir",
+            "phone": "+98 413-33393759",
+            "mobile": "+98 914-4159281"
+        }
+    ]
+
+}
