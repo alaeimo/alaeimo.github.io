@@ -306,32 +306,6 @@
         }
     ],
     "publications": [
-        {
-            "authors": [
-                "Mohammad Alaei",
-                "Shabnam Oskouei",
-                "Hadi S. Aghdasi"
-            ],
-            "title": "Deep Learning–Based Non-Contact Reconstruction of Frontal EEG from Facial Expressions",
-            "journal": "Submitted to Physica Scripta",
-            "year": 2025,
-            "url": "",
-            "code": "",
-            "pdf": ""
-        },
-        {
-            "authors": [
-                "Seyedeh Mahrokh Alaei",
-                "Mohammad Alaei",
-                "Arman Zafaranchi"
-            ],
-            "title": "An Explainable Human Facial Expression Recognition Model Based on CNN, Gabor Filters, and SVM",
-            "journal": "Submitted to The Visual Computer",
-            "year": 2025,
-            "url": "",
-            "code": "",
-            "pdf": ""
-        }
     ],
     "awards": [
         {
@@ -423,28 +397,6 @@
             "start_date": "Mar 2022",
             "end_date": "Mar 2022",
             "image": "static/img/projects/KFC.png",
-            "code": "",
-            "pdf": ""
-        },
-        {
-            "title": "Facial Expression Recognition by Deep Learning Using Gabor and SVM Algorithms",
-            "category": "Deep Learning",
-            "subtitle": "Computer Vision, Deep Learning, Image Processing",
-            "responsibilities": [
-                "Utilized Gabor filter bank for facial feature extraction",
-                "Reduced feature dimensions using LDA algorithm",
-                "Implemented SVM for multi-class emotion classification"
-            ],
-            "technologies": [
-                "Python",
-                "NumPy",
-                "OpenCV",
-                "Scikit-learn",
-                "Keras"
-            ],
-            "start_date": "Jan 2022",
-            "end_date": "Jan 2022",
-            "image": "static/img/projects/FERGaborSVM.jpg",
             "code": "",
             "pdf": ""
         },
