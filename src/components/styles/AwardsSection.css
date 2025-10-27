@@ -1,5 +1,3 @@
-/* AwardsSection.css */
-
 .awards-timeline {
   position: relative;
   display: flex;
@@ -9,56 +7,57 @@
   padding: 0.5rem 0;
 }
 
-/* Timeline line and node */
-.timeline-item {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-}
-
+/* Timeline line with animated gradient */
 .timeline-line {
   position: absolute;
   left: -1.2rem;
-  top: 1.2rem;
   width: 2px;
   height: calc(100% + 1.5rem);
-  background: linear-gradient(to bottom, #90caf9 0%, #2196f3 100%);
+  background: linear-gradient(to bottom, #B1C7DE 0%, #5D91C3 50%, #B1C7DE 100%);
+  background-size: 100% 200%;
   z-index: 0;
+  animation: flow 2s linear infinite;
 }
 
+/* Node with subtle pulse */
 .timeline-node {
   position: absolute;
-  left: -1.6rem;
-  top: 0.6rem;
+  left: calc(-1.2rem + 1px - 6px); /* center on line */
   width: 12px;
   height: 12px;
-  background: #2196f3;
+  background: #5D91C3;
   border-radius: 50%;
-  border: 3px solid #e3f2fd;
-  box-shadow: 0 0 6px rgba(33, 150, 243, 0.4);
+  border: 3px solid #B1C7DE;
+  box-shadow: 0 0 6px rgba(93, 145, 195, 0.4);
   z-index: 2;
+  animation: pulse 1.5s ease-in-out infinite;
 }
 
-/* Card */
+@keyframes flow {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 0% 100%; }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 6px rgba(93, 145, 195, 0.4); }
+  50% { transform: scale(1.2); box-shadow: 0 0 12px rgba(93, 145, 195, 0.6); }
+}
+
+/* Card styling */
 .award-card {
-  position: relative;
-  background: linear-gradient(135deg, #f9fafb 0%, #f1f5f9 100%);
-  border: 1px solid rgba(33, 150, 243, 0.15);
+  border: 2px solid #5D91C3;  /* base color */
   border-radius: 10px;
-  padding: 1rem 1.3rem;
-  width: 100%;
-  backdrop-filter: blur(6px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 8px #5D91C3, 0 0 16px #5D91C3, 0 0 24px #5D91C3; /* neon glow */
+  transition: box-shadow 0.3s ease;
+  background: rgba(255,255,255,0.1); /* optional for transparent neon effect */
 }
 
 .award-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.12);
+  box-shadow: 0 0 12px #5D91C3, 0 0 24px #5D91C3, 0 0 36px #5D91C3;
 }
 
-/* Header: left = title/organization, right = date */
+
+/* Header */
 .award-header {
   display: flex;
   justify-content: space-between;
@@ -67,6 +66,7 @@
   flex-wrap: wrap;
 }
 
+/* Mobile responsiveness */
 @media (max-width: 600px) {
   .award-header {
     flex-direction: column;

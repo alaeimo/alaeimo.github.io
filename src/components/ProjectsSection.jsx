@@ -4,15 +4,17 @@ import {
   Typography,
   Button,
   Grid,
-  Chip,
+  Chip, 
+  useTheme
 } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import "./styles/ProjectsSection.css";
+import AnimatedUnderlineTitle from './AnimatedUnderlineTitle';
 
 const ProjectsSection = forwardRef(({ data }, ref) => {
   const [selectedCategory, setSelectedCategory] = useState("All");
-
+  const theme = useTheme();
   // Extract unique categories
   const categories = ["All", ...new Set(data.projects.map((p) => p.category))];
 
@@ -24,6 +26,7 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
 
   return (
     <div ref={ref}>
+      <AnimatedUnderlineTitle title="Projects" />
       <Box className="projects-container">
         {/* Category Buttons */}
         <Box
@@ -42,28 +45,31 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
               variant={selectedCategory === cat ? "contained" : "outlined"}
               sx={{
                 textTransform: "none",
-                fontFamily: '"Inter", sans-serif',
+                fontFamily: theme.typography.fontFamily,
                 fontWeight: 600,
                 borderRadius: "10px",
                 px: 2,
                 py: 0.5,
                 fontSize: "0.9rem",
-                border: selectedCategory === cat ? "2px solid #6A1B9A" : "1.5px solid #7B1FA2",
-                color: selectedCategory === cat ? "#fff" : "#1e293b",
-                backgroundColor:
-                  selectedCategory === cat ? "#7B1FA2" : "rgba(123,31,162,0.05)",
-                boxShadow:
-                  selectedCategory === cat
-                    ? "0 3px 6px rgba(123,31,162,0.3)"
-                    : "0 1px 3px rgba(0,0,0,0.08)",
+                border: selectedCategory === cat
+                  ? `2px solid ${theme.palette.primary.main}`
+                  : `1.5px solid ${theme.palette.primary.main}99`,
+                color: selectedCategory === cat
+                  ? theme.palette.primary.contrastText
+                  : theme.palette.text.primary,
+                backgroundColor: selectedCategory === cat
+                  ? theme.palette.primary.main
+                  : theme.palette.primary.main + "1A", // 10% opacity background
+                boxShadow: selectedCategory === cat
+                  ? `0 0 6px ${theme.palette.primary.main}55`
+                  : `0 0 4px ${theme.palette.primary.main}22`,
                 transition: "all 0.25s ease",
                 "&:hover": {
-                  backgroundColor:
-                    selectedCategory === cat
-                      ? "#6A1B9A"
-                      : "rgba(123,31,162,0.15)",
-                  borderColor: "#6A1B9A",
-                  boxShadow: "0 3px 6px rgba(123,31,162,0.25)",
+                  backgroundColor: selectedCategory === cat
+                    ? theme.palette.primary.dark
+                    : theme.palette.primary.main + "33", // 20% opacity
+                  borderColor: theme.palette.primary.main,
+                  boxShadow: `0 0 6px ${theme.palette.primary.main}55`,
                 },
               }}
             >
@@ -77,20 +83,29 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
           {filteredProjects.map((item, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
                 <Box
-                    sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        height: "100%",
-                        borderRadius: "10px",
-                        overflow: "hidden", // ensures image respects rounded corners
-                        border: "1px solid rgba(123,31,162,0.15)",
-                        boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
-                        transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                        "&:hover": {
-                        transform: "translateY(-3px)",
-                        boxShadow: "0 4px 12px rgba(123,31,162,0.2)",
-                        },
-                    }}
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    height: "100%",
+                    borderRadius: theme.shape.borderRadius,
+                    overflow: "hidden",
+                    background: `linear-gradient(135deg, ${theme.palette.background.paper} 0%, ${theme.palette.action.hover} 100%)`,
+                    border: `1px solid ${theme.palette.primary.main}`,
+                    boxShadow: `
+                      0 0 4px ${theme.palette.primary.main},
+                      0 0 8px ${theme.palette.primary.main}33
+                    `,
+                    backdropFilter: "blur(6px)",
+                    transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                    "&:hover": {
+                      transform: "translateY(-3px)",
+                      boxShadow: `
+                        0 0 6px ${theme.palette.primary.main},
+                        0 0 12px ${theme.palette.primary.main}55
+                      `,
+                    },
+                  }}
+
                 >
                 {/* Project Image */}
                 <Box
@@ -106,13 +121,38 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
 
                 {/* Content */}
                 <Box sx={{ p: 2, textAlign: "center" }}>
-                    <Typography variant="subtitle1" sx={{ fontWeight: 700, color: "#0f172a" }}>
+                    <Typography 
+                      variant="subtitle1"
+                      sx={{
+                        display: 'flex',
+                        justifyContent: 'center',       // centers horizontally
+                        alignItems: 'center',           // centers vertically
+                        flexWrap: 'wrap',
+                        gap: theme.spacing(1),
+                        mb: theme.spacing(1.5),
+                        textAlign: 'center',            // ensures inner text aligns nicely when stacked
+                      }}
+                    >
                     {item.title}
                     </Typography>
-                    <Typography component="span" sx={{ fontWeight: 400, color: "#475569", fontSize: "0.85rem" }}>
+                    <Typography 
+                      component="span" 
+                      variant="body2"
+                      sx={{
+                        fontFamily: theme.typography.fontFamily,
+                        color: theme.palette.text.secondary,
+                      }}
+                      >
                     ({item.start_date === item.end_date ? item.start_date : `${item.start_date} – ${item.end_date}`})
                     </Typography>
-                    <Typography variant="body2" sx={{ color: "#475569", fontStyle: "italic", mb: 1 }}>
+                    <Typography     
+                      variant="body2"
+                      sx={{
+                        fontFamily: theme.typography.fontFamily,
+                        color: theme.palette.text.secondary,
+                        fontStyle: 'italic',
+                        mt: 0.1,
+                      }}>
                     {item.subtitle}
                     </Typography>
 
@@ -139,9 +179,21 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
                         label={tech}
                         size="small"
                         sx={{
-                          fontSize: "0.75rem",
-                          color: "#1e293b",
-                          backgroundColor: "#e2e8f0",
+                          px: 1.5,
+                          py: 0.3,
+                          bgcolor: theme.palette.primary.main + '1A', 
+                          fontSize: '0.8rem',
+                          fontWeight: 500,
+                          fontFamily: theme.typography.fontFamily,
+                          borderRadius: 1,
+                          border: `1px solid ${theme.palette.primary.main}`,
+                          boxShadow: `0 0 4px ${theme.palette.primary.main}`,
+                          "&:hover": {
+                          transform: "translateY(-1px)",
+                          boxShadow: `
+                            0 0 6px ${theme.palette.primary.main},
+                          `,
+                          },
                         }}
                       />
                     ))}
@@ -157,21 +209,24 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
                     }}
                   >
                     {item.code && (
-                      <Button
-                        href={item.code}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        startIcon={<GitHubIcon sx={{ fontSize: 18 }} />}
-                        variant="outlined"
-                        size="small"
-                        sx={{
-                          color: "#181717",
-                          borderColor: "#181717",
-                          "&:hover": {
-                            backgroundColor: "rgba(24,23,23,0.08)",
-                          },
-                        }}
-                      >
+                    <Button
+                      href={item.code}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      startIcon={<GitHubIcon sx={{ fontSize: 16 }} />}
+                      variant="outlined"
+                      size="small"
+                      sx={{
+                        color: theme.palette.text.primary,
+                        borderColor: theme.palette.text.primary,
+                        minWidth: 36,
+                        '&:hover': {
+                          backgroundColor: theme.palette.action.hover,
+                          borderColor: theme.palette.text.primary,
+                        },
+                      }}
+
+                    >
                         Code
                       </Button>
                     )}

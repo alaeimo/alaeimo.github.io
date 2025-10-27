@@ -1,93 +1,148 @@
 import React, { forwardRef } from "react";
-import { Box, Typography, Button } from "@mui/material";
-import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import { Box, Typography, Button, useTheme } from "@mui/material";
+import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import "./styles/AwardsSection.css";
+import AnimatedUnderlineTitle from './AnimatedUnderlineTitle';
 
-const AwardsSection = forwardRef(({ data }, ref) => (
-  <div ref={ref}>
-    <Box className="awards-timeline">
-      {data.awards?.length > 0 ? (
-        data.awards.map((item, index) => (
-          <Box key={index} className="timeline-item">
-            {/* Timeline Line and Node */}
-            <Box className="timeline-line" />
-            <Box className="timeline-node" />
+const AwardsSection = forwardRef(({ data }, ref) => {
+  const theme = useTheme();
 
-            {/* Card */}
-            <Box
-              className="award-card"
-              sx={{
-                width: "100%",
-                borderRadius: "10px",
-                background: "linear-gradient(135deg, #f9fafb 0%, #f1f5f9 100%)",
-                border: "1px solid rgba(33, 150, 243, 0.15)",
-                padding: "1rem 1.3rem",
-                boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
-                backdropFilter: "blur(6px)",
-                transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                "&:hover": {
-                  transform: "translateY(-2px)",
-                  boxShadow: "0 4px 12px rgba(33, 150, 243,0.12)",
-                },
-              }}
-            >
-              <Box className="award-header" sx={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 1, mb: 1 }}>
-                <Box>
-                  <Typography
-                    variant="subtitle1"
-                    sx={{ fontFamily: '"Inter", sans-serif', fontWeight: 700, color: "#0f172a" }}
-                  >
-                    {item.title}
-                  </Typography>
-                  <Typography
-                    variant="subtitle1"
-                    sx={{ fontFamily: '"Inter", sans-serif', fontWeight: 350, color: "#334155", mt: 0.2 }}
-                  >
-                    {item.organization}
-                  </Typography>
-                </Box>
-                <Box sx={{ textAlign: "right", display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
-                  <Typography variant="body2" sx={{ fontFamily: '"Inter", sans-serif', color: "#475569" }}>
-                    {item.start_date === item.end_date ? item.start_date : `${item.start_date} – ${item.end_date}`}
-                  </Typography>
-                  {/* PDF Button */}
-                  {item.pdf && (
-                    <Button
-                      href={item.pdf}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      startIcon={<PictureAsPdfIcon sx={{ fontSize: 16 }} />}
-                      variant="outlined"
-                      size="small"
+  return (
+    <div ref={ref}>
+      <AnimatedUnderlineTitle title="Awards & Honors" />
+      <Box className="awards-timeline">
+        {data.awards?.length > 0 ? (
+          data.awards.map((item, index) => (
+            <Box key={index} className="timeline-item">
+              <Box className="timeline-line" />
+              <Box className="timeline-node" />
+
+              <Box
+                className="award-card"
+                sx={{
+                  width: "100%",
+                  borderRadius: theme.shape.borderRadius,
+                  background: `linear-gradient(135deg, ${theme.palette.background.paper} 0%, ${theme.palette.action.hover} 100%)`,
+                  border: `1px solid ${theme.palette.primary.light}33`,
+                  padding: { xs: theme.spacing(2), sm: theme.spacing(3) },
+                  boxShadow: theme.shadows[2],
+                  backdropFilter: "blur(6px)",
+                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                  "&:hover": {
+                    transform: "translateY(-2px)",
+                    boxShadow: theme.shadows[4],
+                  },
+                }}
+              >
+                <Box
+                  className="award-header"
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    flexWrap: "wrap",
+                    gap: theme.spacing(1),
+                    mb: theme.spacing(1),
+                  }}
+                >
+                  <Box>
+                    <Typography
+                      variant="subtitle1"
                       sx={{
-                        color: '#f57c00',        // orange for PDF
-                        borderColor: '#f57c00',
-                        mt: 0.5,
-                        minWidth: 36,
-                        '&:hover': { backgroundColor: 'rgba(245,124,0,0.1)', borderColor: '#f57c00' },
+                        fontFamily: theme.typography.fontFamily,
+                        fontWeight: 700,
+                        color: theme.palette.text.primary,
                       }}
                     >
-                      PDF
-                    </Button>
+                      {item.title}
+                    </Typography>
+                    <Typography
+                      variant="subtitle1"
+                      sx={{
+                        fontFamily: theme.typography.fontFamily,
+                        color: theme.palette.text.secondary,
+                        fontStyle: 'italic',
+                        mt: 0.1,
+                      }}
+                    >
+                      {item.organization}
+                    </Typography>
+                    
+                  {item.description && (
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        fontFamily: theme.typography.fontFamily,
+                        color: theme.palette.text.primary,
+                      }}
+                    >
+                      {item.description}
+                    </Typography>
                   )}
+                  </Box>
+
+                  <Box
+                    sx={{
+                      textAlign: "right",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "flex-end",
+                    }}
+                  >
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        fontFamily: theme.typography.fontFamily,
+                        color: theme.palette.text.secondary,
+                      }}
+                    >
+                      {item.start_date === item.end_date
+                        ? item.start_date
+                        : `${item.start_date} – ${item.end_date}`}
+                    </Typography>
+
+                    {item.pdf && (
+                      <Button
+                        href={item.pdf}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        startIcon={<PictureAsPdfIcon sx={{ fontSize: 16 }} />}
+                        variant="outlined"
+                        size="small"
+                        sx={{
+                          color: "#f57c00",
+                          borderColor: "#f57c00",
+                          mt: 0.5,
+                          minWidth: 36,
+                          "&:hover": {
+                            backgroundColor: "rgba(245,124,0,0.1)",
+                            borderColor: "#f57c00",
+                          },
+                        }}
+                      >
+                        PDF
+                      </Button>
+                    )}
+                  </Box>
                 </Box>
               </Box>
-
-              {item.description && (
-                <Typography variant="body2" sx={{ fontFamily: '"Inter", sans-serif', color: "#475569" }}>
-                  {item.description}
-                </Typography>
-              )}
             </Box>
-          </Box>
-        ))
-      ) : (
-        <Typography variant="body2" sx={{ fontFamily: '"Inter", sans-serif', color: "#94a3b8", textAlign: "center", py: 2 }}>
-          No awards provided.
-        </Typography>
-      )}
-    </Box>
-  </div>
-));
+          ))
+        ) : (
+          <Typography
+            variant="body2"
+            sx={{
+              fontFamily: theme.typography.fontFamily,
+              color: theme.palette.text.disabled,
+              textAlign: "center",
+              py: 2,
+            }}
+          >
+            No awards provided.
+          </Typography>
+        )}
+      </Box>
+    </div>
+  );
+});
 
 export default AwardsSection;

@@ -1,25 +1,16 @@
 import React, { forwardRef } from "react";
-import { Box, Typography, Grid, Link } from "@mui/material";
+import { Box, Typography, Grid, Link, useTheme } from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 import SmartphoneIcon from "@mui/icons-material/Smartphone";
+import AnimatedUnderlineTitle from './AnimatedUnderlineTitle';
 
 const ReferencesSection = forwardRef(({ data }, ref) => {
+  const theme = useTheme();
   return (
     <div ref={ref}>
       <Box sx={{ py: 2, px: 2 }}>
-        <Typography
-          variant="h4"
-          sx={{
-            fontFamily: '"Inter", sans-serif',
-            fontWeight: 700,
-            textAlign: "center",
-            mb: 4,
-          }}
-        >
-          References
-        </Typography>
-
+        <AnimatedUnderlineTitle title="References" />
         <Grid container spacing={3} justifyContent="center">
           {data.references?.map((refItem, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
@@ -31,31 +22,34 @@ const ReferencesSection = forwardRef(({ data }, ref) => {
                 }}
               >
                 <Box
-                  sx={{
-                    flexGrow: 1, // allows the card to fill available height
-                    background:
-                      "linear-gradient(135deg, #f9fafb 0%, #f1f5f9 100%)",
-                    borderRadius: "10px",
-                    border: "1px solid rgba(33, 150, 243, 0.15)",
-                    boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
-                    p: 3,
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "flex-start",
-                    transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                    "&:hover": {
-                      transform: "translateY(-3px)",
-                      boxShadow: "0 4px 12px rgba(33,150,243,0.15)",
-                    },
-                  }}
+                    sx={{
+                      flexGrow: 1,
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "flex-start",
+                      width: "100%",
+                      borderRadius: theme.shape.borderRadius,
+                      background: `linear-gradient(135deg, ${theme.palette.background.paper} 0%, ${theme.palette.action.hover} 100%)`,
+                      border: `1px solid ${theme.palette.primary.light}33`,
+                      boxShadow: `
+                      0 0 4px ${theme.palette.primary.main},
+                      0 0 8px ${theme.palette.primary.main}33
+                      `,
+                      backdropFilter: "blur(6px)",
+                      overflow: "hidden",
+                      p: { xs: theme.spacing(2), sm: theme.spacing(3) },
+                      transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                      "&:hover": {
+                        transform: "translateY(-2px)",
+                      },
+                    }}
                 >
                   <Typography
                     variant="h6"
                     sx={{
-                      fontFamily: '"Inter", sans-serif',
+                      fontFamily: theme.typography.fontFamily,
                       fontWeight: 700,
-                      color: "#0f172a",
-                      mb: 0.5,
+                      color: theme.palette.text.primary,
                     }}
                   >
                     {refItem.name}
@@ -65,7 +59,7 @@ const ReferencesSection = forwardRef(({ data }, ref) => {
                     sx={{
                       fontFamily: '"Inter", sans-serif',
                       fontStyle: "italic",
-                      color: "#475569",
+                      color: theme.palette.text.secondary,
                       mb: 2,
                     }}
                   >
@@ -95,7 +89,13 @@ const ReferencesSection = forwardRef(({ data }, ref) => {
                   {refItem.phone && (
                     <Box sx={{ display: "flex", alignItems: "center", mb: 0.5 }}>
                       <PhoneIcon sx={{ fontSize: 16, mr: 1, color: "#6A1B9A" }} />
-                      <Typography variant="body2" sx={{ color: "#334155" }}>
+                      <Typography 
+                        variant="body2"       
+                        sx={{
+                          fontFamily: theme.typography.fontFamily,
+                          color: theme.palette.text.secondary,
+                        }}
+                        >
                         {refItem.phone}
                       </Typography>
                     </Box>
@@ -105,7 +105,13 @@ const ReferencesSection = forwardRef(({ data }, ref) => {
                   {refItem.mobile && (
                     <Box sx={{ display: "flex", alignItems: "center" }}>
                       <SmartphoneIcon sx={{ fontSize: 16, mr: 1, color: "#6A1B9A" }} />
-                      <Typography variant="body2" sx={{ color: "#334155" }}>
+                      <Typography 
+                      variant="body2"        
+                        sx={{
+                          fontFamily: theme.typography.fontFamily,
+                          color: theme.palette.text.secondary,
+                        }}
+                      >
                         {refItem.mobile}
                       </Typography>
                     </Box>

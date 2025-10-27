@@ -1,5 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Box, CssBaseline, Tabs, Tab } from '@mui/material';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { Box, CssBaseline, GlobalStyles } from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './theme'; 
+
+// Import icons
 import HomeIcon from '@mui/icons-material/Home';
 import SchoolIcon from '@mui/icons-material/School';
 import ArticleIcon from '@mui/icons-material/Article';
@@ -11,7 +15,7 @@ import FolderIcon from '@mui/icons-material/Folder';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';           
 
-
+// Import your sections
 import Header from './components/Header';
 import EducationSection from './components/EducationSection';
 import ResearchInterestsSection from './components/ResearchInterestsSection';
@@ -23,33 +27,33 @@ import AwardsSection from './components/AwardsSection';
 import CertificatesSection from './components/CertificatesSection';
 import ProjectsSection from './components/ProjectsSection';
 import ReferencesSection from './components/ReferencesSection';
-import Taskbar from './components/Taskbar';
+import Navbar from './components/Navbar';
+import Loader from './components/Loader';
 
 function App() {
-  const [activeTab, setActiveTab] = useState('education');
+  const [activeTab, setActiveTab] = useState('home');
   const [resumeData, setResumeData] = useState(null);
   const [error, setError] = useState(null);
 
-  const tabContainerRef = useRef(null);
   const headerRef = useRef(null);
+  const sectionRefs = useRef({});
+  const nodeRef = useRef(null);
 
   const sectionIcons = {
-    home: { icon: HomeIcon, color: '#1E88E5' },              // blue, welcoming & standard for home
-    educations: { icon: SchoolIcon, color: '#43A047' },      // green, learning & growth
-    research_interests: { icon: ArticleIcon, color: '#6D4C41' }, // brownish, academic/research
-    work_experiences: { icon: WorkIcon, color: '#F4511E' },  // orange, professional/work
-    academic_experiences: { icon: HistoryEduIcon, color: '#8E24AA' }, // purple, education/research
-    skills: { icon: CodeIcon, color: '#3949AB' },            // deep blue, tech/programming
-    publications: { icon: ArticleIcon, color: '#00897B' },   // teal, formal/academic
-    awards: { icon: EmojiEventsIcon, color: '#FDD835' },     // yellow/gold, achievement
-    certificates: { icon: VerifiedIcon, color: '#FF6F00' },  // orange, recognition
-    projects: { icon: FolderIcon, color: '#0a3549ff' },        // slate gray, organization/projects
-    references: { icon: SupervisorAccountIcon, color: '#6A1B9A' },      // purple, professional network
+    home: { icon: HomeIcon, color: '#B1C7DE' },              
+    educations: { icon: SchoolIcon, color: '#B1C7DE' },      
+    research_interests: { icon: ArticleIcon, color: '#B1C7DE' }, 
+    work_experiences: { icon: WorkIcon, color: '#B1C7DE' },  
+    academic_experiences: { icon: HistoryEduIcon, color: '#B1C7DE' }, 
+    skills: { icon: CodeIcon, color: '#B1C7DE' },           
+    publications: { icon: ArticleIcon, color: '#B1C7DE' },  
+    awards: { icon: EmojiEventsIcon, color: '#B1C7DE' },     
+    certificates: { icon: VerifiedIcon, color: '#B1C7DE' }, 
+    projects: { icon: FolderIcon, color: '#B1C7DE' },        
+    references: { icon: SupervisorAccountIcon, color: '#B1C7DE' },      
   };
 
-
-  const sections = [
-    { id: 'home', label: 'Home' },
+  const sections = useMemo(() => [
     { id: 'educations', label: 'Educations' },
     { id: 'research_interests', label: 'Research Interests' },
     { id: 'work_experiences', label: 'Work Experiences' },
@@ -57,147 +61,129 @@ function App() {
     { id: 'skills', label: 'Skills' },
     { id: 'publications', label: 'Publications' },
     { id: 'awards', label: 'Awards & Honors' },
-    { id: 'certificates', label: 'Certificates' },        
+    { id: 'certificates', label: 'Certificates' },
     { id: 'projects', label: 'Projects' },
     { id: 'references', label: 'References' },
-  ];
+  ], []);
 
+  // Fetch JSON data
   useEffect(() => {
     fetch('/data.json')
-      .then((response) => {
-        if (!response.ok) throw new Error(`Failed to fetch: ${response.statusText}`);
-        return response.json();
-      })
-      .then((data) => setResumeData(data))
-      .catch((err) => {
-        console.error('Error:', err);
-        setError(err.message);
-      });
+      .then((r) => r.ok ? r.json() : Promise.reject(new Error('Fetch error')))
+      .then(setResumeData)
+      .catch((err) => setError(err.message));
   }, []);
 
-const handleTabChange = (tabId) => {
-  if (tabId === 'home') {
-    setActiveTab('');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    return;
-  }
 
-  setActiveTab(tabId);
+  // Click a tab
+  const handleTabChange = (tabId) => {
+    setActiveTab(tabId);
 
-  setTimeout(() => {
-    if (tabContainerRef.current) {
-      tabContainerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (tabId === 'home' && headerRef.current) {
+      headerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
     }
-  }, 150);
-};
+
+    const section = sectionRefs.current[tabId];
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+
+  // Scroll-based tab update
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const offset = 80; // navbar height
+      const allSections = [
+        { id: 'home', el: headerRef.current },
+        ...Object.entries(sectionRefs.current).map(([id, el]) => ({ id, el })),
+      ];
+
+      let closest = { id: 'home', distance: Infinity };
+      allSections.forEach(({ id, el }) => {
+        if (!el) return;
+        const top = el.getBoundingClientRect().top + window.scrollY - offset;
+        const distance = Math.abs(scrollY - top);
+        if (distance < closest.distance) closest = { id, distance };
+      });
+
+      setActiveTab(closest.id);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // initialize
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [sections]);
+
 
 
   if (error)
     return <Box sx={{ p: 2, color: 'red', textAlign: 'center' }}>Error: {error}</Box>;
-  if (!resumeData)
-    return <Box sx={{ p: 2, textAlign: 'center' }}>Loading...</Box>;
+  
+  if (!resumeData) return <Loader />;
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', p: 2 }}>
-      <CssBaseline />
+    <ThemeProvider theme={theme}>
+      <Navbar
+          sections={sections.filter(s => s.id !== 'home')}
+          activeTab={activeTab}
+          onTabChange={handleTabChange}
+          sectionIcons={sectionIcons}
+        />
+      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', p: 2 }}>
+      {/* Node layer */}
 
-      <Box ref={headerRef}>
-        <Header data={resumeData.header} />
+        <CssBaseline />
+        <GlobalStyles
+          styles={{
+            ':root': {
+              '--color-bg': theme.palette.background.default,
+              '--color-surface': theme.palette.background.paper,
+              '--color-primary': theme.palette.primary.main,
+            },
+            body: { backgroundColor: 'var(--color-bg)' },
+          }}
+        />
+
+        {/* Header */}
+        <Box id="home" ref={headerRef} style={{ scrollMarginTop: '80px' }}>
+          <Header data={resumeData.header} />
+        </Box>
+
+
+        {/* Sections */}
+        <Box component="main" sx={{ flexGrow: 1, p: { xs: 2, sm: 3 } }}>
+          {sections.map(({ id }) => (
+            <div
+              id={id}
+              key={id}
+              ref={(el) => (sectionRefs.current[id] = el)}
+              style={{ marginBottom: '80px', scrollMarginTop: '80px' }}
+            >
+              {id === 'educations' && <EducationSection data={resumeData} />}
+              {id === 'research_interests' && <ResearchInterestsSection data={resumeData} />}
+              {id === 'work_experiences' && <WorkExperienceSection data={resumeData} />}
+              {id === 'academic_experiences' && <AcademicExperienceSection data={resumeData} />}
+              {id === 'skills' && <SkillSection data={resumeData} />}
+              {id === 'publications' && <PublicationsSection data={resumeData} />}
+              {id === 'awards' && <AwardsSection data={resumeData} />}
+              {id === 'certificates' && <CertificatesSection data={resumeData} />}
+              {id === 'projects' && <ProjectsSection data={resumeData} />}
+              {id === 'references' && <ReferencesSection data={resumeData} />}
+            </div>
+          ))}
+        </Box>
+
+        {/* <Taskbar
+          activeSection={activeTab}
+          onSectionChange={handleTabChange}
+          sections={sections}
+          sectionIcons={sectionIcons}
+        /> */}
       </Box>
-
-      <Box
-        ref={tabContainerRef}
-        sx={{
-          borderBottom: 1,
-          borderColor: 'divider',
-          mb: 2,
-          display: 'flex',
-          justifyContent: 'center',
-        }}
-      >
-        <Tabs
-          value={activeTab}
-          onChange={(e, newValue) => handleTabChange(newValue)}
-          variant="scrollable"
-          scrollButtons="auto"
-          TabIndicatorProps={{ style: { display: 'none' } }}
-        >
-          {sections.filter(section => section.id !== 'home').map((section) => {
-            const Icon = sectionIcons[section.id]?.icon || ArticleIcon;
-            const isActive = activeTab === section.id;
-            return (
-              <Tab
-                key={section.id}
-                value={section.id}
-                icon={
-                  <Icon
-                    sx={{
-                      fontSize: isActive ? 34 : 26,
-                      color: isActive ? sectionIcons[section.id].color : '#999',
-                    }}
-                  />
-                }
-                iconPosition="top"
-                label={
-                  <Box
-                    sx={{
-                      fontSize: 11,
-                      color: isActive ? sectionIcons[section.id].color : '#999',
-                      mt: 0.5,
-                      textTransform: 'none',
-                    }}
-                  >
-                    {section.label}
-                  </Box>
-                }
-              />
-            );
-          })}
-        </Tabs>
-      </Box>
-
-      {/* Main content */}
-      <Box component="main" sx={{ flexGrow: 1, p: { xs: 2, sm: 3 } }}>
-        {activeTab === 'educations' && (
-          <EducationSection data={resumeData} />
-        )}
-        {activeTab === 'research_interests' && (
-          <ResearchInterestsSection data={resumeData} />
-        )}
-        {activeTab === 'work_experiences' && (
-          <WorkExperienceSection data={resumeData} />
-        )}
-        
-        {activeTab === 'academic_experiences' && (
-          <AcademicExperienceSection data={resumeData} />
-        )}
-        {activeTab === 'skills' && (
-          <SkillSection data={resumeData} />
-        )}
-        {activeTab === 'publications' && (
-          <PublicationsSection data={resumeData} />
-        )}
-        {activeTab === 'awards' && (
-          <AwardsSection data={resumeData} />
-        )}
-        {activeTab === 'certificates' && (
-          <CertificatesSection data={resumeData} />
-        )}
-        {activeTab === 'projects' && (
-          <ProjectsSection data={resumeData} />
-        )}
-        {activeTab === 'references' && (
-          <ReferencesSection data={resumeData} />
-        )}
-      </Box>
-
-      <Taskbar
-        activeSection={activeTab}
-        onSectionChange={handleTabChange}
-        sections={sections}
-        sectionIcons={sectionIcons}
-      />
-    </Box>
+    </ThemeProvider>
   );
 }
 

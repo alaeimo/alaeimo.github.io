@@ -4,7 +4,7 @@ import './styles/Taskbar.css';
 
 const Taskbar = ({ data, activeSection, onSectionChange, sections, sectionIcons }) => {
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '10vh' }}>
       <CssBaseline />
       <Box
         sx={{
@@ -40,13 +40,13 @@ const Taskbar = ({ data, activeSection, onSectionChange, sections, sectionIcons 
                 key={section.id}
                 onClick={() => onSectionChange(section.id)}
                 sx={{
-                  color: activeSection === section.id ? color : '#666',
+                  color: activeSection === section.id ? color : '#5D91C3',
                   bgcolor:
                     activeSection === section.id
-                      ? 'rgba(255, 255, 255, 0.2)'
+                      ? 'rgba(93, 145, 195, 1)'
                       : 'transparent',
                   '&:hover': {
-                    bgcolor: 'rgba(255, 255, 255, 0.2)',
+                    bgcolor: 'rgba(93, 145, 195, 1)',
                     color,
                   },
                   borderRadius: '50%',

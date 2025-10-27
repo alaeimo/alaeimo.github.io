@@ -2,11 +2,11 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem; 
+  gap: 1.5rem;
   margin-left: 2rem;
   padding: 0.5rem 0;
 }
-/* Timeline spine and node */
+
 .timeline-item {
   position: relative;
   display: flex;
@@ -17,17 +17,17 @@
 .timeline-line {
   position: absolute;
   left: -1.2rem;
-  top: 1.2rem;
   width: 2px;
   height: calc(100% + 1.5rem);
-  background: linear-gradient(to bottom, #90caf9 0%, #2196f3 100%);
+  background: linear-gradient(to bottom, #d3e6f5 0%, #2196f3 50%, #d3e6f5 100%);
+  background-size: 100% 200%;
   z-index: 0;
+  animation: flow 2s linear infinite;
 }
 
 .timeline-node {
   position: absolute;
-  left: -1.6rem;
-  top: 0.6rem;
+  left: -1.52rem;
   width: 12px;
   height: 12px;
   background: #2196f3;
@@ -35,53 +35,42 @@
   border: 3px solid #e3f2fd;
   box-shadow: 0 0 6px rgba(33, 150, 243, 0.4);
   z-index: 2;
+  animation: pulse 1.5s ease-in-out infinite;
 }
 
-/* Card */
+@keyframes flow {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 0% 100%; }
+}
+
+@keyframes pulse {
+  0%,100% { transform: scale(1); box-shadow: 0 0 6px rgba(33, 150, 243,0.4); }
+  50% { transform: scale(1.2); box-shadow: 0 0 12px rgba(33, 150, 243,0.6); }
+}
+
 .education-card {
-  position: relative;
-  background: rgba(255, 255, 255, 0.65);
-  border: 1px solid rgba(33, 150, 243, 0.15);
+  border: 2px solid #5D91C3;
   border-radius: 10px;
-  padding: 1rem 1.3rem; /* slightly smaller padding */
+  box-shadow: 0 0 8px #5D91C3, 0 0 16px #5D91C3, 0 0 24px #5D91C3;
+  background: rgba(255,255,255,0.1);
+  padding: 1rem 1.3rem;
   width: 100%;
-  backdrop-filter: blur(6px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .education-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.12);
+  box-shadow: 0 0 12px #5D91C3, 0 0 24px #5D91C3, 0 0 36px #5D91C3;
 }
 
-/* Header: left = degree+field, right = institution+dates */
 .edu-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
   gap: 1.5rem;
-  flex-wrap: wrap; /* allows wrapping on small screens */
+  flex-wrap: wrap;
 }
 
-/* Left column */
-.edu-degree {
-  font-family: "Inter", sans-serif;
-  font-weight: 700;
-  color: #0f172a;
-  font-size: 1.05rem;
-}
-
-.edu-field {
-  font-family: "Inter", sans-serif;
-  color: #334155;
-  font-size: 0.95rem;
-  font-style: italic;
-  margin-top: 0.1rem;
-}
-
-/* Right column */
-.edu-right {
+.edu-dates {
   text-align: right;
   display: flex;
   flex-direction: column;
@@ -90,74 +79,12 @@
 
 @media (max-width: 600px) {
   .edu-header {
-    flex-direction: column; /* stack left and right columns vertically */
-    align-items: flex-start; /* align to left for readability */
+    flex-direction: column;
+    align-items: flex-start;
   }
-  .edu-right {
+  .edu-dates {
     text-align: left;
     align-items: flex-start;
-    margin-top: 0.5rem; /* spacing between degree/field and university/date */
-  }
-}
-
-.edu-university {
-  font-family: "Inter", sans-serif;
-  font-weight: 600;
-  color: #1e293b;
-  font-size: 1rem;
-}
-
-
-.edu-location {
-  font-family: "Inter", sans-serif;
-  color: #64748b;
-  font-size: 0.9rem;
-  font-style: italic;
-}
-
-.edu-dates {
-  font-family: "Inter", sans-serif;
-  color: #475569;
-  font-size: 0.9rem;
-  margin-top: 0.1rem;
-}
-
-/* Details below */
-.edu-details {
-  margin-top: 0.8rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
-
-.edu-detail {
-  font-family: "Inter", sans-serif;
-  color: #475569;
-  font-size: 0.9rem;
-  line-height: 1.5;
-}
-
-.detail-label {
-  font-weight: 600;
-  color: #1e293b;
-}
-
-.no-education {
-  text-align: center;
-  color: #94a3b8;
-  font-family: "Inter", sans-serif;
-  font-size: 0.95rem;
-  padding: 1rem 0;
-}
-
-/* Animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+    margin-top: 0.5rem;
   }
 }

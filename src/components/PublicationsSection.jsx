@@ -1,12 +1,17 @@
 import React, { forwardRef } from "react";
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography, Button, useTheme } from "@mui/material";
 import LanguageIcon from '@mui/icons-material/Language'; // URL
 import GitHubIcon from '@mui/icons-material/GitHub';      // Code
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf'; // PDF
 import "./styles/PublicationsSection.css";
+import AnimatedUnderlineTitle from './AnimatedUnderlineTitle';
 
-const PublicationsSection = forwardRef(({ data }, ref) => (
+const PublicationsSection = forwardRef(({ data }, ref) => {
+
+   const theme = useTheme();
+   return (
   <div ref={ref}>
+    <AnimatedUnderlineTitle title="Publications" />
     <Box className="manuscript-timeline">
       {data.publications?.length > 0 ? (
         data.publications.map((item, index) => (
@@ -14,41 +19,66 @@ const PublicationsSection = forwardRef(({ data }, ref) => (
             <Box className="timeline-line" />
             <Box className="timeline-node" />
 
-            <Box className="manuscript-card" 
-                      sx={{
+            <Box 
+              className="manuscript-card" 
+              sx={{
                 width: '100%',
-                borderRadius: '10px',
-                boxShadow: '0 3px 12px rgba(0, 0, 0, 0.08)',
-                background: 'linear-gradient(135deg, #f9fafb 0%, #f1f5f9 100%)',
+                borderRadius: theme.shape.borderRadius,
+                boxShadow: theme.shadows[2],
+                background: `linear-gradient(135deg, ${theme.palette.background.paper} 0%, ${theme.palette.action.hover} 100%)`,
+                border: `1px solid ${theme.palette.primary.light}33`,
+                backdropFilter: 'blur(6px)',
                 overflow: 'hidden',
-                p: { xs: 2, sm: 3 },
-              }}>
+                p: { xs: theme.spacing(2), sm: theme.spacing(3) },
+                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                '&:hover': {
+                  transform: 'translateY(-2px)',
+                  boxShadow: theme.shadows[4],
+                },
+              }}
+              >
               {/* Header */}
               <Box
                 className="manuscript-header"
-                sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}
+                     sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    flexWrap: 'wrap',
+                    gap: theme.spacing(1),
+                    mb: theme.spacing(1.5),
+                  }}
               >
                 <Box>
                   <Typography
                     variant="subtitle1"
-                      sx={{ 
-                        fontFamily: '"Inter", sans-serif', 
-                        fontWeight: 600, 
-                        fontStyle: 'italic',   
-                        color: '#0f172a' 
-                    }}
+                      sx={{
+                        fontFamily: theme.typography.fontFamily,
+                        fontWeight: 700,
+                        color: theme.palette.text.primary,
+                      }}
                   >
                     {item.title}
                   </Typography>
                   <Typography
                     variant="subtitle1"
-                    sx={{ fontFamily: '"Inter", sans-serif', color: '#334155', mt: 0.2 }}
+                    sx={{
+                      fontFamily: theme.typography.fontFamily,
+                      color: theme.palette.text.secondary,
+                      fontStyle: 'italic',
+                      mt: 0.1,
+                    }}
                   >
                     {item.authors.join(", ")}
                   </Typography>
                   <Typography
                     variant="body2"
-                    sx={{ fontFamily: '"Inter", sans-serif', color: '#475569', mt: 0.3 }}
+                    sx={{
+                      fontFamily: '"Inter", sans-serif',
+                      textAlign: 'left',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      mt: 0.3 
+                    }}
                   >
                     {item.journal}, {item.year}
                   </Typography>
@@ -83,11 +113,15 @@ const PublicationsSection = forwardRef(({ data }, ref) => (
                       variant="outlined"
                       size="small"
                       sx={{
-                        color: '#181717',        // black for GitHub
-                        borderColor: '#181717',
+                        color: theme.palette.text.primary,
+                        borderColor: theme.palette.text.primary,
                         minWidth: 36,
-                        '&:hover': { backgroundColor: 'rgba(24,23,23,0.1)', borderColor: '#181717' },
+                        '&:hover': {
+                          backgroundColor: theme.palette.action.hover,
+                          borderColor: theme.palette.text.primary,
+                        },
                       }}
+
                     >
                       Code
                     </Button>
@@ -126,6 +160,7 @@ const PublicationsSection = forwardRef(({ data }, ref) => (
       )}
     </Box>
   </div>
-));
+  );
+});
 
 export default PublicationsSection;

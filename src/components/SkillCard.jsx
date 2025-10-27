@@ -1,7 +1,8 @@
 import React from "react";
-import { Box, Typography, LinearProgress } from "@mui/material";
+import { Box, Typography, LinearProgress, useTheme } from "@mui/material";
 
 const SkillCard = ({ skill }) => {
+  const theme = useTheme();
   return (
     <Box
       className="skill-card"
@@ -11,8 +12,12 @@ const SkillCard = ({ skill }) => {
         padding: "0.8rem 1rem 1.2rem 1rem",
         background: "rgba(255,255,255,0.65)",
         backdropFilter: "blur(6px)",
-        boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
         transition: "transform 0.3s ease",
+        border: `1px solid ${theme.palette.primary.main}`,
+        boxShadow: `
+          0 0 4px ${theme.palette.primary.main},
+          0 0 8px ${theme.palette.primary.main}33
+        `,
         overflow: "hidden",
         "&:hover": { transform: "translateY(-2px)" },
       }}
@@ -35,7 +40,7 @@ const SkillCard = ({ skill }) => {
             component="img"
             src={skill.icon}
             alt={`${skill.name} logo`}
-            sx={{ width: 35, height: 35 }}
+            sx={{ width: 35, height: 35, ml:1 }}
           />
         )}
       </Box>
