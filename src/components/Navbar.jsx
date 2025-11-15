@@ -104,7 +104,7 @@ const Navbar = ({ sections, activeTab, onTabChange, sectionIcons }) => {
                 fontWeight: activeTab === 'home' ? 700 : 500,
                 minWidth: 70,
                 borderBottom:
-                  activeTab === 'home' ? `2px solid ${theme.palette.primary.main}` : '2px solid transparent',
+                  activeTab === 'home' ? `1px solid ${theme.palette.primary.main}` : '1px solid transparent',
                 '&:hover': {
                   backgroundColor: 'transparent',
                   color: theme.palette.primary.light,
@@ -140,7 +140,7 @@ const Navbar = ({ sections, activeTab, onTabChange, sectionIcons }) => {
                     fontWeight: isActive ? 700 : 500,
                     minWidth: 70,
                     borderBottom:
-                      isActive ? `2px solid ${theme.palette.primary.main}` : '2px solid transparent',
+                      isActive ? `1px solid ${theme.palette.primary.main}` : '1px solid transparent',
                     '&:hover': {
                       backgroundColor: 'transparent',
                       color: theme.palette.primary.light,

@@ -3,6 +3,7 @@ import {
   Box,
   Typography,
   Button,
+  Modal,
   Grid,
   Chip, 
   useTheme
@@ -17,6 +18,9 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
   const theme = useTheme();
   // Extract unique categories
   const categories = ["All", ...new Set(data.projects.map((p) => p.category))];
+  const [zoomImage, setZoomImage] = useState(null);
+  const [zoomPos, setZoomPos] = useState({ x: 0, y: 0 });
+  const [hoverTimer, setHoverTimer] = useState(null);
 
   // Filter projects
   const filteredProjects =
@@ -26,6 +30,39 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
 
   return (
     <div ref={ref}>
+    {zoomImage && (
+      <Box
+        sx={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100vw",
+          height: "100vh",
+          pointerEvents: "none", // allow mouse events to pass through
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          zIndex: 9999,
+        }}
+      >
+        <Box
+          sx={{
+            width: "70vw",
+            height: "70vh",
+            overflow: "hidden",
+            borderRadius: 2,
+            boxShadow: "0 0 20px rgba(0,0,0,0.5)",
+            backgroundImage: `url(${zoomImage})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "200%", // zoom level
+            backgroundPosition: `${zoomPos.x}% ${zoomPos.y}%`,
+            cursor: "zoom-out",
+          }}
+          onClick={() => setZoomImage(null)} // click overlay to close
+        />
+      </Box>
+    )}
+
       <AnimatedUnderlineTitle title="Projects" />
       <Box className="projects-container">
         {/* Category Buttons */}
@@ -109,14 +146,32 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
                 >
                 {/* Project Image */}
                 <Box
-                    sx={{
+                  sx={{
                     height: 200,
                     backgroundImage: `url(${item.image})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
                     flexShrink: 0,
-                    }}
+                    cursor: "zoom-in",
+                  }}
+                  onMouseEnter={(e) => {
+                    const timer = setTimeout(() => {
+                      setZoomImage(item.image); // show magnifier after 1s
+                    }, 1000);
+                    setHoverTimer(timer);
+                  }}
+                  onMouseLeave={() => {
+                    clearTimeout(hoverTimer); // cancel hover timer
+                    setZoomImage(null);        // hide magnifier
+                  }}
+                  onMouseMove={(e) => {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                    setZoomPos({ x, y });
+                  }}
+                  onClick={() => setZoomImage(item.image)} // click shows magnifier immediately
                 />
 
                 {/* Content */}

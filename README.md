@@ -155,8 +155,8 @@ This automatically builds and publishes the site to:
 ## 👨‍💻 Contributor
 
 **Mohammad Alaei**
-Researcher in Human–AI Interaction, Cognitive Computing, and Personalized Systems
-📍 University of Tabriz, Iran
+AI Researcher & Computer Engineer
+
 🔗 [https://alaeimo.ir](https://alaeimo.ir)
 
 ---
@@ -180,6 +180,6 @@ in the Software without restriction...
 
 ## 🧭 Acknowledgments
 
-This website is designed and developed by **Mohammad Alaei**, inspired by the principles of clarity, accessibility, and human-centered technology — blending academic precision with design simplicity.
+This website is designed and developed by **Mohammad Alaei**, inspired by the principles of clarity, accessibility, and human-centered technology, blending academic precision with design simplicity.
 
 

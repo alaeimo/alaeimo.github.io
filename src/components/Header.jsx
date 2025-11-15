@@ -37,17 +37,16 @@ return (
       py: { xs: 2, md: 4 },
       borderRadius: 4,
       overflow: 'hidden',
-      background: 'linear-gradient(135deg, #B1C7DE 0%, #6C8C9C 100%)', 
+      background: 'linear-gradient(135deg, #5D91C3 0%, #6C8C9C 100%)', 
       color: '#0B2536', py: { xs: 2, md: 4 },
       boxShadow: `0 0 25px 6px #B1C7DEaa`, 
-      // لبه نئون با gradient متحرک
       '&::before': {
         content: '""',
         position: 'absolute',
         inset: 0,
-        padding: '3px', // ضخامت لبه
+        padding: '3px', 
         borderRadius: 4,
-        background: 'linear-gradient(90deg, #B1C7DE, #6C8C9C)', // gradient نئون
+        background: 'linear-gradient(90deg, #e5e5e5, #6C8C9C)',
         backgroundSize: '200% 100%',
         mask:
           'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
@@ -77,7 +76,7 @@ return (
               width: { xs: 150, sm: 170 },
               height: { xs: 150, sm: 170 },
               mx: 'auto',
-              border: '4px solid #1a3b5fff',
+              border: '4px solid #9c9d9eff',
               boxShadow: '0 0 15px #B1C7DEaa',
             }}
           />

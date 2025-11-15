@@ -359,8 +359,36 @@
     ],
     "projects": [
         {
+            "title": "Automated Casting Defect Detection System",
+            "category": "Computer Vision / Deep Learning",
+            "subtitle": "Industrial Quality Inspection using CNNs & Machine Learning",
+            "responsibilities": [
+                "Designed and implemented an automated defect detection system for casting products",
+                "Conducted comparative analysis between traditional ML (LBP, HOG + RF/SVM/KNN) and deep learning models",
+                "Trained and fine-tuned state-of-the-art CNNs including VGG16, MobileNetV2, InceptionV3, and ResNet50",
+                "Applied data preprocessing steps including CLAHE, denoising, grayscale normalization, and tensor conversion",
+                "Used transfer learning with added dense, batch normalization, and dropout layers to prevent overfitting",
+                "Evaluated models using accuracy, precision, recall, F1 score, confusion matrix, and ROC curves",
+                "Demonstrated that VGG16 achieved 99.58% accuracy, outperforming traditional methods"
+            ],
+            "technologies": [
+                "Python",
+                "TensorFlow",
+                "Keras",
+                "Scikit-learn",
+                "OpenCV",
+                "NumPy",
+                "Matplotlib"
+            ],
+            "start_date": "October 2025",
+            "end_date": "October 2025",
+            "image": "static/img/projects/automated-defect-detection.jpg",
+            "code": "https://github.com/alaeimo/CastingDefectDetection",
+            "pdf": "https://github.com/alaeimo/CastingDefectDetection/blob/master/Report.pdf"
+        },
+        {
             "title": "A Transfer Learning Based Approach to Facial Emotion Recognition",
-            "category": "Computer Vision",
+            "category": "Computer Vision / Deep Learning",
             "subtitle": "Computer Vision, Deep Learning, Transfer Learning, Image Processing",
             "responsibilities": [
                 "Designed an open-source AI model to classify facial images into seven distinct emotions",
@@ -381,7 +409,7 @@
         },
         {
             "title": "Extracting Key Face Components from Face Images",
-            "category": "Computer Vision",
+            "category": "Computer Vision / Deep Learning",
             "subtitle": "Computer Vision, Deep Learning, Image Processing",
             "responsibilities": [
                 "Implemented video analysis for detecting 3D facial landmarks",
@@ -424,44 +452,29 @@
             "pdf": ""
         },
         {
-            "title": "Dynamic Web Application for Enhanced Online Profiles and Skill-Based Discovery",
-            "category": "Software Development",
-            "subtitle": "Software Development, Web Development, Online Portfolios",
-            "responsibilities": [
-                "Developed a website for interactive profile creation and resume management",
-                "Integrated a Telegram bot for automated skill-based specialist discovery"
-            ],
-            "technologies": [
-                "Python",
-                "Python Telegram Bot API",
-                "PostgreSQL",
-                "Django",
-                "Bootstrap",
-                "Git"
-            ],
-            "start_date": "Oct 2021",
-            "end_date": "Oct 2021",
-            "image": "static/img/projects/Profile.jpg",
-            "code": "",
-            "pdf": ""
-        },
-        {
-            "title": "Development of a Two-Wheeled Inverted Pendulum Mobile Robot",
+            "title": "Self-Balancing Two-Wheeled Inverted Pendulum Robot",
             "category": "Robotics",
-            "subtitle": "Robotic, Electronic, Robot Control",
+            "subtitle": "Embedded Robotics, Sensor Fusion, PID Control",
             "responsibilities": [
-                "Built a self-balancing two-wheeled robot using sensor fusion and PID control",
-                "Designed control algorithms for motion stability and precision"
+                "Developed a two-wheeled self-balancing robot using a GY-953 IMU for real-time orientation feedback",
+                "Implemented PID-based control algorithms for maintaining stability and precise motion",
+                "Configured PWM motor drivers for bidirectional speed control of both wheels",
+                "Integrated sensor fusion from accelerometer and gyroscope to compute pitch, roll, and yaw",
+                "Calibrated and tuned control parameters (Kp, Ki, Kd) for optimal balancing performance",
+                "Monitored system state via serial output for debugging and performance analysis"
             ],
             "technologies": [
                 "C++",
-                "Arduino programming",
-                "GY-953 Module"
+                "Arduino Programming",
+                "GY-953 IMU",
+                "PWM Motor Control",
+                "PID Control",
+                "Embedded Systems"
             ],
             "start_date": "May 2020",
             "end_date": "May 2020",
-            "image": "static/img/projects/self-balancing-robot.jpg",
-            "code": "",
+            "image": "static/img/projects/self-balancing-robot.png",
+            "code": "https://github.com/alaeimo/InvertedPendulumRobot",
             "pdf": ""
         },
         {
@@ -487,69 +500,103 @@
             "pdf": ""
         },
         {
-            "title": "Obstacle-Crossing and Maze-Solving Robot",
+            "title": "Maze-Solving Autonomous Robot",
             "category": "Robotics",
-            "subtitle": "Robotic, Electronic, Robot Control",
+            "subtitle": "Autonomous Navigation, Sensor Fusion, Motion Control",
             "responsibilities": [
-                "Designed an autonomous robot capable of navigating mazes",
-                "Implemented obstacle detection and avoidance using ultrasonic sensors"
+                "Built an autonomous robot capable of solving mazes using the Left-Hand Rule algorithm",
+                "Implemented multi‑directional obstacle detection using a servo‑mounted ultrasonic sensor",
+                "Developed adaptive motion control logic for forward movement, turning, and dead‑end handling",
+                "Programmed real-time scanning of front, left, and right distances with angle‑based sensor sampling",
+                "Integrated an L293D motor driver for differential motor control (forward, reverse, pivot turns)",
+                "Optimized decision-making routines for smoother navigation in narrow maze paths"
             ],
             "technologies": [
-                "C programming",
-                "AVR ATMega32 Microcontroller",
-                "Ultrasonic Sensors"
+                "Arduino C/C++",
+                "AVR ATMega32 / Arduino-Compatible Board",
+                "Ultrasonic Distance Sensor (HC‑SR04)",
+                "Servo Motor (Angle Scanning)",
+                "L293D Motor Driver"
             ],
             "start_date": "Oct 2019",
             "end_date": "Oct 2019",
             "image": "static/img/projects/maze-solver-robot.jpg",
-            "code": "",
+            "code": "https://github.com/alaeimo/MazeSolverRobot",
             "pdf": ""
         },
         {
-            "title": "Hardware and Software Exploit Alert System: A Protective Application",
-            "category": "Cybersecurity",
-            "subtitle": "Cybersecurity, Vulnerability Assessment, Threat Detection",
+            "title": "Interactive Music-Driven Servo Robot",
+            "category": "Robotics",
+            "subtitle": "Human–Robot Interaction, Motion Control, Embedded Programming",
             "responsibilities": [
-                "Developed a system to detect hardware and software vulnerabilities in real time",
-                "Collected live configuration data and monitored hacker forums for emerging threats",
-                "Performed vulnerability scanning and automated alert reporting"
+                "Designed and implemented a four-servo robotic system capable of reacting to music commands in real time",
+                "Programmed an Arduino-based control system to synchronize arm motion with predefined musical sequences",
+                "Developed a Python-based socket server to process natural-language song titles and trigger corresponding robot actions",
+                "Implemented motion routines using timed servo actuation and lightweight kinematics",
+                "Integrated serial communication between a PC and microcontroller for dynamic command dispatch"
+            ],
+            "technologies": [
+                "C++ (Arduino)",
+                "Python",
+                "Serial Communication",
+                "Socket Programming",
+                "Servo Control"
+            ],
+            "start_date": "Jun 2018",
+            "end_date": "Jun 2018",
+            "image": "static/img/projects/Music-Player-Robot.jpg",
+            "code": "https://github.com/alaeimo/MusicPlayerRobot",
+            "pdf": ""
+        },
+        {
+            "title": "Hardware and Software Exploit Alert System",
+            "category": "Cybersecurity",
+            "subtitle": "Intelligent Vulnerability Detection, Data-Driven Threat Analysis, Automated Alerting",
+            "responsibilities": [
+                "Designed and implemented a real-time system to detect hardware and software vulnerabilities",
+                "Collected and processed live system configuration data and online exploit feeds using Python automation",
+                "Applied fuzzy string matching algorithms for intelligent mapping between exploit titles and installed software",
+                "Built an automated email alerting pipeline for notifying users about relevant vulnerabilities",
+                "Created a PyQT interface for visualization of vulnerability alerts and system status"
             ],
             "technologies": [
                 "Python",
                 "PyQT",
                 "Mechanize",
                 "BeautifulSoup",
+                "FuzzyWuzzy",
                 "SQLite"
             ],
             "start_date": "Nov 2018",
             "end_date": "Nov 2018",
-            "image": "static/img/projects/ExploitFinder.jpg",
-            "code": "",
+            "image": "static/img/projects/ExploitAlertSystem.jpg",
+            "code": "https://github.com/alaeimo/ExploitAlertSystem",
             "pdf": ""
         }
-    ],
-    "references": [
-        {
-            "name": "Leyli Mohammad Khanli",
-            "position": "Professor, Department of Computer Engineering, University of Tabriz, Iran",
-            "email": "l-khanli@tabrizu.ac.ir",
-            "phone": "+98 41-33393725",
-            "mobile": "+98 914-3138652"
-        },
-        {
-            "name": "Seyed Hadi Aghdasi Alamdari",
-            "position": "Assistant Professor, Department of Computer Engineering, University of Tabriz, Iran",
-            "email": ["aghdasi@tabrizu.ac.ir", "aghdasi.ha@gmail.com"],
-            "phone": "+98 41-33393753",
-            "mobile": "+98 914-4060184"
-        },
-        {
-            "name": "Mina Zolfy Lighvan",
-            "position": "Associate Professor, Department of Computer Engineering, University of Tabriz, Iran",
-            "email": "mzolfy@tabrizu.ac.ir",
-            "phone": "+98 413-33393759",
-            "mobile": "+98 914-4159281"
-        }
-    ]
 
+    ],
+    "references": 
+        [
+            {
+                "name": "Seyed Hadi Aghdasi Alamdari",
+                "position": "Full Professor, Department of Electrical and Computer Engineering, University of Tabriz, Iran",
+                "email": ["aghdasi@tabrizu.ac.ir", "aghdasi.ha@gmail.com"],
+                "phone": "+98 41-33393753",
+                "mobile": "+98 914-4060184"
+            },
+            {
+                "name": "Leyli Mohammad Khanli",
+                "position": "Full Professor, Department of Electrical and Computer Engineering, University of Tabriz, Iran",
+                "email": ["l-khanli@tabrizu.ac.ir"],
+                "phone": "+98 41-33393725",
+                "mobile": "+98 914-3138652"
+            },
+            {
+                "name": "Mina Zolfy Lighvan",
+                "position": "Associate Professor, Department of Electrical and Computer Engineering, University of Tabriz, Iran",
+                "email": ["mzolfy@tabrizu.ac.ir"],
+                "phone": "+98 41-33393759",
+                "mobile": "+98 914-4159281"
+            }
+        ]
 }
