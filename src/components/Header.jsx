@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Grid, Typography, Avatar, Link, IconButton, Container } from '@mui/material';
+import { Box, Grid, Typography, Avatar, Link, Button, IconButton, Container } from '@mui/material';
 import {
   GitHub as GitHubIcon,
   LinkedIn as LinkedInIcon,
@@ -38,7 +38,7 @@ return (
       borderRadius: 4,
       overflow: 'hidden',
       background: 'linear-gradient(135deg, #5D91C3 0%, #6C8C9C 100%)', 
-      color: '#0B2536', py: { xs: 2, md: 4 },
+      color: '#0B2536', 
       boxShadow: `0 0 25px 6px #B1C7DEaa`, 
       '&::before': {
         content: '""',
@@ -80,7 +80,21 @@ return (
               boxShadow: '0 0 15px #B1C7DEaa',
             }}
           />
-        </Grid>
+          <Button
+            variant="contained"
+            sx={{ mt: 4,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  textAlign: 'center',
+             }}
+            component="a"
+            href="/static/pdf/MohammadAlaei-CV.pdf"
+            download
+          >
+            Download CV
+          </Button>
+      </Grid>
+
 
         <Grid item xs={12} md={10}>
           <Typography

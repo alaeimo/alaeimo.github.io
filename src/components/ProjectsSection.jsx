@@ -3,9 +3,9 @@ import {
   Box,
   Typography,
   Button,
-  Modal,
   Grid,
-  Chip, 
+  Chip,
+  Collapse,
   useTheme
 } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -15,55 +15,84 @@ import AnimatedUnderlineTitle from './AnimatedUnderlineTitle';
 
 const ProjectsSection = forwardRef(({ data }, ref) => {
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const theme = useTheme();
-  // Extract unique categories
-  const categories = ["All", ...new Set(data.projects.map((p) => p.category))];
+  const [expandedProjects, setExpandedProjects] = useState({});
   const [zoomImage, setZoomImage] = useState(null);
   const [zoomPos, setZoomPos] = useState({ x: 0, y: 0 });
   const [hoverTimer, setHoverTimer] = useState(null);
 
+  const theme = useTheme();
+
+  // Extract unique categories
+    const categories = [
+      "All",
+      ...new Set(
+        data.projects.flatMap((p) =>
+          p.category.split("/").map((c) => c.trim())
+        )
+      ),
+    ];
+
+  // SORT DESCENDING BY DATE (Primary: end_date, fallback: start_date)
+  const sortedProjects = [...data.projects].sort((a, b) => {
+    const dateA = new Date(a.end_date || a.start_date);
+    const dateB = new Date(b.end_date || b.start_date);
+    return dateB - dateA;
+  });
+
   // Filter projects
   const filteredProjects =
     selectedCategory === "All"
-      ? data.projects
-      : data.projects.filter((p) => p.category === selectedCategory);
+      ? sortedProjects
+      : sortedProjects.filter((p) =>
+          p.category
+            .split("/")
+            .map((c) => c.trim())
+            .includes(selectedCategory)
+        );
+  const toggleExpand = (i) => {
+    setExpandedProjects((prev) => ({
+      ...prev,
+      [i]: !prev[i],
+    }));
+  };
 
   return (
     <div ref={ref}>
-    {zoomImage && (
-      <Box
-        sx={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100vw",
-          height: "100vh",
-          pointerEvents: "none", // allow mouse events to pass through
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          zIndex: 9999,
-        }}
-      >
+      {zoomImage && (
         <Box
           sx={{
-            width: "70vw",
-            height: "70vh",
-            overflow: "hidden",
-            borderRadius: 2,
-            boxShadow: "0 0 20px rgba(0,0,0,0.5)",
-            backgroundImage: `url(${zoomImage})`,
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "200%", // zoom level
-            backgroundPosition: `${zoomPos.x}% ${zoomPos.y}%`,
-            cursor: "zoom-out",
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            pointerEvents: "none",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 9999,
           }}
-          onClick={() => setZoomImage(null)} // click overlay to close
-        />
-      </Box>
-    )}
+        >
+          <Box
+            sx={{
+              width: "70vw",
+              height: "70vh",
+              overflow: "hidden",
+              borderRadius: 2,
+              boxShadow: "0 0 20px rgba(0,0,0,0.5)",
+              backgroundImage: `url(${zoomImage})`,
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "200%",
+              backgroundPosition: `${zoomPos.x}% ${zoomPos.y}%`,
+              cursor: "zoom-out",
+            }}
+            onClick={() => setZoomImage(null)}
+          />
+        </Box>
+      )}
 
       <AnimatedUnderlineTitle title="Projects" />
+
       <Box className="projects-container">
         {/* Category Buttons */}
         <Box
@@ -96,7 +125,7 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
                   : theme.palette.text.primary,
                 backgroundColor: selectedCategory === cat
                   ? theme.palette.primary.main
-                  : theme.palette.primary.main + "1A", // 10% opacity background
+                  : theme.palette.primary.main + "1A",
                 boxShadow: selectedCategory === cat
                   ? `0 0 6px ${theme.palette.primary.main}55`
                   : `0 0 4px ${theme.palette.primary.main}22`,
@@ -104,7 +133,7 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
                 "&:hover": {
                   backgroundColor: selectedCategory === cat
                     ? theme.palette.primary.dark
-                    : theme.palette.primary.main + "33", // 20% opacity
+                    : theme.palette.primary.main + "33",
                   borderColor: theme.palette.primary.main,
                   boxShadow: `0 0 6px ${theme.palette.primary.main}55`,
                 },
@@ -119,31 +148,31 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
         <Grid container spacing={2}>
           {filteredProjects.map((item, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    height: "100%",
-                    borderRadius: theme.shape.borderRadius,
-                    overflow: "hidden",
-                    background: `linear-gradient(135deg, ${theme.palette.background.paper} 0%, ${theme.palette.action.hover} 100%)`,
-                    border: `1px solid ${theme.palette.primary.main}`,
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  height: "100%",
+                  borderRadius: theme.shape.borderRadius,
+                  overflow: "hidden",
+                  background: `linear-gradient(135deg, ${theme.palette.background.paper} 0%, ${theme.palette.action.hover} 100%)`,
+                  border: `1px solid ${theme.palette.primary.main}`,
+                  boxShadow: `
+                    0 0 4px ${theme.palette.primary.main},
+                    0 0 8px ${theme.palette.primary.main}33
+                  `,
+                  backdropFilter: "blur(6px)",
+                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                  "&:hover": {
+                    transform: "translateY(-3px)",
                     boxShadow: `
-                      0 0 4px ${theme.palette.primary.main},
-                      0 0 8px ${theme.palette.primary.main}33
+                      0 0 6px ${theme.palette.primary.main},
+                      0 0 12px ${theme.palette.primary.main}55
                     `,
-                    backdropFilter: "blur(6px)",
-                    transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                    "&:hover": {
-                      transform: "translateY(-3px)",
-                      boxShadow: `
-                        0 0 6px ${theme.palette.primary.main},
-                        0 0 12px ${theme.palette.primary.main}55
-                      `,
-                    },
-                  }}
+                  },
+                }}
+              >
 
-                >
                 {/* Project Image */}
                 <Box
                   sx={{
@@ -155,15 +184,15 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
                     flexShrink: 0,
                     cursor: "zoom-in",
                   }}
-                  onMouseEnter={(e) => {
+                  onMouseEnter={() => {
                     const timer = setTimeout(() => {
-                      setZoomImage(item.image); // show magnifier after 1s
-                    }, 1000);
+                      setZoomImage(item.image);
+                    }, 3000);
                     setHoverTimer(timer);
                   }}
                   onMouseLeave={() => {
-                    clearTimeout(hoverTimer); // cancel hover timer
-                    setZoomImage(null);        // hide magnifier
+                    clearTimeout(hoverTimer);
+                    setZoomImage(null);
                   }}
                   onMouseMove={(e) => {
                     const rect = e.currentTarget.getBoundingClientRect();
@@ -171,140 +200,163 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
                     const y = ((e.clientY - rect.top) / rect.height) * 100;
                     setZoomPos({ x, y });
                   }}
-                  onClick={() => setZoomImage(item.image)} // click shows magnifier immediately
+                  onClick={() => setZoomImage(item.image)}
                 />
 
                 {/* Content */}
                 <Box sx={{ p: 2, textAlign: "center" }}>
-                    <Typography 
-                      variant="subtitle1"
-                      sx={{
-                        display: 'flex',
-                        justifyContent: 'center',       // centers horizontally
-                        alignItems: 'center',           // centers vertically
-                        flexWrap: 'wrap',
-                        gap: theme.spacing(1),
-                        mb: theme.spacing(1.5),
-                        textAlign: 'center',            // ensures inner text aligns nicely when stacked
+                  <Typography
+                    variant="subtitle1"
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      flexWrap: "wrap",
+                      gap: theme.spacing(1),
+                      mb: theme.spacing(1.5),
+                      textAlign: "center",
+                    }}
+                  >
+                    {item.title}
+                  </Typography>
+
+                  <Typography
+                    component="span"
+                    variant="body2"
+                    sx={{
+                      fontFamily: theme.typography.fontFamily,
+                      color: theme.palette.text.secondary,
+                    }}
+                  >
+                    ({item.start_date === item.end_date
+                      ? item.start_date
+                      : `${item.start_date} – ${item.end_date}`})
+                  </Typography>
+
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      fontFamily: theme.typography.fontFamily,
+                      color: theme.palette.text.secondary,
+                      fontStyle: "italic",
+                      mt: 0.1,
+                      mb: 1,
+                    }}
+                  >
+                    {item.subtitle}
+                  </Typography>
+
+                  {/* Expand / Collapse Button */}
+                  <Button
+                    size="small"
+                    variant="text"
+                    onClick={() => toggleExpand(index)}
+                    sx={{ mb: 1 }}
+                  >
+                    {expandedProjects[index] ? "Show Less ▲" : "Show More ▼"}
+                  </Button>
+
+                  {/* COLLAPSIBLE SECTION */}
+                  <Collapse in={expandedProjects[index]}>
+                    {/* Responsibilities */}
+                    <ul
+                      style={{
+                        textAlign: "left",
+                        margin: "0 auto",
+                        maxWidth: "85%",
                       }}
                     >
-                    {item.title}
-                    </Typography>
-                    <Typography 
-                      component="span" 
-                      variant="body2"
-                      sx={{
-                        fontFamily: theme.typography.fontFamily,
-                        color: theme.palette.text.secondary,
-                      }}
-                      >
-                    ({item.start_date === item.end_date ? item.start_date : `${item.start_date} – ${item.end_date}`})
-                    </Typography>
-                    <Typography     
-                      variant="body2"
-                      sx={{
-                        fontFamily: theme.typography.fontFamily,
-                        color: theme.palette.text.secondary,
-                        fontStyle: 'italic',
-                        mt: 0.1,
-                      }}>
-                    {item.subtitle}
-                    </Typography>
-
-                    {/* Responsibilities */}
-                    <ul style={{ textAlign: "left", margin: "0 auto", maxWidth: "85%" }}>
-                    {item.responsibilities.map((resp, i) => (
+                      {item.responsibilities.map((resp, i) => (
                         <li key={i}>{resp}</li>
-                    ))}
+                      ))}
                     </ul>
 
-                  {/* Technologies */}
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      flexWrap: "wrap",
-                      gap: 0.6,
-                      mt: 1.5,
-                    }}
-                  >
-                    {item.technologies.map((tech, i) => (
-                      <Chip
-                        key={i}
-                        label={tech}
-                        size="small"
-                        sx={{
-                          px: 1.5,
-                          py: 0.3,
-                          bgcolor: theme.palette.primary.main + '1A', 
-                          fontSize: '0.8rem',
-                          fontWeight: 500,
-                          fontFamily: theme.typography.fontFamily,
-                          borderRadius: 1,
-                          border: `1px solid ${theme.palette.primary.main}`,
-                          boxShadow: `0 0 4px ${theme.palette.primary.main}`,
-                          "&:hover": {
-                          transform: "translateY(-1px)",
-                          boxShadow: `
-                            0 0 6px ${theme.palette.primary.main},
-                          `,
-                          },
-                        }}
-                      />
-                    ))}
-                  </Box>
-
-                  {/* Buttons */}
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      gap: 1.5,
-                      mt: 2,
-                    }}
-                  >
-                    {item.code && (
-                    <Button
-                      href={item.code}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      startIcon={<GitHubIcon sx={{ fontSize: 16 }} />}
-                      variant="outlined"
-                      size="small"
+                    {/* Technologies */}
+                    <Box
                       sx={{
-                        color: theme.palette.text.primary,
-                        borderColor: theme.palette.text.primary,
-                        minWidth: 36,
-                        '&:hover': {
-                          backgroundColor: theme.palette.action.hover,
-                          borderColor: theme.palette.text.primary,
-                        },
+                        display: "flex",
+                        justifyContent: "center",
+                        flexWrap: "wrap",
+                        gap: 0.6,
+                        mt: 1.5,
                       }}
-
                     >
-                        Code
-                      </Button>
-                    )}
-                    {item.pdf && (
-                      <Button
-                        href={item.pdf}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        startIcon={<PictureAsPdfIcon sx={{ fontSize: 18 }} />}
-                        variant="outlined"
-                        size="small"
-                        sx={{
-                          color: "#f57c00",
-                          borderColor: "#f57c00",
-                          "&:hover": {
-                            backgroundColor: "rgba(245,124,0,0.1)",
-                          },
-                        }}
-                      >
-                        Report
-                      </Button>
-                    )}
-                  </Box>
+                      {item.technologies.map((tech, i) => (
+                        <Chip
+                          key={i}
+                          label={tech}
+                          size="small"
+                          sx={{
+                            px: 1.5,
+                            py: 0.3,
+                            bgcolor: theme.palette.primary.main + "1A",
+                            fontSize: "0.8rem",
+                            fontWeight: 500,
+                            fontFamily: theme.typography.fontFamily,
+                            borderRadius: 1,
+                            border: `1px solid ${theme.palette.primary.main}`,
+                            boxShadow: `0 0 4px ${theme.palette.primary.main}`,
+                            "&:hover": {
+                              transform: "translateY(-1px)",
+                              boxShadow: `0 0 6px ${theme.palette.primary.main}`,
+                            },
+                          }}
+                        />
+                      ))}
+                    </Box>
+
+                    {/* Buttons */}
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        gap: 1.5,
+                        mt: 2,
+                      }}
+                    >
+                      {item.code && (
+                        <Button
+                          href={item.code}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          startIcon={<GitHubIcon sx={{ fontSize: 16 }} />}
+                          variant="outlined"
+                          size="small"
+                          sx={{
+                            color: theme.palette.text.primary,
+                            borderColor: theme.palette.text.primary,
+                            minWidth: 36,
+                            "&:hover": {
+                              backgroundColor: theme.palette.action.hover,
+                              borderColor: theme.palette.text.primary,
+                            },
+                          }}
+                        >
+                          Code
+                        </Button>
+                      )}
+
+                      {item.pdf && (
+                        <Button
+                          href={item.pdf}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          startIcon={<PictureAsPdfIcon sx={{ fontSize: 18 }} />}
+                          variant="outlined"
+                          size="small"
+                          sx={{
+                            color: "#f57c00",
+                            borderColor: "#f57c00",
+                            "&:hover": {
+                              backgroundColor: "rgba(245,124,0,0.1)",
+                            },
+                          }}
+                        >
+                          Report
+                        </Button>
+                      )}
+                    </Box>
+                  </Collapse>
                 </Box>
               </Box>
             </Grid>

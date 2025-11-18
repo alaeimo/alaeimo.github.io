@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { Box, Typography, Grid, Link, useTheme } from "@mui/material";
+import { Box, Typography, Grid, Link, useTheme} from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 import SmartphoneIcon from "@mui/icons-material/Smartphone";
@@ -44,16 +44,20 @@ const ReferencesSection = forwardRef(({ data }, ref) => {
                       },
                     }}
                 >
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontFamily: theme.typography.fontFamily,
-                      fontWeight: 700,
-                      color: theme.palette.text.primary,
-                    }}
-                  >
-                    {refItem.name}
-                  </Typography>
+                <Link
+                  href={refItem.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  underline="hover"
+                  variant="h6"
+                  sx={{
+                    fontFamily: theme.typography.fontFamily,
+                    fontWeight: 700,
+                    color: theme.palette.text.primary,
+                  }}
+                >
+                  {refItem.name}
+                </Link>
                   <Typography
                     variant="body2"
                     sx={{

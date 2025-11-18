@@ -105,13 +105,13 @@
     "work_experiences": [
         {
             "position": "Founder & Research Engineer",
-            "company": "Kavida.ir",
+            "company": "Kavida",
             "start_date": "Mar 2025",
             "end_date": "Present",
             "responsibilities": [
-                "Designed and implemented a human-centric platform for goal-oriented networking, enabling structured user profiles and peer/mentor matching.",
-                "Developed algorithms for recommending collaborators based on skills, goals, and experiences, improving theoretical match relevance by an estimated 30–40%.",
-                "Architected the platform infrastructure and data models to support future research in social networks and digital mentorship."
+                "Designed and implemented a networking platform with structured user profiles and peer matching, facilitating goal-oriented connections and collaboration among users.",
+                "Developed collaborator recommendation algorithms based on skills, goals, and experience, improving predicted match accuracy by 30--40% and enhancing user engagement.",
+                "Architected platform infrastructure and data models to support scalable research in social networks, enabling future studies on digital collaboration and mentorship."
             ],
             "technologies": [
                 "Python",
@@ -134,8 +134,9 @@
                 "Managed and optimized DevOps infrastructure by configuring Nginx, PostgreSQL, SSL, Git, and automated backups, fortifying data reliability to 95%, enhancing security by 80%, and streamlining collaboration across contributors."
             ],
             "technologies": [
-                "React.js",
+                "Python",
                 "Django REST API",
+                "React.js",
                 "JavaScript",
                 "HTML/CSS",
                 "PostgreSQL",
@@ -152,37 +153,66 @@
             "start_date": "May 2023",
             "end_date": "July 2023",
             "responsibilities": [
-                "Architected a robust and secure web-based platform, granting customers exclusive access to a range of private proxy servers."
+                "Architected full-stack features of a secure cloud platform, including a Telegram bot system, enabling authenticated and controlled access to VPN servers",
+                "Developed backend automation pipelines and a secure worker API for server and client management, including traffic monitoring and encrypted client provisioning"
             ],
-            "technologies": []
+            "technologies": [
+                "Python",
+                "Django",
+                "FastAPI",
+                "PostgreSQL",
+                "Telegram Bot API",
+                "JavaScript",
+                "HTML/CSS",
+                "Nginx",
+                "Git",
+                "DevOps"
+            ]
         },
         {
             "position": "Software Developer and Consultant",
             "company": "Self-Employed (Part-time)",
-            "start_date": "Jan 2019",
+            "start_date": "Mar 2018",
             "end_date": "Present",
             "responsibilities": [
-                "Created and managed software across web apps, desktop programs, and AI systems.",
-                "Advised and collaborated with clients to design customized software solutions.",
-                "Developed inventive approaches to solve software challenges effectively."
+                "Designed and deployed full-stack web applications, real-time experimental platforms, and automation tools, delivering scalable, multilingual, and research-grade systems",
+                "Engineered algorithms and prototypes for robotics, cryptography, and cognitive neuroscience with multithreading, sensor integration, and precise real-time data acquisition",
+                "Collaborated in multidisciplinary teams to integrate UI/UX, database modeling, and hardware-software interfacing, ensuring data integrity, reproducibility, and robust system performance"
             ],
-            "technologies": []
+            "technologies": [
+                "Python", "Django", "Flask", "ASP.NET MVC", "C#", "SQL Server", "SQLite", "MySQL",
+                "JavaScript", "Bootstrap", "Telegram Bot API", "PyQt", "Arduino C/C++", "Pandas", "NumPy",
+                "Threading & Multithreading", "Data Logging", "Computer Vision"
+            ]
         }
     ],
     "academic_experiences": [
         {
-            "position": "Research Internship",
-            "organization": "National Elite Foundation of Iran and JobVision",
+            "position": "Research Intern",
+            "organization": "National Elite Foundation of Iran & JobVision",
             "location": "Remote",
             "employment_type": "Part-time",
             "start_date": "Oct 2020",
             "end_date": "Mar 2021",
             "responsibilities": [
-                "Collaborated as a key member of a six-person research team.",
-                "Identified vital soft skills demanded by companies for employee recruitment.",
-                "Analyzed games and defined methodologies for appraising soft skills through them.",
-                "Evaluated the credibility and efficacy of the selected games.",
-                "Investigated prevalent and crucial games for assessing soft skills."
+                "Identified critical employer-demanded soft skills through research and analysis",
+                "Designed quantification methods to evaluate these skills via online cognitive games",
+                "Evaluated reliability and efficacy of selected games and documented key assessment tools",
+                "Synthesized findings into actionable recommendations informing game-based hiring assessments",
+                "Contributed to a 6-member team evaluating cognitive games to assess soft skills"
+            ]
+        },
+        {
+            "position": "Software Developer (VR Developer)",
+            "organization": "National Elite Foundation of Iran, University of Tabriz",
+            "employment_type": "Part-time",
+            "start_date": "Oct 2019",
+            "end_date": "Sep 2020",
+            "responsibilities": [
+                "Developed a VR educational game for 3D geometry, deployed in multiple schools and recognized for enhancing comprehension of complex STEM concepts",
+                "Implemented immersive VR functionalities using C#, Unity, and HTC Vive to boost 3D geometry learning",
+                "Collaborated in a 10-member multidisciplinary team, contributing to core VR system design and implementation",
+                "Designed intuitive menus and interfaces to optimize usability and student learning experience"
             ]
         },
         {
@@ -192,23 +222,10 @@
             "start_date": "Sep 2018",
             "end_date": "Feb 2019",
             "responsibilities": [
-                "Utilized advanced deep learning methods for in-depth brain signal analysis.",
-                "Verified and selected diverse datasets for brain signal analysis.",
-                "Generated comprehensive reports summarizing research findings.",
-                "Conducted literature reviews to inform research directions."
-            ]
-        },
-        {
-            "position": "Software Developer",
-            "organization": "National Elite Foundation of Iran, University of Tabriz",
-            "employment_type": "Part-time",
-            "start_date": "Oct 2019",
-            "end_date": "Sep 2020",
-            "responsibilities": [
-                "Collaborated with a team to craft spatial geometry training tool.",
-                "Utilized HTC Vive and Unity to implement the project.",
-                "Employed programming expertise for VR environment’s functionalities.",
-                "Devised user-friendly menus enhancing user experience."
+                "Reviewed assistive technology literature for cognitive and functional impairments to guide future research",
+                "Synthesized and presented research findings at weekly lab meetings, informing discussions and project planning",
+                "Mentored students on projects and theses, providing guidance on experimental design and methodology",
+                "Managed lab resources to ensure availability of tools and smooth execution of experiments"
             ]
         }
     ],
@@ -306,58 +323,160 @@
         }
     ],
     "publications": [
-    ],
-    "awards": [
         {
-            "title": "Member of the Exceptional Talent Group",
-            "organization": "University of Tabriz, Iran",
-            "start_date": "Sep 2017",
-            "end_date": "Sep 2021",
-            "description": "Recognized as a member of the Exceptional Talent Group for outstanding academic performance.",
+            "authors": [
+            "Mohammad Alaei",
+            "Shabnam Oskouei",
+            "Hadi S. Aghdasi"
+            ],
+            "title": "Deep Learning–Based Non-Contact Reconstruction of Frontal EEG from Facial Expressions",
+            "journal": "Submitted to Physica Scripta",
+            "year": 2025,
+            "url": "",
+            "code": "",
             "pdf": ""
         },
         {
-            "title": "First Rank in Master’s Degree",
-            "organization": "University of Tabriz, Iran",
-            "start_date": "2021",
-            "end_date": "2021",
-            "description": "Achieved the first rank among students in the Master’s degree program.",
-            "pdf": ""
-        },
-        {
-            "title": "Third Rank in Bachelor’s Degree",
-            "organization": "University of Tabriz, Iran",
-            "start_date": "2018",
-            "end_date": "2018",
-            "description": "Achieved the third rank among students in the Bachelor’s degree program.",
-            "pdf": ""
-        },
-        {
-            "title": "Admitted as Exceptional Talent for Master’s Degree",
-            "organization": "University of Tabriz, Iran",
-            "start_date": "2018",
-            "end_date": "2018",
-            "description": "Selected as an exceptional talent for admission to the Master’s degree program.",
+            "authors": [
+            "Seyedeh Mahrokh Alaei",
+            "Mohammad Alaei",
+            "Arman Zafaranchi"
+            ],
+            "title": "An Explainable Human Facial Expression Recognition Model Based on CNN, Gabor Filters, and SVM",
+            "journal": "Under Review at The Visual Computer",
+            "year": 2025,
+            "url": "",
+            "code": "",
             "pdf": ""
         }
     ],
+    "awards": [
+    {
+        "title": "Member of the Exceptional Talent Group",
+        "organization": "University of Tabriz, Iran",
+        "start_date": "Sep 2018",
+        "end_date": "Sep 2021",
+        "description": "Recognized as a member of the Exceptional Talent Group for outstanding academic performance and achievements.",
+        "pdf": "static/pdf/certificates/Dosta-Tabrizu-2021.pdf"
+    },
+    {
+        "title": "First Rank in Master’s Program",
+        "organization": "University of Tabriz, Iran",
+        "start_date": "2021",
+        "end_date": "2021",
+        "description": "Achieved the first rank among all students in the Master’s program within the same field and entry year.",
+        "pdf": "static/pdf/certificates/Dosta-Tabrizu-2021.pdf"
+    },
+    {
+        "title": "Admitted as Exceptional Talent for Master’s Program",
+        "organization": "University of Tabriz, Iran",
+        "start_date": "2018",
+        "end_date": "2018",
+        "description": "Selected as an exceptional talent for admission to the Master’s program based on academic merit.",
+        "pdf": "static/pdf/certificates/Dosta-Tabrizu-2021.pdf"
+    },
+    {
+        "title": "Third Rank in Bachelor’s Program",
+        "organization": "University of Tabriz, Iran",
+        "start_date": "2018",
+        "end_date": "2018",
+        "description": "Achieved the third rank among all students in the Bachelor’s program within the same field and entry year.",
+        "pdf": ""
+    }
+    ],
     "certificates": [
+        {
+            "name": "Supervised Machine Learning: Regression and Classification",
+            "issuer": "DeepLearning.AI and Stanford University",
+            "date": "Nov 28, 2024",
+            "description": "Successfully completed an online non-credit course on supervised machine learning covering regression and classification, authorized by DeepLearning.AI and Stanford University, and offered through Coursera. Instructor: Andrew Ng.",
+            "pdf": "static/pdf/certificates/Supervised Machine Learning- Stanford-2024.pdf"
+        },
         {
             "name": "Certificate for Completion of Deep Learning Interactive Track and Course Project",
             "issuer": "Neuromatch Academy",
-            "date": "Aug 2023",
+            "date": "July 2023",
             "description": "Completed intensive deep learning training and project",
-            "pdf": ""
+            "pdf": "static/pdf/certificates/DeepLearning-Neuromatch-2023.pdf"
         },
         {
             "name": "Certificate of Game Development Workshop in VR/AR",
             "issuer": "University of Tabriz",
             "date": "Nov 2019",
             "description": "Participated in workshop on virtual reality and augmented reality game development",
-            "pdf": ""
+            "pdf": "static/pdf/certificates/Mazalakh-TabrizU-2019.pdf"
+        },
+
+        {
+            "name": "Certificate of Participation in the Reh-Neshan Competition",
+            "issuer": "Reh-Neshan Competition Committee",
+            "date": "Oct 2018 – Mar 2019",
+            "description": "Participated for six months in the Reh-Neshan Competition with a project focused on the assessment of job applicants’ soft skills based on their performance in online cognitive games, in collaboration with Job Vision, the National Elite Foundation, and the Vice-Presidency for Science and Technology.",
+            "pdf": "static/pdf/certificates/GameBasedAssessment-Rahneshan-2020.pdf"
+        },
+
+        {
+            "name": "Certificate of Participation in the Second APA Security Event",
+            "issuer": "APA Laboratory and Specialized Center, University of Tabriz",
+            "date": "Nov 6, 2018",
+            "description": "Participated in the Second Security Event organized by the APA Laboratory and Specialized Center of the University of Tabriz, attended workshops on Cyber Incident Handling and Response, Ethical Hacking, Penetration Testing, Red Teaming, and Security Challenges in Government Offices and Organizations (6 hours).",
+            "pdf": "static/pdf/certificates/APASecurityEvent-2018.pdf"
         }
     ],
     "projects": [
+        {
+            "title": "Hybrid Fashion Recommendation System",
+            "category": "Recommender Systems",
+            "subtitle": "Personalized Fashion Suggestions using Visual & Metadata Features",
+            "responsibilities": [
+                "Developed a hybrid recommender system for fashion products combining ResNet50 visual embeddings with metadata features such as category, color, gender, subcategory, product type, and usage",
+                "Preprocessed and encoded product images and metadata for feature extraction and similarity computation",
+                "Calculated hybrid similarity using weighted combination of visual (CNN) and metadata-based similarities",
+                "Generated personalized product recommendations and visualized outputs using grid layouts",
+                "Evaluated system performance using Precision@K, Recall@K, and Mean Average Precision (MAP)",
+                "Analyzed dataset distributions of category, color, gender, product type, subcategory, and usage to inform model design"
+            ],
+            "technologies": [
+                "Python",
+                "TensorFlow / Keras",
+                "ResNet50 (CNN)",
+                "NumPy / Pandas / Scikit-learn",
+                "Matplotlib / Seaborn"
+            ],
+            "start_date": "Nov 2025",
+            "end_date": "Nov 2025",
+            "image": "static/img/projects/FashionRecommendationSystem.png",
+            "code": "https://github.com/alaeimo/FashionRecommenderSystem",
+            "pdf": ""
+
+        },
+        {
+            "title": "Jet Engine Remaining Useful Life Prediction (CMAPSS)",
+            "category": "Deep Learning",
+            "subtitle": "Hybrid CNN–Transformer model for RUL forecasting on NASA CMAPSS",
+            "responsibilities": [
+                "Built a deep learning model to predict engine RUL from multivariate sensor data",
+                "Combined 1D CNN + Transformer encoders for temporal feature extraction",
+                "Implemented full preprocessing pipeline including normalization and windowing",
+                "Applied asymmetric loss to reduce critical overestimation error",
+                "Visualized predictions using RUL curves, scatter plots, and error distributions"
+            ],
+            "technologies": [
+                "Python",
+                "PyTorch",
+                "NumPy",
+                "Pandas",
+                "Matplotlib",
+                "Scikit-Learn",
+                "Convolutional Neural Networks",
+                "Transformers"
+            ],
+            "start_date": "Oct 2025",
+            "end_date": "Oct 2025",
+            "image": "static/img/projects/JetEnginePredictiveMaintenance.png",
+            "code": "https://github.com/alaeimo/JetEnginePredictiveMaintenance",
+            "pdf": ""
+        },
         {
             "title": "Automated Casting Defect Detection System",
             "category": "Computer Vision / Deep Learning",
@@ -380,73 +499,138 @@
                 "NumPy",
                 "Matplotlib"
             ],
-            "start_date": "October 2025",
-            "end_date": "October 2025",
+            "start_date": "Oct 2025",
+            "end_date": "Oct 2025",
             "image": "static/img/projects/automated-defect-detection.jpg",
             "code": "https://github.com/alaeimo/CastingDefectDetection",
             "pdf": "https://github.com/alaeimo/CastingDefectDetection/blob/master/Report.pdf"
         },
         {
-            "title": "A Transfer Learning Based Approach to Facial Emotion Recognition",
+            "title": "Facial Expression Recognition using Deep Learning",
             "category": "Computer Vision / Deep Learning",
-            "subtitle": "Computer Vision, Deep Learning, Transfer Learning, Image Processing",
+            "subtitle": "Deep Learning, Machine Learning, Neural Networks",
             "responsibilities": [
-                "Designed an open-source AI model to classify facial images into seven distinct emotions",
-                "Applied transfer learning techniques to improve generalization and training efficiency"
+                "Implemented transfer learning using pre-trained ResNet-18 model on FER2013 and CK+ datasets to classify facial emotions",
+                "Preprocessed images with illumination normalization and applied data augmentation techniques including random cropping and horizontal flipping",
+                "Optimized model training by minimizing cross-entropy loss, adapting learning rates, and tuning hyperparameters for improved performance",
+                "Explored ensemble learning approaches, including feature-level ensemble, to enhance accuracy across emotional categories",
+                "Evaluated models achieving up to 70.10% test accuracy on FER2013, analyzing results via confusion matrices and discussing dataset limitations"
             ],
             "technologies": [
                 "Python",
                 "PyTorch",
+                "Torchvision",
                 "Pandas",
+                "Matplotlib",
                 "NumPy",
-                "Matplotlib"
+                "Torchinfo",
+                "TQDM"
             ],
-            "start_date": "Aug 2023",
-            "end_date": "Aug 2023",
+            "start_date": "Jul 2023",
+            "end_date": "Jul 2023",
             "image": "static/img/projects/FER.jpeg",
-            "code": "",
-            "pdf": ""
+            "code": "https://github.com/alaeimo/NMA_DL_FER",
+            "pdf": "https://github.com/alaeimo/NMA_DL_FER/blob/master/Report.pdf"
         },
         {
-            "title": "Extracting Key Face Components from Face Images",
-            "category": "Computer Vision / Deep Learning",
-            "subtitle": "Computer Vision, Deep Learning, Image Processing",
+            "title": "Multi Stimuli Sync Tasks (Python)",
+            "category": "Cognitive Neuroscience",
+            "subtitle": "Multisensory Stimulus Presentation with Precise Timing and Response Logging",
             "responsibilities": [
-                "Implemented video analysis for detecting 3D facial landmarks",
-                "Extracted facial attributes such as eyes, eyebrows, nose, and lips using MediaPipe"
+                "Developed a Python-based platform for synchronized visual and auditory stimuli in cognitive experiments",
+                "Implemented configurable in-phase, inter-phase, and anti-phase stimulus coordination patterns",
+                "Designed multithreaded stimulus display and response collection for precise timing of keypresses",
+                "Recorded detailed timestamps for each stimulus display and participant response, exported as CSV files",
+                "Created a customizable settings system to adjust stimulus duration, repetition, delays, and display parameters",
+                "Provided interactive instructions and selectable experiment modes with bilingual support (Persian/English)",
+                "Integrated auditory stimuli sourced from NeuroBS repository for validated experimental sounds"
             ],
             "technologies": [
                 "Python",
-                "OpenCV",
-                "MediaPipe",
+                "Pygame",
+                "pynput",
                 "NumPy",
-                "Keras"
+                "Threading & Multithreading",
+                "CSV Data Logging",
+                "Bilingual Display (Persian/English)",
+                "Auditory & Visual Stimulus Synchronization"
             ],
-            "start_date": "Mar 2022",
-            "end_date": "Mar 2022",
-            "image": "static/img/projects/KFC.png",
+            "start_date": "Jun 2023",
+            "end_date": "Jun 2023",
+            "image": "static/img/projects/MultiStimuliSync.png",
+            "code": "https://github.com/alaeimo/Multi-Stimuli-Sync-Tasks",
+            "pdf": "https://github.com/alaeimo/Multi-Stimuli-Sync-Tasks/blob/master/docs/README.pdf"
+        },
+        {
+            "title": "AES Block Cipher Core Implementation (Python)",
+            "category": "Cybersecurity / Cryptography",
+            "subtitle": "AES Internal State Representation, S-box Tables, Rijndael GF(2^8) Arithmetic",
+            "responsibilities": [
+                "Implemented core AES components including S-box, inverse S-box, and Rijndael Galois field multiplication tables",
+                "Developed text-to-matrix and matrix-to-text conversion functions aligned with AES 4×4 state format",
+                "Handled UTF-8 encoding, padding, and multi-block state preparation",
+                "Created reversible state transformations supporting encryption and decryption stages",
+                "Ensured correctness by matching AES lookup tables to the FIPS-197 standard"
+            ],
+            "technologies": [
+                "Python",
+                "NumPy",
+                "AES S-box / Inv S-box",
+                "Rijndael GF(2^8) Multiplication",
+                "Matrix-Based State Encoding"
+            ],
+            "start_date": "Jan 2021",
+            "end_date": "Jan 2021",
+            "image": "static/img/projects/AES-Overview.png",
+            "code": "https://github.com/alaeimo/AES",
+            "pdf": ""
+        },
+        {
+            "title": "Telegram Freelancer Bot",
+            "category": "Bot Development",
+            "subtitle": "Freelancing Platform, Project Ads, User Profiles",
+            "responsibilities": [
+                    "Designed stateful Telegram bot with ConversationHandler to enable secure, guided project ad creation and skill-based freelancer discovery in a freelancing ecosystem.",
+                    "Developed Django ORM models with regex validation and admin moderation to ensure reliable, moderated ad submission and user profile integrity.",
+                    "Implemented inline query search using Django Q objects to support real-time, multi-criteria freelancer filtering by metadata and skills.",
+                    "Engineered paginated, toggleable skill/category UI with per-user state to provide scalable, interactive skill management and profile enrichment."
+                ],
+            "technologies": [
+                "Python",
+                "Django",
+                "Telegram Bot API",
+                "SQLite",
+                "Regular Expressions"
+            ],
+            "start_date": "April 2022",
+            "end_date": "May 2022",
+            "image": "static/img/projects/Freelancer-Bot.jpg",
             "code": "",
             "pdf": ""
         },
         {
-            "title": "Advanced Web-Based Accounting Platform",
+            "title": "Logistics and Payment Management System for Talasamar Holding",
             "category": "Web Development",
-            "subtitle": "Web Development, Financial Services, Data Analysis",
+            "subtitle": "Web Development, Logistics Management, Financial Reporting",
             "responsibilities": [
-                "Developed a full-stack web platform for company-wide financial management",
-                "Optimized workflows for speed, accuracy, and clarity of operations"
+                "Built a multi-tenant Django platform with role-based access and company isolation",
+                "Automated Excel freight report parsing using Pandas with company-specific format mapping and dynamic fare calculation",
+                "Developed interactive dashboards with Jalali date filtering, real-time aggregation, and secure data export to Excel",
+                "Implemented custom forms, signals for profile sync, and robust validation for data integrity",
+                "Enhanced security with authentication mixins and optimized payment report generation via Openpyxl"
             ],
             "technologies": [
                 "Python",
                 "Django",
-                "MySQL",
                 "Pandas",
-                "NumPy",
+                "Openpyxl",
+                "jDatetime",
                 "Bootstrap",
+                "MySQL",
                 "Git"
             ],
             "start_date": "Jan 2022",
-            "end_date": "Jan 2022",
+            "end_date": "Feb 2022",
             "image": "static/img/projects/Talasamar.jpg",
             "code": "",
             "pdf": ""
@@ -478,28 +662,6 @@
             "pdf": ""
         },
         {
-            "title": "Dynamic Content Management System for Small Businesses",
-            "category": "Web Development",
-            "subtitle": "Software Development, Web Development, CMS",
-            "responsibilities": [
-                "Developed a CMS to manage posts, media, and articles for small businesses",
-                "Optimized usability and scalability for content-heavy applications"
-            ],
-            "technologies": [
-                "Python",
-                "Flask",
-                "Bootstrap",
-                "SQLAlchemy",
-                "MySQL",
-                "Git"
-            ],
-            "start_date": "Jun 2019",
-            "end_date": "Jun 2019",
-            "image": "static/img/projects/CMS-Dashboard.jpg",
-            "code": "",
-            "pdf": ""
-        },
-        {
             "title": "Maze-Solving Autonomous Robot",
             "category": "Robotics",
             "subtitle": "Autonomous Navigation, Sensor Fusion, Motion Control",
@@ -522,6 +684,83 @@
             "end_date": "Oct 2019",
             "image": "static/img/projects/maze-solver-robot.jpg",
             "code": "https://github.com/alaeimo/MazeSolverRobot",
+            "pdf": ""
+        },
+        {
+            "title": "Flask-Based Multilingual Content Management System",
+            "category": "Web Development",
+            "subtitle": "Full-Stack Web Application, CMS, Blog Engine",
+            "responsibilities": [
+                "Architected a scalable, modular CMS using Flask blueprints to manage hierarchical content (posts, categories, media galleries, user interactions)",
+                "Implemented secure user authentication (Flask-Login), role-based access (superuser), and activation workflows with randomized tokens",
+                "Designed Persian-first, RTL-compliant UI with localized WTForms validation and dynamic pagination for high-volume content",
+                "Engineered relational data models via SQLAlchemy (polymorphic associations, backrefs, composite keys) supporting nested comments, view tracking, and download logging",
+                "Developed admin-facing forms for company metadata, contact channels, and post lifecycle management with file upload validation"
+            ],
+            "technologies": [
+                "Python",
+                "Flask",
+                "Flask-Login",
+                "Flask-WTF",
+                "SQLAlchemy",
+                "SQLite/MySQL",
+                "WTForms",
+                "Jinja2",
+                "Bootstrap 5",
+                "Git"
+            ],
+            "start_date": "Jun 2019",
+            "end_date": "July 2019",
+            "image": "static/img/projects/CMS-Dashboard.jpg",
+            "code": "",
+            "pdf": ""
+        },
+        {
+            "title": "MAServer: Simple HTTP File Sharing Server",
+            "category": "Network Application",
+            "subtitle": "Software Development, Desktop Application, HTTP Server",
+            "responsibilities": [
+                "Developed a Windows Forms application to manage a list of files for sharing over a local network",
+                "Implemented an HTTP server using TCP sockets to handle client requests for file downloads and viewing",
+                "Created request parsing and response generation logic to serve HTML pages and binary file data",
+                "Added UI features for adding/removing files, starting/stopping the server, and displaying connected users"
+            ],
+            "technologies": [
+                "C#",
+                ".NET Framework",
+                "Windows Forms",
+                "TCP/IP Sockets",
+                "HTTP Protocol"
+            ],
+            "start_date": "Jan 2019",
+            "end_date": "Jan 2019",
+            "image": "static/img/projects/MAServer.png",
+            "code": "https://github.com/alaeimo/MAServer",
+            "pdf": ""
+        },
+        {
+            "title": "Hardware and Software Exploit Alert System",
+            "category": "Cybersecurity / Cryptography",
+            "subtitle": "Intelligent Vulnerability Detection, Data-Driven Threat Analysis, Automated Alerting",
+            "responsibilities": [
+                "Designed and implemented a real-time system to detect hardware and software vulnerabilities",
+                "Collected and processed live system configuration data and online exploit feeds using Python automation",
+                "Applied fuzzy string matching algorithms for intelligent mapping between exploit titles and installed software",
+                "Built an automated email alerting pipeline for notifying users about relevant vulnerabilities",
+                "Created a PyQT interface for visualization of vulnerability alerts and system status"
+            ],
+            "technologies": [
+                "Python",
+                "PyQT",
+                "Mechanize",
+                "BeautifulSoup",
+                "FuzzyWuzzy",
+                "SQLite"
+            ],
+            "start_date": "Nov 2018",
+            "end_date": "Nov 2018",
+            "image": "static/img/projects/ExploitAlertSystem.jpg",
+            "code": "https://github.com/alaeimo/ExploitAlertSystem",
             "pdf": ""
         },
         {
@@ -549,54 +788,58 @@
             "pdf": ""
         },
         {
-            "title": "Hardware and Software Exploit Alert System",
-            "category": "Cybersecurity",
-            "subtitle": "Intelligent Vulnerability Detection, Data-Driven Threat Analysis, Automated Alerting",
+            "title": "Full-Stack Online Store Web Application",
+            "category": "Web Development",
+            "subtitle": "ASP.NET MVC, SQL Server, Entity Framework, Full E-Commerce Workflow",
             "responsibilities": [
-                "Designed and implemented a real-time system to detect hardware and software vulnerabilities",
-                "Collected and processed live system configuration data and online exploit feeds using Python automation",
-                "Applied fuzzy string matching algorithms for intelligent mapping between exploit titles and installed software",
-                "Built an automated email alerting pipeline for notifying users about relevant vulnerabilities",
-                "Created a PyQT interface for visualization of vulnerability alerts and system status"
+                "Designed and implemented a complete e-commerce website with product browsing, cart, checkout, and payment workflow",
+                "Developed a relational SQL Server database including users, products, categories, orders, invoices, and messaging tables",
+                "Implemented Entity Framework ORM for database communication and data persistence",
+                "Built user authentication and registration with profile, order history, and address management",
+                "Created an admin dashboard for product management, category grouping, and order processing",
+                "Implemented cart management, order tracking, and guest purchases without registration",
+                "Designed MVC 4 layered architecture with separation of UI, logic, and data access"
             ],
             "technologies": [
-                "Python",
-                "PyQT",
-                "Mechanize",
-                "BeautifulSoup",
-                "FuzzyWuzzy",
-                "SQLite"
+                "ASP.NET MVC 4",
+                "C#",
+                "SQL Server",
+                "Entity Framework",
+                "ADO.NET",
+                "Relational Database Modeling"
             ],
-            "start_date": "Nov 2018",
-            "end_date": "Nov 2018",
-            "image": "static/img/projects/ExploitAlertSystem.jpg",
-            "code": "https://github.com/alaeimo/ExploitAlertSystem",
-            "pdf": ""
+            "start_date": "Oct 2017",
+            "end_date": "Nov 2017",
+            "image": "static/img/projects/StoreWebApplication.png",
+            "code": "https://github.com/alaeimo/Store",
+            "pdf": "https://github.com/alaeimo/Store/blob/master/Report.pdf"
         }
-
     ],
     "references": 
         [
             {
-                "name": "Seyed Hadi Aghdasi Alamdari",
+                "name": "Hadi S. Aghdasi",
                 "position": "Full Professor, Department of Electrical and Computer Engineering, University of Tabriz, Iran",
                 "email": ["aghdasi@tabrizu.ac.ir", "aghdasi.ha@gmail.com"],
                 "phone": "+98 41-33393753",
-                "mobile": "+98 914-4060184"
+                "mobile": "+98 914-4060184",
+                "website": "https://scholar.google.com/citations?user=TvJ0cK0AAAAJ&hl"
             },
             {
                 "name": "Leyli Mohammad Khanli",
                 "position": "Full Professor, Department of Electrical and Computer Engineering, University of Tabriz, Iran",
                 "email": ["l-khanli@tabrizu.ac.ir"],
                 "phone": "+98 41-33393725",
-                "mobile": "+98 914-3138652"
+                "mobile": "+98 914-3138652",
+                "website": "https://scholar.google.com/citations?hl=en&user=-Zk3Vd4AAAAJ"
             },
             {
                 "name": "Mina Zolfy Lighvan",
                 "position": "Associate Professor, Department of Electrical and Computer Engineering, University of Tabriz, Iran",
                 "email": ["mzolfy@tabrizu.ac.ir"],
                 "phone": "+98 41-33393759",
-                "mobile": "+98 914-4159281"
+                "mobile": "+98 914-4159281",
+                "website": "https://scholar.google.com/citations?hl=en&user=uKUZUJMAAAAJ"
             }
         ]
 }

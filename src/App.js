@@ -59,7 +59,7 @@ function App() {
     { id: 'work_experiences', label: 'Work Experiences' },
     { id: 'academic_experiences', label: 'Academic Experiences' },
     { id: 'skills', label: 'Skills' },
-    { id: 'publications', label: 'Publications' },
+    { id: 'publications', label: 'Manuscripts & Preprints' },
     { id: 'awards', label: 'Awards & Honors' },
     { id: 'certificates', label: 'Certificates' },
     { id: 'projects', label: 'Projects' },

@@ -11,7 +11,7 @@ const PublicationsSection = forwardRef(({ data }, ref) => {
    const theme = useTheme();
    return (
   <div ref={ref}>
-    <AnimatedUnderlineTitle title="Publications" />
+    <AnimatedUnderlineTitle title="Manuscripts & Preprints" />
     <Box className="manuscript-timeline">
       {data.publications?.length > 0 ? (
         data.publications.map((item, index) => (

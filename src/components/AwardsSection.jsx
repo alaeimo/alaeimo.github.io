@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { Box, Typography, Button, useTheme } from "@mui/material";
+import { Box, Grid, Typography, Button, useTheme } from "@mui/material";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import "./styles/AwardsSection.css";
 import AnimatedUnderlineTitle from './AnimatedUnderlineTitle';
@@ -44,7 +44,7 @@ const AwardsSection = forwardRef(({ data }, ref) => {
                     mb: theme.spacing(1),
                   }}
                 >
-                  <Box>
+                  <Grid item xs={10}>
                     <Typography
                       variant="subtitle1"
                       sx={{
@@ -78,51 +78,43 @@ const AwardsSection = forwardRef(({ data }, ref) => {
                       {item.description}
                     </Typography>
                   )}
-                  </Box>
-
-                  <Box
+                   </Grid>
+                  {/* Right side: date and PDF */}
+                  <Grid item xs={12} md={12} lg={2} sx={{ textAlign: { xs: "left", lg: "right" },  }}>
+                    <Typography
+                    variant="body2"
                     sx={{
-                      textAlign: "right",
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "flex-end",
+                      fontFamily: theme.typography.fontFamily,
+                      color: theme.palette.text.secondary,
                     }}
                   >
-                    <Typography
-                      variant="body2"
+                    {item.start_date === item.end_date
+                      ? item.start_date
+                      : `${item.start_date} – ${item.end_date}`}
+                  </Typography>
+                    {item.pdf && (
+                    <Button
+                      href={item.pdf}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      startIcon={<PictureAsPdfIcon sx={{ fontSize: 16 }} />}
+                      variant="outlined"
+                      size="small"
                       sx={{
-                        fontFamily: theme.typography.fontFamily,
-                        color: theme.palette.text.secondary,
+                        color: "#f57c00",
+                        borderColor: "#f57c00",
+                        mt: 0.5,
+                        minWidth: 36,
+                        "&:hover": {
+                          backgroundColor: "rgba(245,124,0,0.1)",
+                          borderColor: "#f57c00",
+                        },
                       }}
                     >
-                      {item.start_date === item.end_date
-                        ? item.start_date
-                        : `${item.start_date} – ${item.end_date}`}
-                    </Typography>
-
-                    {item.pdf && (
-                      <Button
-                        href={item.pdf}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        startIcon={<PictureAsPdfIcon sx={{ fontSize: 16 }} />}
-                        variant="outlined"
-                        size="small"
-                        sx={{
-                          color: "#f57c00",
-                          borderColor: "#f57c00",
-                          mt: 0.5,
-                          minWidth: 36,
-                          "&:hover": {
-                            backgroundColor: "rgba(245,124,0,0.1)",
-                            borderColor: "#f57c00",
-                          },
-                        }}
-                      >
-                        PDF
-                      </Button>
+                      PDF
+                    </Button>
                     )}
-                  </Box>
+                  </Grid>
                 </Box>
               </Box>
             </Box>

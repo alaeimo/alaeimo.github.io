@@ -9,7 +9,7 @@ const SkillCard = ({ skill }) => {
       sx={{
         position: "relative",
         borderRadius: "10px",
-        padding: "0.8rem 1rem 1.2rem 1rem",
+        padding: "0.8rem 0.5rem 0.8rem 0.5rem",
         background: "rgba(255,255,255,0.65)",
         backdropFilter: "blur(6px)",
         transition: "transform 0.3s ease",
@@ -26,12 +26,12 @@ const SkillCard = ({ skill }) => {
       <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <Box sx={{ display: "flex", flexDirection: "column" }}>
           <Typography
-            variant="body1"
-            sx={{ fontWeight: 600, color: "#0f172a", lineHeight: 1.2 }}
+            variant="body2"
+            sx={{ fontWeight: 500, color: "#0f172a", lineHeight: 0.7}}
           >
             {skill.name}
           </Typography>
-          <Typography variant="body2" sx={{ color: "#475569", mt: 0.5 }}>
+          <Typography variant="body2" sx={{ color: "#475569", mt: 0.3 }}>
             {skill.level}
           </Typography>
         </Box>
@@ -40,7 +40,7 @@ const SkillCard = ({ skill }) => {
             component="img"
             src={skill.icon}
             alt={`${skill.name} logo`}
-            sx={{ width: 35, height: 35, ml:1 }}
+            sx={{ width: 30, height: 30, ml:1 }}
           />
         )}
       </Box>

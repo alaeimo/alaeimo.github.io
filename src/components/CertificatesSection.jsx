@@ -1,18 +1,25 @@
 import React, { forwardRef } from "react";
-import { Box, Typography, Button, useTheme } from "@mui/material";
+import { Box, Typography, Button, Grid, useTheme } from "@mui/material";
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import "./styles/CertificatesSection.css";
 import AnimatedUnderlineTitle from './AnimatedUnderlineTitle';
 
 const CertificatesSection = forwardRef(({ data }, ref) => {
   const theme = useTheme();
-  
-  return(
+
+  // Sort certificates by date descending
+  const sortedCertificates = [...(data.certificates || [])].sort((a, b) => {
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+    return dateB - dateA;
+  });
+
+  return (
     <div ref={ref}>
       <AnimatedUnderlineTitle title="Certificates" />
       <Box className="certificates-timeline">
-        {data.certificates?.length > 0 ? (
-          data.certificates.map((item, index) => (
+        {sortedCertificates.length > 0 ? (
+          sortedCertificates.map((item, index) => (
             <Box key={index} className="timeline-item">
               {/* Timeline line and node */}
               <Box className="timeline-line" />
@@ -37,13 +44,13 @@ const CertificatesSection = forwardRef(({ data }, ref) => {
                   },
                 }}
               >
-                <Box className="certificate-header" sx={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 1, mb: 1 }}>
-                  <Box>
+                <Grid container spacing={2}>
+                  {/* Left side: title, issuer, description */}
+                  <Grid item xs={10}>
                     <Typography
                       variant="subtitle1"
                       sx={{
                         display: 'flex',
-                        justifyContent: 'space-between',
                         flexWrap: 'wrap',
                         gap: theme.spacing(1),
                         mb: theme.spacing(1.5),
@@ -52,7 +59,7 @@ const CertificatesSection = forwardRef(({ data }, ref) => {
                       {item.name}
                     </Typography>
                     <Typography
-                      variant="subtitle1"
+                      variant="subtitle2"
                       sx={{
                         fontFamily: theme.typography.fontFamily,
                         color: theme.palette.text.secondary,
@@ -62,21 +69,22 @@ const CertificatesSection = forwardRef(({ data }, ref) => {
                     >
                       {item.issuer}
                     </Typography>
-                    
-                      {item.description && (
-                        <Typography 
-                          variant="body2"
-                          sx={{
-                            fontFamily: theme.typography.fontFamily,
-                            color: theme.palette.text.primary,
-                          }}
-                          >
-                          {item.description}
-                        </Typography>
-                      )}
-                  </Box>
-                  <Box sx={{ textAlign: "right", display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
-                    <Typography 
+                    {item.description && (
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          fontFamily: theme.typography.fontFamily,
+                          color: theme.palette.text.primary,
+                        }}
+                      >
+                        {item.description}
+                      </Typography>
+                    )}
+                  </Grid>
+
+                  {/* Right side: date and PDF */}
+                  <Grid item xs={12} md={12} lg={2} sx={{ textAlign: { xs: "left", lg: "right" },  }}>
+                    <Typography
                       variant="body2"
                       sx={{
                         fontFamily: theme.typography.fontFamily,
@@ -85,7 +93,6 @@ const CertificatesSection = forwardRef(({ data }, ref) => {
                     >
                       {item.date}
                     </Typography>
-                    {/* PDF Button */}
                     {item.pdf && (
                       <Button
                         href={item.pdf}
@@ -95,23 +102,34 @@ const CertificatesSection = forwardRef(({ data }, ref) => {
                         variant="outlined"
                         size="small"
                         sx={{
-                          color: '#f57c00',        // orange for PDF
+                          color: '#f57c00',
                           borderColor: '#f57c00',
                           mt: 0.5,
                           minWidth: 36,
-                          '&:hover': { backgroundColor: 'rgba(245,124,0,0.1)', borderColor: '#f57c00' },
+                          '&:hover': {
+                            backgroundColor: 'rgba(245,124,0,0.1)',
+                            borderColor: '#f57c00',
+                          },
                         }}
                       >
                         PDF
                       </Button>
                     )}
-                  </Box>
-                </Box>
+                  </Grid>
+                </Grid>
               </Box>
             </Box>
           ))
         ) : (
-          <Typography variant="body2" sx={{ fontFamily: '"Inter", sans-serif', color: "#94a3b8", textAlign: "center", py: 2 }}>
+          <Typography
+            variant="body2"
+            sx={{
+              fontFamily: '"Inter", sans-serif',
+              color: "#94a3b8",
+              textAlign: "center",
+              py: 2
+            }}
+          >
             No certificates provided.
           </Typography>
         )}
