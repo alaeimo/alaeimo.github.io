@@ -12,8 +12,9 @@ import {
   Box,
   useTheme,
 } from '@mui/material';
+
 import MenuIcon from '@mui/icons-material/Menu';
-import HomeIcon from '@mui/icons-material/Home'; // Home icon
+import HomeIcon from '@mui/icons-material/Home'; 
 
 const Navbar = ({ sections, activeTab, onTabChange, sectionIcons }) => {
   const theme = useTheme();
