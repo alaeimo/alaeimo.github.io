@@ -109,17 +109,15 @@
             "start_date": "Mar 2025",
             "end_date": "Present",
             "responsibilities": [
-                "Designed and implemented a networking platform with structured user profiles and peer matching, facilitating goal-oriented connections and collaboration among users.",
-                "Developed collaborator recommendation algorithms based on skills, goals, and experience, improving predicted match accuracy by 30--40% and enhancing user engagement.",
-                "Architected platform infrastructure and data models to support scalable research in social networks, enabling future studies on digital collaboration and mentorship."
+                "Designed the scalable architecture and backend for a goal-oriented networking platform",
+                "Defined feature representations, similarity metrics, and data pipelines supporting collaborator-matching research.",
+                "Built a full-stack system enabling social-graph expansion and profile-level analytics."
             ],
             "technologies": [
                 "Python",
                 "Django",
                 "PostgreSQL",
                 "Telegram Bot API",
-                "PyTorch",
-                "Data Analysis",
                 "React.js"
             ]
         },

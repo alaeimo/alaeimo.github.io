@@ -4,8 +4,9 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {
   Box, Typography, CircularProgress, Alert,
-  Grid, Card, CardContent, CardActions, Link,
+  Grid, Card, CardContent, Link,
   Button, Chip, IconButton, useTheme, Collapse,
+  useMediaQuery
 } from '@mui/material';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import SchoolIcon from '@mui/icons-material/School';
@@ -36,6 +37,9 @@ const labIcon = L.divIcon({
 
 const ResearchLabsExplorer = () => {
   const theme = useTheme();
+  // Detect if screen size is smaller than medium breakpoint
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  
   const [researchData, setResearchData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -199,169 +203,326 @@ const ResearchLabsExplorer = () => {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden' }}>
-      <Box sx={{ display: 'flex', flexGrow: 1, overflow: 'hidden' }}>
-        {/* Left panel: filters + results */}
-        <Box
-          sx={{
-            width: '50%',
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            overflow: 'hidden',
-            backgroundColor: theme.palette.background.default
-          }}
-        >
-          <Box sx={{ p: 2, flexShrink: 0, overflowY: 'auto' }}>
-            <ResearchSearchFilter data={researchData} onSearch={handleSearch} />
-            <Box sx={{ mb: 2, display: 'flex', alignItems: 'center' }}>
-              <LocationOnIcon sx={{ mr: 1, color: theme.palette.primary.main }} />
-              <Typography variant="h6">
-                Showing {visibleItems.length} of {filteredItems.length} items
-              </Typography>
+      {/* Mobile Layout: Map on top, filters/results below */}
+      {isMobile ? (
+        <>
+          {/* Map on top for mobile */}
+          <Box sx={{ height: '40%', position: 'relative', overflow: 'hidden' }}>
+            <div ref={mapRef} style={{ width: '100%', height: '100%' }} />
+            <Box sx={{ position: 'absolute', bottom: 20, right: 20, display: 'flex', flexDirection: 'column', gap: 1 }}>
+              <IconButton color="primary" sx={{ backgroundColor: 'rgba(255,255,255,0.7)' }} onClick={handleZoomIn}><ZoomInIcon /></IconButton>
+              <IconButton color="primary" sx={{ backgroundColor: 'rgba(255,255,255,0.7)' }} onClick={handleZoomOut}><ZoomOutIcon /></IconButton>
+              <IconButton color="primary" sx={{ backgroundColor: 'rgba(255,255,255,0.7)' }} onClick={handleFullscreen}><FullscreenIcon /></IconButton>
+            </Box>
+          </Box>
+          
+          {/* Filters and results below the map for mobile */}
+          <Box sx={{ height: '60%', display: 'flex', flexDirection: 'column', overflow: 'hidden', backgroundColor: theme.palette.background.default }}>
+            <Box sx={{ p: 2, flexShrink: 0, overflowY: 'auto' }}>
+              <ResearchSearchFilter data={researchData} onSearch={handleSearch} />
+              <Box sx={{ mb: 2, display: 'flex', alignItems: 'center' }}>
+                <LocationOnIcon sx={{ mr: 1, color: theme.palette.primary.main }} />
+                <Typography variant="h6">
+                  Showing {visibleItems.length} of {filteredItems.length} items
+                </Typography>
+              </Box>
+            </Box>
+
+            <Box
+              sx={{
+                flexGrow: 1,
+                overflowY: 'auto',
+                px: 2,
+                py: 2,
+                '&::-webkit-scrollbar': { width: '0.4em' },
+                '&::-webkit-scrollbar-track': { background: theme.palette.background.default },
+                '&::-webkit-scrollbar-thumb': { backgroundColor: theme.palette.divider, borderRadius: 4 },
+              }}
+            >
+              {visibleItems.length === 0 ? (
+                <Typography color="text.secondary" sx={{ textAlign: 'center', mt: 2 }}>
+                  {filteredItems.length > 0
+                    ? 'Move or zoom the map to see research labs'
+                    : 'No items match your filters'}
+                </Typography>
+              ) : (
+                <Grid container spacing={2}>
+                  {visibleItems.map(item => {
+                    const id = item.type === 'university'
+                      ? `uni-${item.name.replace(/\s+/g, '-')}`
+                      : `lab-${item.lab.replace(/\s+/g, '-')}`;
+
+                    return (
+                      <Grid item xs={12} key={id}>
+                        <Card
+                          id={id}
+                          sx={{
+                            backgroundColor: highlightedItem === id ? theme.palette.action.selected : theme.palette.background.paper,
+                            cursor: 'pointer',
+                            borderRadius: 3,
+                            border: '1px solid #e0e0e0',
+                            boxShadow: 1,
+                            transition: 'box-shadow 0.3s, transform 0.2s',
+                            '&:hover': { boxShadow: 4, transform: 'translateY(-2px)' },
+                          }}
+                          onClick={() => {
+                            const lat = item.type === 'university' ? item.location.latitude : item.latitude;
+                            const lng = item.type === 'university' ? item.location.longitude : item.longitude;
+                            mapInstanceRef.current.setView([lat, lng]);
+                            setHighlightedItem(id);
+                            setTimeout(() => setHighlightedItem(null), 2000);
+                          }}
+                        >
+                          <CardContent>
+                            <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                              {item.type === 'university' ? (
+                                <SchoolIcon sx={{ mr: 1, color: theme.palette.primary.main }} />
+                              ) : (
+                                <ScienceIcon sx={{ mr: 1, color: theme.palette.secondary.main }} />
+                              )}
+                              <Link
+                                href={item.type === 'university' ? item.research_groups?.[0]?.url : item.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                underline="hover"
+                                variant="h6"
+                                sx={{ color: theme.palette.text.primary, fontWeight: 600 }}
+                                onClick={e => e.stopPropagation()}
+                              >
+                                {item.type === 'university' ? item.name : item.lab}
+                              </Link>
+                            </Box>
+
+                            <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+                              {item.type === 'university' ? `${item.location.city}, ${item.country}` : item.location}
+                            </Typography>
+
+                            {item.type === 'university' && item.research_groups?.length > 0 && (
+                              <>
+                                <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                                  <Chip
+                                    label={`${item.research_groups.length} Research Groups`}
+                                    size="small"
+                                    color="primary"
+                                    onClick={e => { e.stopPropagation(); toggleGroups(id); }}
+                                    sx={{ cursor: 'pointer' }}
+                                  />
+                                  <IconButton
+                                    size="small"
+                                    onClick={e => { e.stopPropagation(); toggleGroups(id); }}
+                                    sx={{
+                                      ml: 1,
+                                      transform: openGroups[id] ? 'rotate(180deg)' : 'rotate(0deg)',
+                                      transition: 'transform 0.3s ease',
+                                    }}
+                                  >
+                                    <ExpandMoreIcon />
+                                  </IconButton>
+                                </Box>
+
+                                <Collapse in={openGroups[id]} timeout="auto" unmountOnExit>
+                                  <Box sx={{ pl: 2, pt: 1, borderLeft: `2px solid ${theme.palette.divider}` }}>
+                                    {item.research_groups.map((g, idx) => (
+                                      <Button
+                                        key={idx}
+                                        component="a"
+                                        href={g.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        onClick={e => e.stopPropagation()}
+                                        sx={{
+                                          display: 'block',
+                                          textAlign: 'left',
+                                          mb: 0.5,
+                                          textTransform: 'none',
+                                          color: theme.palette.primary.main,
+                                          fontWeight: 500,
+                                          textDecoration: 'underline',
+                                          '&:hover': { backgroundColor: 'rgba(0,0,0,0.04)' },
+                                        }}
+                                      >
+                                        {g.title || g.name}
+                                      </Button>
+                                    ))}
+                                  </Box>
+                                </Collapse>
+                              </>
+                            )}
+                          </CardContent>
+                        </Card>
+                      </Grid>
+                    );
+                  })}
+                </Grid>
+              )}
+            </Box>
+          </Box>
+        </>
+      ) : (
+        /* Desktop Layout: Filters/results on left, map on right */
+        <Box sx={{ display: 'flex', flexGrow: 1, overflow: 'hidden' }}>
+          {/* Left panel: filters + results */}
+          <Box
+            sx={{
+              width: '50%',
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              overflow: 'hidden',
+              backgroundColor: theme.palette.background.default,
+            }}
+          >
+            <Box sx={{ p: 2, flexShrink: 0, overflowY: 'auto' }}>
+              <ResearchSearchFilter data={researchData} onSearch={handleSearch} />
+              <Box sx={{ mb: 2, display: 'flex', alignItems: 'center' }}>
+                <LocationOnIcon sx={{ mr: 1, color: theme.palette.primary.main }} />
+                <Typography variant="h6">
+                  Showing {visibleItems.length} of {filteredItems.length} items
+                </Typography>
+              </Box>
+            </Box>
+
+            <Box
+              sx={{
+                flexGrow: 1,
+                overflowY: 'auto',
+                px: 2,
+                py: 2,
+                '&::-webkit-scrollbar': { width: '0.4em' },
+                '&::-webkit-scrollbar-track': { background: theme.palette.background.default },
+                '&::-webkit-scrollbar-thumb': { backgroundColor: theme.palette.divider, borderRadius: 4 },
+              }}
+            >
+              {visibleItems.length === 0 ? (
+                <Typography color="text.secondary" sx={{ textAlign: 'center', mt: 2 }}>
+                  {filteredItems.length > 0
+                    ? 'Move or zoom the map to see research labs'
+                    : 'No items match your filters'}
+                </Typography>
+              ) : (
+                <Grid container spacing={2}>
+                  {visibleItems.map(item => {
+                    const id = item.type === 'university'
+                      ? `uni-${item.name.replace(/\s+/g, '-')}`
+                      : `lab-${item.lab.replace(/\s+/g, '-')}`;
+
+                    return (
+                      <Grid item xs={12} key={id}>
+                        <Card
+                          id={id}
+                          sx={{
+                            backgroundColor: highlightedItem === id ? theme.palette.action.selected : theme.palette.background.paper,
+                            cursor: 'pointer',
+                            borderRadius: 3,
+                            border: '1px solid #e0e0e0',
+                            boxShadow: 1,
+                            transition: 'box-shadow 0.3s, transform 0.2s',
+                            '&:hover': { boxShadow: 4, transform: 'translateY(-2px)' },
+                          }}
+                          onClick={() => {
+                            const lat = item.type === 'university' ? item.location.latitude : item.latitude;
+                            const lng = item.type === 'university' ? item.location.longitude : item.longitude;
+                            mapInstanceRef.current.setView([lat, lng]);
+                            setHighlightedItem(id);
+                            setTimeout(() => setHighlightedItem(null), 2000);
+                          }}
+                        >
+                          <CardContent>
+                            <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                              {item.type === 'university' ? (
+                                <SchoolIcon sx={{ mr: 1, color: theme.palette.primary.main }} />
+                              ) : (
+                                <ScienceIcon sx={{ mr: 1, color: theme.palette.secondary.main }} />
+                              )}
+                              <Link
+                                href={item.type === 'university' ? item.research_groups?.[0]?.url : item.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                underline="hover"
+                                variant="h6"
+                                sx={{ color: theme.palette.text.primary, fontWeight: 600 }}
+                                onClick={e => e.stopPropagation()}
+                              >
+                                {item.type === 'university' ? item.name : item.lab}
+                              </Link>
+                            </Box>
+
+                            <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+                              {item.type === 'university' ? `${item.location.city}, ${item.country}` : item.location}
+                            </Typography>
+
+                            {item.type === 'university' && item.research_groups?.length > 0 && (
+                              <>
+                                <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                                  <Chip
+                                    label={`${item.research_groups.length} Research Groups`}
+                                    size="small"
+                                    color="primary"
+                                    onClick={e => { e.stopPropagation(); toggleGroups(id); }}
+                                    sx={{ cursor: 'pointer' }}
+                                  />
+                                  <IconButton
+                                    size="small"
+                                    onClick={e => { e.stopPropagation(); toggleGroups(id); }}
+                                    sx={{
+                                      ml: 1,
+                                      transform: openGroups[id] ? 'rotate(180deg)' : 'rotate(0deg)',
+                                      transition: 'transform 0.3s ease',
+                                    }}
+                                  >
+                                    <ExpandMoreIcon />
+                                  </IconButton>
+                                </Box>
+
+                                <Collapse in={openGroups[id]} timeout="auto" unmountOnExit>
+                                  <Box sx={{ pl: 2, pt: 1, borderLeft: `2px solid ${theme.palette.divider}` }}>
+                                    {item.research_groups.map((g, idx) => (
+                                      <Button
+                                        key={idx}
+                                        component="a"
+                                        href={g.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        onClick={e => e.stopPropagation()}
+                                        sx={{
+                                          display: 'block',
+                                          textAlign: 'left',
+                                          mb: 0.5,
+                                          textTransform: 'none',
+                                          color: theme.palette.primary.main,
+                                          fontWeight: 500,
+                                          textDecoration: 'underline',
+                                          '&:hover': { backgroundColor: 'rgba(0,0,0,0.04)' },
+                                        }}
+                                      >
+                                        {g.title || g.name}
+                                      </Button>
+                                    ))}
+                                  </Box>
+                                </Collapse>
+                              </>
+                            )}
+                          </CardContent>
+                        </Card>
+                      </Grid>
+                    );
+                  })}
+                </Grid>
+              )}
             </Box>
           </Box>
 
-        <Box
-          sx={{
-            flexGrow: 1,
-            overflowY: 'auto',
-            px: 2,
-            py: 2,
-            '&::-webkit-scrollbar': { width: '0.4em' },
-            '&::-webkit-scrollbar-track': { background: theme.palette.background.default },
-            '&::-webkit-scrollbar-thumb': { backgroundColor: theme.palette.divider, borderRadius: 4 },
-          }}
-        >
-          {visibleItems.length === 0 ? (
-            <Typography color="text.secondary" sx={{ textAlign: 'center', mt: 2 }}>
-              {filteredItems.length > 0
-                ? 'Move or zoom the map to see research labs'
-                : 'No items match your filters'}
-            </Typography>
-          ) : (
-            <Grid container spacing={2}>
-              {visibleItems.map(item => {
-                const id = item.type === 'university'
-                  ? `uni-${item.name.replace(/\s+/g, '-')}`
-                  : `lab-${item.lab.replace(/\s+/g, '-')}`;
-
-                return (
-                  <Grid item xs={12} key={id}>
-                    <Card
-                      id={id}
-                      sx={{
-                        backgroundColor: highlightedItem === id ? theme.palette.action.selected : theme.palette.background.paper,
-                        cursor: 'pointer',
-                        borderRadius: 3,
-                        border: '1px solid #e0e0e0',
-                        boxShadow: 1,
-                        transition: 'box-shadow 0.3s, transform 0.2s',
-                        '&:hover': { boxShadow: 4, transform: 'translateY(-2px)' },
-                      }}
-                      onClick={() => {
-                        const lat = item.type === 'university' ? item.location.latitude : item.latitude;
-                        const lng = item.type === 'university' ? item.location.longitude : item.longitude;
-                        mapInstanceRef.current.setView([lat, lng]);
-                        setHighlightedItem(id);
-                        setTimeout(() => setHighlightedItem(null), 2000);
-                      }}
-                    >
-                      <CardContent>
-                        <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                          {item.type === 'university' ? (
-                            <SchoolIcon sx={{ mr: 1, color: theme.palette.primary.main }} />
-                          ) : (
-                            <ScienceIcon sx={{ mr: 1, color: theme.palette.secondary.main }} />
-                          )}
-                          <Link
-                            href={item.type === 'university' ? item.research_groups?.[0]?.url : item.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            underline="hover"
-                            variant="h6"
-                            sx={{ color: theme.palette.text.primary, fontWeight: 600 }}
-                            onClick={e => e.stopPropagation()}
-                          >
-                            {item.type === 'university' ? item.name : item.lab}
-                          </Link>
-                        </Box>
-
-                        <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-                          {item.type === 'university' ? `${item.location.city}, ${item.country}` : item.location}
-                        </Typography>
-
-                        {item.type === 'university' && item.research_groups?.length > 0 && (
-                          <>
-                            <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                              <Chip
-                                label={`${item.research_groups.length} Research Groups`}
-                                size="small"
-                                color="primary"
-                                onClick={e => { e.stopPropagation(); toggleGroups(id); }}
-                                sx={{ cursor: 'pointer' }}
-                              />
-                              <IconButton
-                                size="small"
-                                onClick={e => { e.stopPropagation(); toggleGroups(id); }}
-                                sx={{
-                                  ml: 1,
-                                  transform: openGroups[id] ? 'rotate(180deg)' : 'rotate(0deg)',
-                                  transition: 'transform 0.3s ease',
-                                }}
-                              >
-                                <ExpandMoreIcon />
-                              </IconButton>
-                            </Box>
-
-                            <Collapse in={openGroups[id]} timeout="auto" unmountOnExit>
-                              <Box sx={{ pl: 2, pt: 1, borderLeft: `2px solid ${theme.palette.divider}` }}>
-                                {item.research_groups.map((g, idx) => (
-                                  <Button
-                                    key={idx}
-                                    component="a"
-                                    href={g.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    onClick={e => e.stopPropagation()}
-                                    sx={{
-                                      display: 'block',
-                                      textAlign: 'left',
-                                      mb: 0.5,
-                                      textTransform: 'none',
-                                      color: theme.palette.primary.main,
-                                      fontWeight: 500,
-                                      textDecoration: 'underline',
-                                      '&:hover': { backgroundColor: 'rgba(0,0,0,0.04)' },
-                                    }}
-                                  >
-                                    {g.title || g.name}
-                                  </Button>
-                                ))}
-                              </Box>
-                            </Collapse>
-                          </>
-                        )}
-                      </CardContent>
-                    </Card>
-                  </Grid>
-                );
-              })}
-            </Grid>
-          )}
-        </Box>
-
-        </Box>
-
-        {/* Right panel: Map */}
-        <Box sx={{ width: '50%', height: '100%', position: 'relative', overflow: 'hidden' }}>
-          <div ref={mapRef} style={{ width: '100%', height: '100%' }} />
-          <Box sx={{ position: 'absolute', bottom: 20, right: 20, display: 'flex', flexDirection: 'column', gap: 1 }}>
-            <IconButton color="primary" sx={{ backgroundColor: 'rgba(255,255,255,0.7)' }} onClick={handleZoomIn}><ZoomInIcon /></IconButton>
-            <IconButton color="primary" sx={{ backgroundColor: 'rgba(255,255,255,0.7)' }} onClick={handleZoomOut}><ZoomOutIcon /></IconButton>
-            <IconButton color="primary" sx={{ backgroundColor: 'rgba(255,255,255,0.7)' }} onClick={handleFullscreen}><FullscreenIcon /></IconButton>
+          {/* Right panel: Map */}
+          <Box sx={{ width: '50%', height: '100%', position: 'relative', overflow: 'hidden' }}>
+            <div ref={mapRef} style={{ width: '100%', height: '100%' }} />
+            <Box sx={{ position: 'absolute', bottom: 20, right: 20, display: 'flex', flexDirection: 'column', gap: 1 }}>
+              <IconButton color="primary" sx={{ backgroundColor: 'rgba(255,255,255,0.7)' }} onClick={handleZoomIn}><ZoomInIcon /></IconButton>
+              <IconButton color="primary" sx={{ backgroundColor: 'rgba(255,255,255,0.7)' }} onClick={handleZoomOut}><ZoomOutIcon /></IconButton>
+              <IconButton color="primary" sx={{ backgroundColor: 'rgba(255,255,255,0.7)' }} onClick={handleFullscreen}><FullscreenIcon /></IconButton>
+            </Box>
           </Box>
         </Box>
-      </Box>
+      )}
     </Box>
   );
 };
