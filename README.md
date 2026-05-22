@@ -143,7 +143,7 @@ npm run deploy
 
 This automatically builds and publishes the site to:
 ➡️ [https://alaeimo.github.io](https://alaeimo.github.io)
-
+➡️ [https://alaeimo.ir](https://alaeimo.ir)
 ### Option 2: Deploy manually to your custom domain
 
 1. Run `npm run build`
