@@ -146,28 +146,6 @@
             ]
         },
         {
-            "position": "Co-founder & Developer",
-            "company": "Argon Cloud Service (Full-time)",
-            "start_date": "May 2023",
-            "end_date": "July 2023",
-            "responsibilities": [
-                "Architected full-stack features of a secure cloud platform, including a Telegram bot system, enabling authenticated and controlled access to VPN servers",
-                "Developed backend automation pipelines and a secure worker API for server and client management, including traffic monitoring and encrypted client provisioning"
-            ],
-            "technologies": [
-                "Python",
-                "Django",
-                "FastAPI",
-                "PostgreSQL",
-                "Telegram Bot API",
-                "JavaScript",
-                "HTML/CSS",
-                "Nginx",
-                "Git",
-                "DevOps"
-            ]
-        },
-        {
             "position": "Research Software Engineer & Full-Stack Developer",
             "company": "Freelance",
             "start_date": "Mar 2018",
