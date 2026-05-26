@@ -299,32 +299,7 @@
         }
     ],
     "publications": [
-        {
-            "authors": [
-            "Mohammad Alaei",
-            "Shabnam Oskouei",
-            "Hadi S. Aghdasi"
-            ],
-            "title": "Deep Learning–Based Non-Contact Reconstruction of Frontal EEG from Facial Expressions",
-            "journal": "Submitted to Physica Scripta",
-            "year": 2025,
-            "url": "",
-            "code": "",
-            "pdf": ""
-        },
-        {
-            "authors": [
-            "Seyedeh Mahrokh Alaei",
-            "Mohammad Alaei",
-            "Arman Zafaranchi"
-            ],
-            "title": "An Explainable Human Facial Expression Recognition Model Based on CNN, Gabor Filters, and SVM",
-            "journal": "Under Review at The Visual Computer",
-            "year": 2025,
-            "url": "",
-            "code": "",
-            "pdf": ""
-        }
+
     ],
     "awards": [
     {
