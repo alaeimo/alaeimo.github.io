@@ -1,5 +1,12 @@
 import React, { forwardRef } from 'react';
 import { Box, Typography, useTheme } from '@mui/material';
+import SchoolIcon from '@mui/icons-material/School';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import GradeIcon from '@mui/icons-material/Grade';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import PsychologyIcon from '@mui/icons-material/Psychology';
 import './styles/EducationSection.css';
 import AnimatedUnderlineTitle from './AnimatedUnderlineTitle';
 
@@ -8,7 +15,7 @@ const EducationSection = forwardRef(({ data }, ref) => {
 
   return (
     <div ref={ref}>
-      <AnimatedUnderlineTitle title="Educations" />
+      <AnimatedUnderlineTitle title="Education" />
       <Box className="education-timeline">
         {data.educations?.length > 0 ? (
           data.educations.map((item, index) => (
@@ -19,53 +26,94 @@ const EducationSection = forwardRef(({ data }, ref) => {
                 className="education-card"
                 sx={{
                   width: '100%',
-                  borderRadius: theme.shape.borderRadius,
-                  boxShadow: theme.shadows[2],
-                  background: `linear-gradient(135deg, ${theme.palette.background.paper} 0%, ${theme.palette.action.hover} 100%)`,
-                  border: `1px solid ${theme.palette.primary.light}33`,
-                  backdropFilter: 'blur(6px)',
+                  borderRadius: 3,
+                  boxShadow: 'none',
+                  background: 'transparent',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
                   overflow: 'hidden',
-                  p: { xs: theme.spacing(2), sm: theme.spacing(3) },
-                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                  p: { xs: 2, sm: 3 },
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  position: 'relative',
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: '3px',
+                    background: 'linear-gradient(90deg, #5D91C3, #2196f3, #5D91C3)',
+                    transform: 'scaleX(0)',
+                    transformOrigin: 'left',
+                    transition: 'transform 0.3s ease',
+                  },
                   '&:hover': {
-                    transform: 'translateY(-2px)',
-                    boxShadow: theme.shadows[4],
+                    transform: 'translateY(-4px)',
+                    boxShadow: '0 8px 30px rgba(0,0,0,0.2)',
+                    border: '1px solid rgba(255, 255, 255, 0.2)',
+                    '&::before': {
+                      transform: 'scaleX(1)',
+                    },
                   },
                 }}
               >
-                {/* Header */}
+                {/* Header with Icon */}
                 <Box
                   className="edu-header"
                   sx={{
                     display: 'flex',
                     justifyContent: 'space-between',
                     flexWrap: 'wrap',
-                    gap: theme.spacing(1),
-                    mb: theme.spacing(1.5),
+                    gap: 1,
+                    mb: 1.5,
                   }}
                 >
-                  <Box>
-                    <Typography
-                      variant="h6"
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                    <Box
                       sx={{
-                        fontFamily: theme.typography.fontFamily,
-                        fontWeight: 700,
-                        color: theme.palette.text.primary,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: 50,
+                        height: 50,
+                        borderRadius: 2.5,
+                        background: 'linear-gradient(135deg, #5D91C3 0%, #2196f3 100%)',
+                        boxShadow: '0 4px 15px rgba(33, 150, 243, 0.3)',
+                        transition: 'all 0.3s ease',
+                        '&:hover': {
+                          transform: 'rotate(5deg) scale(1.05)',
+                          boxShadow: '0 6px 20px rgba(33, 150, 243, 0.4)',
+                        },
                       }}
                     >
-                      {item.degree}
-                    </Typography>
-                    <Typography
-                      variant="subtitle1"
-                      sx={{
-                        fontFamily: theme.typography.fontFamily,
-                        color: theme.palette.text.secondary,
-                        fontStyle: 'italic',
-                        mt: 0.1,
-                      }}
-                    >
-                      {item.field}
-                    </Typography>
+                      <SchoolIcon sx={{ color: '#ffffff', fontSize: '1.5rem' }} />
+                    </Box>
+                    <Box>
+                      <Typography
+                        variant="h6"
+                        sx={{
+                          fontFamily: theme.typography.fontFamily,
+                          fontWeight: 700,
+                          color: '#ffffff',
+                        }}
+                      >
+                        {item.degree}
+                      </Typography>
+                      <Typography
+                        variant="subtitle1"
+                        sx={{
+                          fontFamily: theme.typography.fontFamily,
+                          color: '#B1C7DE',
+                          fontStyle: 'italic',
+                          mt: 0.1,
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 0.5,
+                        }}
+                      >
+                        <MenuBookIcon sx={{ fontSize: '0.8rem', color: '#5D91C3' }} />
+                        {item.field}
+                      </Typography>
+                    </Box>
                   </Box>
 
                   <Box
@@ -75,26 +123,33 @@ const EducationSection = forwardRef(({ data }, ref) => {
                       display: 'flex',
                       flexDirection: 'column',
                       alignItems: 'flex-end',
+                      gap: 0.5,
                     }}
                   >
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        fontFamily: theme.typography.fontFamily,
-                        color: theme.palette.text.secondary,
-                      }}
-                    >
-                      {item.university}, {item.location}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        fontFamily: theme.typography.fontFamily,
-                        color: theme.palette.text.secondary,
-                      }}
-                    >
-                      {item.start_date} – {item.end_date}
-                    </Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                      <LocationOnIcon sx={{ color: '#5D91C3', fontSize: '0.8rem' }} />
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          fontFamily: theme.typography.fontFamily,
+                          color: '#B1C7DE',
+                        }}
+                      >
+                        {item.university}, {item.location}
+                      </Typography>
+                    </Box>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                      <CalendarTodayIcon sx={{ color: '#5D91C3', fontSize: '0.8rem' }} />
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          fontFamily: theme.typography.fontFamily,
+                          color: '#B1C7DE',
+                        }}
+                      >
+                        {item.start_date} – {item.end_date}
+                      </Typography>
+                    </Box>
                   </Box>
                 </Box>
 
@@ -103,53 +158,66 @@ const EducationSection = forwardRef(({ data }, ref) => {
                   sx={{
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: theme.spacing(0.6),
-                    mt: theme.spacing(1),
+                    gap: 0.75,
+                    mt: 1.5,
+                    pl: { xs: 0, sm: 7.5 },
                   }}
                 >
                   {item.gpa && (
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        fontFamily: theme.typography.fontFamily,
-                        color: theme.palette.text.primary,
-                      }}
-                    >
-                      <strong>GPA:</strong> {item.gpa}
-                    </Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <GradeIcon sx={{ color: '#5D91C3', fontSize: '0.9rem' }} />
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          fontFamily: theme.typography.fontFamily,
+                          color: '#E0E8F0',
+                        }}
+                      >
+                        <strong style={{ color: '#ffffff' }}>GPA:</strong> {item.gpa}
+                      </Typography>
+                    </Box>
                   )}
                   {item.thesis && (
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        fontFamily: theme.typography.fontFamily,
-                        color: theme.palette.text.primary,
-                      }}
-                    >
-                      <strong>Thesis:</strong> <em>{item.thesis}</em>
-                    </Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1 }}>
+                      <AssignmentIcon sx={{ color: '#5D91C3', fontSize: '0.9rem', mt: 0.2 }} />
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          fontFamily: theme.typography.fontFamily,
+                          color: '#E0E8F0',
+                        }}
+                      >
+                        <strong style={{ color: '#ffffff' }}>Thesis:</strong> <em style={{ color: '#B1C7DE' }}>{item.thesis}</em>
+                      </Typography>
+                    </Box>
                   )}
                   {item.final_project && (
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        fontFamily: theme.typography.fontFamily,
-                        color: theme.palette.text.primary,
-                      }}
-                    >
-                      <strong>Final Project:</strong> <em>{item.final_project}</em>
-                    </Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1 }}>
+                      <AssignmentIcon sx={{ color: '#5D91C3', fontSize: '0.9rem', mt: 0.2 }} />
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          fontFamily: theme.typography.fontFamily,
+                          color: '#E0E8F0',
+                        }}
+                      >
+                        <strong style={{ color: '#ffffff' }}>Final Project:</strong> <em style={{ color: '#B1C7DE' }}>{item.final_project}</em>
+                      </Typography>
+                    </Box>
                   )}
                   {item.supervisor && (
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        fontFamily: theme.typography.fontFamily,
-                        color: theme.palette.text.primary,
-                      }}
-                    >
-                      <strong>Supervisor:</strong> {item.supervisor}
-                    </Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <PsychologyIcon sx={{ color: '#5D91C3', fontSize: '0.9rem' }} />
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          fontFamily: theme.typography.fontFamily,
+                          color: '#E0E8F0',
+                        }}
+                      >
+                        <strong style={{ color: '#ffffff' }}>Supervisor:</strong> {item.supervisor}
+                      </Typography>
+                    </Box>
                   )}
                 </Box>
               </Box>
@@ -160,9 +228,9 @@ const EducationSection = forwardRef(({ data }, ref) => {
             variant="body2"
             sx={{
               fontFamily: theme.typography.fontFamily,
-              color: theme.palette.text.disabled,
+              color: '#B1C7DE',
               textAlign: 'center',
-              py: theme.spacing(2),
+              py: 4,
             }}
           >
             No education details provided.

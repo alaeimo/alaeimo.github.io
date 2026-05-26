@@ -1,6 +1,8 @@
 import React, { forwardRef } from "react";
-import { Box, Grid, Typography, Button, useTheme } from "@mui/material";
+import { Box, Typography, Button, useTheme } from "@mui/material";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import "./styles/AwardsSection.css";
 import AnimatedUnderlineTitle from './AnimatedUnderlineTitle';
 
@@ -21,16 +23,33 @@ const AwardsSection = forwardRef(({ data }, ref) => {
                 className="award-card"
                 sx={{
                   width: "100%",
-                  borderRadius: theme.shape.borderRadius,
-                  background: `linear-gradient(135deg, ${theme.palette.background.paper} 0%, ${theme.palette.action.hover} 100%)`,
-                  border: `1px solid ${theme.palette.primary.light}33`,
-                  padding: { xs: theme.spacing(2), sm: theme.spacing(3) },
-                  boxShadow: theme.shadows[2],
-                  backdropFilter: "blur(6px)",
-                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                  borderRadius: 3,
+                  background: "transparent",
+                  border: "1px solid rgba(255, 255, 255, 0.1)",
+                  padding: { xs: 2, sm: 3 },
+                  boxShadow: "none",
+                  transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                  position: "relative",
+                  overflow: "hidden",
+                  "&::before": {
+                    content: '""',
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: "3px",
+                    background: "linear-gradient(90deg, #5D91C3, #2196f3, #5D91C3)",
+                    transform: "scaleX(0)",
+                    transformOrigin: "left",
+                    transition: "transform 0.3s ease",
+                  },
                   "&:hover": {
-                    transform: "translateY(-2px)",
-                    boxShadow: theme.shadows[4],
+                    transform: "translateY(-4px)",
+                    boxShadow: "0 8px 30px rgba(0,0,0,0.2)",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                    "&::before": {
+                      transform: "scaleX(1)",
+                    },
                   },
                 }}
               >
@@ -40,81 +59,129 @@ const AwardsSection = forwardRef(({ data }, ref) => {
                     display: "flex",
                     justifyContent: "space-between",
                     flexWrap: "wrap",
-                    gap: theme.spacing(1),
-                    mb: theme.spacing(1),
+                    gap: 2,
                   }}
                 >
-                  <Grid item xs={10}>
-                    <Typography
-                      variant="subtitle1"
+                  {/* Left side - Award Info with Icon */}
+                  <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 2, flex: 1 }}>
+                    <Box
                       sx={{
-                        fontFamily: theme.typography.fontFamily,
-                        fontWeight: 700,
-                        color: theme.palette.text.primary,
-                      }}
-                    >
-                      {item.title}
-                    </Typography>
-                    <Typography
-                      variant="subtitle1"
-                      sx={{
-                        fontFamily: theme.typography.fontFamily,
-                        color: theme.palette.text.secondary,
-                        fontStyle: 'italic',
-                        mt: 0.1,
-                      }}
-                    >
-                      {item.organization}
-                    </Typography>
-                    
-                  {item.description && (
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        fontFamily: theme.typography.fontFamily,
-                        color: theme.palette.text.primary,
-                      }}
-                    >
-                      {item.description}
-                    </Typography>
-                  )}
-                   </Grid>
-                  {/* Right side: date and PDF */}
-                  <Grid item xs={12} md={12} lg={2} sx={{ textAlign: { xs: "left", lg: "right" },  }}>
-                    <Typography
-                    variant="body2"
-                    sx={{
-                      fontFamily: theme.typography.fontFamily,
-                      color: theme.palette.text.secondary,
-                    }}
-                  >
-                    {item.start_date === item.end_date
-                      ? item.start_date
-                      : `${item.start_date} – ${item.end_date}`}
-                  </Typography>
-                    {item.pdf && (
-                    <Button
-                      href={item.pdf}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      startIcon={<PictureAsPdfIcon sx={{ fontSize: 16 }} />}
-                      variant="outlined"
-                      size="small"
-                      sx={{
-                        color: "#f57c00",
-                        borderColor: "#f57c00",
-                        mt: 0.5,
-                        minWidth: 36,
-                        "&:hover": {
-                          backgroundColor: "rgba(245,124,0,0.1)",
-                          borderColor: "#f57c00",
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: 50,
+                        height: 50,
+                        borderRadius: 2.5,
+                        background: 'linear-gradient(135deg, #5D91C3 0%, #2196f3 100%)',
+                        boxShadow: '0 4px 15px rgba(33, 150, 243, 0.3)',
+                        transition: 'all 0.3s ease',
+                        '&:hover': {
+                          transform: 'rotate(5deg) scale(1.05)',
+                          boxShadow: '0 6px 20px rgba(33, 150, 243, 0.4)',
                         },
                       }}
                     >
-                      PDF
-                    </Button>
+                      <EmojiEventsIcon sx={{ color: '#ffffff', fontSize: '1.3rem' }} />
+                    </Box>
+                    
+                    <Box sx={{ flex: 1 }}>
+                      <Typography
+                        variant="subtitle1"
+                        sx={{
+                          fontFamily: theme.typography.fontFamily,
+                          fontWeight: 700,
+                          color: '#ffffff',
+                          fontSize: '1rem',
+                          mb: 0.5,
+                        }}
+                      >
+                        {item.title}
+                      </Typography>
+                      
+                      <Typography
+                        variant="caption"
+                        sx={{
+                          fontFamily: theme.typography.fontFamily,
+                          color: '#B1C7DE',
+                          fontStyle: 'italic',
+                          display: 'block',
+                          mb: 0.5,
+                        }}
+                      >
+                        {item.organization}
+                      </Typography>
+                      
+                      {item.description && (
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            fontFamily: theme.typography.fontFamily,
+                            color: '#E0E8F0',
+                            fontSize: '0.85rem',
+                            lineHeight: 1.5,
+                            mt: 1,
+                          }}
+                        >
+                          {item.description}
+                        </Typography>
+                      )}
+                    </Box>
+                  </Box>
+
+                  {/* Right side - Date and PDF Button */}
+                  <Box sx={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    alignItems: { xs: 'flex-start', lg: 'flex-end' },
+                    gap: 1,
+                    minWidth: { xs: 'auto', lg: '180px' },
+                  }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                      <CalendarTodayIcon sx={{ color: '#5D91C3', fontSize: '0.8rem' }} />
+                      <Typography
+                        variant="caption"
+                        sx={{
+                          fontFamily: theme.typography.fontFamily,
+                          color: '#B1C7DE',
+                          fontWeight: 500,
+                        }}
+                      >
+                        {item.start_date === item.end_date
+                          ? item.start_date
+                          : `${item.start_date} – ${item.end_date}`}
+                      </Typography>
+                    </Box>
+                    
+                    {item.pdf && (
+                      <Button
+                        href={item.pdf}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        startIcon={<PictureAsPdfIcon sx={{ fontSize: 16 }} />}
+                        variant="outlined"
+                        size="small"
+                        sx={{
+                          color: "#f57c00",
+                          borderColor: "rgba(245, 124, 0, 0.5)",
+                          backgroundColor: "transparent",
+                          textTransform: "none",
+                          fontWeight: 600,
+                          borderRadius: 2,
+                          px: 1.5,
+                          py: 0.5,
+                          transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
+                          "&:hover": {
+                            backgroundColor: "rgba(245, 124, 0, 0.15)",
+                            borderColor: "#f57c00",
+                            transform: "translateY(-2px)",
+                            boxShadow: "0 4px 12px rgba(245, 124, 0, 0.2)",
+                          },
+                        }}
+                      >
+                        PDF
+                      </Button>
                     )}
-                  </Grid>
+                  </Box>
                 </Box>
               </Box>
             </Box>
@@ -124,9 +191,10 @@ const AwardsSection = forwardRef(({ data }, ref) => {
             variant="body2"
             sx={{
               fontFamily: theme.typography.fontFamily,
-              color: theme.palette.text.disabled,
+              color: "#B1C7DE",
               textAlign: "center",
-              py: 2,
+              py: 4,
+              fontStyle: "italic",
             }}
           >
             No awards provided.

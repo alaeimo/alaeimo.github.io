@@ -10,6 +10,8 @@ import {
 } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+import FolderIcon from "@mui/icons-material/Folder";
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import "./styles/ProjectsSection.css";
 import AnimatedUnderlineTitle from './AnimatedUnderlineTitle';
 
@@ -23,14 +25,14 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
   const theme = useTheme();
 
   // Extract unique categories
-    const categories = [
-      "All",
-      ...new Set(
-        data.projects.flatMap((p) =>
-          p.category.split("/").map((c) => c.trim())
-        )
-      ),
-    ];
+  const categories = [
+    "All",
+    ...new Set(
+      data.projects.flatMap((p) =>
+        p.category.split("/").map((c) => c.trim())
+      )
+    ),
+  ];
 
   // SORT DESCENDING BY DATE (Primary: end_date, fallback: start_date)
   const sortedProjects = [...data.projects].sort((a, b) => {
@@ -49,6 +51,7 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
             .map((c) => c.trim())
             .includes(selectedCategory)
         );
+          
   const toggleExpand = (i) => {
     setExpandedProjects((prev) => ({
       ...prev,
@@ -116,26 +119,23 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
                 borderRadius: "10px",
                 px: 2,
                 py: 0.5,
-                fontSize: "0.9rem",
+                fontSize: "0.85rem",
                 border: selectedCategory === cat
-                  ? `2px solid ${theme.palette.primary.main}`
-                  : `1.5px solid ${theme.palette.primary.main}99`,
+                  ? "none"
+                  : `1.5px solid rgba(93, 145, 195, 0.5)`,
                 color: selectedCategory === cat
-                  ? theme.palette.primary.contrastText
-                  : theme.palette.text.primary,
+                  ? "#ffffff"
+                  : "#B1C7DE",
                 backgroundColor: selectedCategory === cat
-                  ? theme.palette.primary.main
-                  : theme.palette.primary.main + "1A",
-                boxShadow: selectedCategory === cat
-                  ? `0 0 6px ${theme.palette.primary.main}55`
-                  : `0 0 4px ${theme.palette.primary.main}22`,
+                  ? "linear-gradient(135deg, #5D91C3, #2196f3)"
+                  : "transparent",
                 transition: "all 0.25s ease",
                 "&:hover": {
                   backgroundColor: selectedCategory === cat
-                    ? theme.palette.primary.dark
-                    : theme.palette.primary.main + "33",
-                  borderColor: theme.palette.primary.main,
-                  boxShadow: `0 0 6px ${theme.palette.primary.main}55`,
+                    ? "linear-gradient(135deg, #4a7aaa, #1a7bc3)"
+                    : "rgba(93, 145, 195, 0.15)",
+                  borderColor: "#5D91C3",
+                  transform: "translateY(-1px)",
                 },
               }}
             >
@@ -145,7 +145,7 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
         </Box>
 
         {/* Project Grid */}
-        <Grid container spacing={2}>
+        <Grid container spacing={3}>
           {filteredProjects.map((item, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
               <Box
@@ -153,26 +153,34 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
                   display: "flex",
                   flexDirection: "column",
                   height: "100%",
-                  borderRadius: theme.shape.borderRadius,
+                  borderRadius: 3,
                   overflow: "hidden",
-                  background: `linear-gradient(135deg, ${theme.palette.background.paper} 0%, ${theme.palette.action.hover} 100%)`,
-                  border: `1px solid ${theme.palette.primary.main}`,
-                  boxShadow: `
-                    0 0 4px ${theme.palette.primary.main},
-                    0 0 8px ${theme.palette.primary.main}33
-                  `,
-                  backdropFilter: "blur(6px)",
-                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                  background: "transparent",
+                  border: "1px solid rgba(255, 255, 255, 0.1)",
+                  transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                  position: 'relative',
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: '3px',
+                    background: 'linear-gradient(90deg, #5D91C3, #2196f3, #5D91C3)',
+                    transform: 'scaleX(0)',
+                    transformOrigin: 'left',
+                    transition: 'transform 0.3s ease',
+                  },
                   "&:hover": {
-                    transform: "translateY(-3px)",
-                    boxShadow: `
-                      0 0 6px ${theme.palette.primary.main},
-                      0 0 12px ${theme.palette.primary.main}55
-                    `,
+                    transform: "translateY(-4px)",
+                    boxShadow: "0 8px 30px rgba(0,0,0,0.2)",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                    '&::before': {
+                      transform: 'scaleX(1)',
+                    },
                   },
                 }}
               >
-
                 {/* Project Image */}
                 <Box
                   sx={{
@@ -183,6 +191,16 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
                     backgroundRepeat: "no-repeat",
                     flexShrink: 0,
                     cursor: "zoom-in",
+                    position: 'relative',
+                    '&::after': {
+                      content: '""',
+                      position: 'absolute',
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      height: '60px',
+                      background: 'linear-gradient(to top, rgba(0,0,0,0.6), transparent)',
+                    },
                   }}
                   onMouseEnter={() => {
                     const timer = setTimeout(() => {
@@ -204,43 +222,44 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
                 />
 
                 {/* Content */}
-                <Box sx={{ p: 2, textAlign: "center" }}>
-                  <Typography
-                    variant="subtitle1"
-                    sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      flexWrap: "wrap",
-                      gap: theme.spacing(1),
-                      mb: theme.spacing(1.5),
-                      textAlign: "center",
-                    }}
-                  >
-                    {item.title}
-                  </Typography>
+                <Box sx={{ p: 2.5, textAlign: "center" }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1, mb: 1 }}>
+                    <FolderIcon sx={{ color: '#5D91C3', fontSize: '1rem' }} />
+                    <Typography
+                      variant="subtitle1"
+                      sx={{
+                        fontWeight: 700,
+                        color: '#ffffff',
+                        fontSize: '1rem',
+                      }}
+                    >
+                      {item.title}
+                    </Typography>
+                  </Box>
+
+                  <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 0.5, mb: 1 }}>
+                    <CalendarTodayIcon sx={{ color: '#5D91C3', fontSize: '0.7rem' }} />
+                    <Typography
+                      variant="caption"
+                      sx={{
+                        fontFamily: theme.typography.fontFamily,
+                        color: '#B1C7DE',
+                      }}
+                    >
+                      {item.start_date === item.end_date
+                        ? item.start_date
+                        : `${item.start_date} – ${item.end_date}`}
+                    </Typography>
+                  </Box>
 
                   <Typography
-                    component="span"
                     variant="body2"
                     sx={{
                       fontFamily: theme.typography.fontFamily,
-                      color: theme.palette.text.secondary,
-                    }}
-                  >
-                    ({item.start_date === item.end_date
-                      ? item.start_date
-                      : `${item.start_date} – ${item.end_date}`})
-                  </Typography>
-
-                  <Typography
-                    variant="body2"
-                    sx={{
-                      fontFamily: theme.typography.fontFamily,
-                      color: theme.palette.text.secondary,
+                      color: '#B1C7DE',
                       fontStyle: "italic",
-                      mt: 0.1,
-                      mb: 1,
+                      mb: 1.5,
+                      fontSize: '0.85rem',
                     }}
                   >
                     {item.subtitle}
@@ -251,7 +270,15 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
                     size="small"
                     variant="text"
                     onClick={() => toggleExpand(index)}
-                    sx={{ mb: 1 }}
+                    sx={{ 
+                      mb: 1.5,
+                      color: '#5D91C3',
+                      textTransform: 'none',
+                      fontWeight: 600,
+                      '&:hover': {
+                        backgroundColor: 'rgba(93, 145, 195, 0.1)',
+                      },
+                    }}
                   >
                     {expandedProjects[index] ? "Show Less ▲" : "Show More ▼"}
                   </Button>
@@ -259,17 +286,16 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
                   {/* COLLAPSIBLE SECTION */}
                   <Collapse in={expandedProjects[index]}>
                     {/* Responsibilities */}
-                    <ul
-                      style={{
-                        textAlign: "left",
-                        margin: "0 auto",
-                        maxWidth: "85%",
-                      }}
-                    >
+                    <Box sx={{ textAlign: "left", mt: 1 }}>
                       {item.responsibilities.map((resp, i) => (
-                        <li key={i}>{resp}</li>
+                        <Box key={i} sx={{ display: 'flex', gap: 1, mb: 0.75 }}>
+                          <Typography sx={{ color: '#5D91C3', fontWeight: 700 }}>•</Typography>
+                          <Typography variant="body2" sx={{ color: '#E0E8F0', fontSize: '0.8rem' }}>
+                            {resp}
+                          </Typography>
+                        </Box>
                       ))}
-                    </ul>
+                    </Box>
 
                     {/* Technologies */}
                     <Box
@@ -277,8 +303,8 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
                         display: "flex",
                         justifyContent: "center",
                         flexWrap: "wrap",
-                        gap: 0.6,
-                        mt: 1.5,
+                        gap: 0.8,
+                        mt: 2,
                       }}
                     >
                       {item.technologies.map((tech, i) => (
@@ -287,19 +313,19 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
                           label={tech}
                           size="small"
                           sx={{
-                            px: 1.5,
-                            py: 0.3,
-                            bgcolor: theme.palette.primary.main + "1A",
-                            fontSize: "0.8rem",
-                            fontWeight: 500,
+                            backgroundColor: 'rgba(93, 145, 195, 0.12)',
+                            fontSize: "0.7rem",
+                            fontWeight: 600,
                             fontFamily: theme.typography.fontFamily,
-                            borderRadius: 1,
-                            border: `1px solid ${theme.palette.primary.main}`,
-                            boxShadow: `0 0 4px ${theme.palette.primary.main}`,
+                            borderRadius: 1.5,
+                            border: "1px solid rgba(93, 145, 195, 0.3)",
+                            color: '#5D91C3',
                             "&:hover": {
                               transform: "translateY(-1px)",
-                              boxShadow: `0 0 6px ${theme.palette.primary.main}`,
+                              borderColor: '#5D91C3',
+                              backgroundColor: 'rgba(93, 145, 195, 0.2)',
                             },
+                            transition: 'all 0.2s ease',
                           }}
                         />
                       ))}
@@ -311,7 +337,7 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
                         display: "flex",
                         justifyContent: "center",
                         gap: 1.5,
-                        mt: 2,
+                        mt: 2.5,
                       }}
                     >
                       {item.code && (
@@ -323,12 +349,15 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
                           variant="outlined"
                           size="small"
                           sx={{
-                            color: theme.palette.text.primary,
-                            borderColor: theme.palette.text.primary,
-                            minWidth: 36,
-                            "&:hover": {
-                              backgroundColor: theme.palette.action.hover,
-                              borderColor: theme.palette.text.primary,
+                            color: '#B1C7DE',
+                            borderColor: 'rgba(177, 199, 222, 0.5)',
+                            textTransform: "none",
+                            fontWeight: 600,
+                            borderRadius: 2,
+                            '&:hover': {
+                              backgroundColor: 'rgba(177, 199, 222, 0.15)',
+                              borderColor: '#B1C7DE',
+                              transform: 'translateY(-2px)',
                             },
                           }}
                         >
@@ -341,14 +370,19 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
                           href={item.pdf}
                           target="_blank"
                           rel="noopener noreferrer"
-                          startIcon={<PictureAsPdfIcon sx={{ fontSize: 18 }} />}
+                          startIcon={<PictureAsPdfIcon sx={{ fontSize: 16 }} />}
                           variant="outlined"
                           size="small"
                           sx={{
                             color: "#f57c00",
-                            borderColor: "#f57c00",
+                            borderColor: "rgba(245, 124, 0, 0.5)",
+                            textTransform: "none",
+                            fontWeight: 600,
+                            borderRadius: 2,
                             "&:hover": {
-                              backgroundColor: "rgba(245,124,0,0.1)",
+                              backgroundColor: "rgba(245, 124, 0, 0.15)",
+                              borderColor: "#f57c00",
+                              transform: "translateY(-2px)",
                             },
                           }}
                         >

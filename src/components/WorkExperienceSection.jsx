@@ -1,6 +1,9 @@
 import React, { forwardRef } from 'react';
-import { Box, Typography, useTheme } from '@mui/material';
-import './styles/AcademicExperienceSection.css'; // reuse same CSS for timeline & card
+import { Box, Typography, useTheme, Chip } from '@mui/material';
+import WorkIcon from '@mui/icons-material/Work';
+import BusinessIcon from '@mui/icons-material/Business';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import './styles/AcademicExperienceSection.css';
 import AnimatedUnderlineTitle from './AnimatedUnderlineTitle';
 
 const WorkExperienceSection = forwardRef(({ data }, ref) => {
@@ -25,54 +28,94 @@ const WorkExperienceSection = forwardRef(({ data }, ref) => {
                   flexDirection: "column",
                   justifyContent: "flex-start",
                   width: "100%",
-                  borderRadius: theme.shape.borderRadius,
-                  background: `linear-gradient(135deg, ${theme.palette.background.paper} 0%, ${theme.palette.action.hover} 100%)`,
-                  border: `1px solid ${theme.palette.primary.light}33`,
-                  boxShadow: theme.shadows[2],
-                  backdropFilter: "blur(6px)",
+                  borderRadius: 3,
+                  background: 'transparent',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  boxShadow: 'none',
                   overflow: "hidden",
-                  p: { xs: theme.spacing(2), sm: theme.spacing(3) },
-                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                  p: { xs: 2, sm: 3 },
+                  transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                  position: 'relative',
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: '3px',
+                    background: 'linear-gradient(90deg, #5D91C3, #2196f3, #5D91C3)',
+                    transform: 'scaleX(0)',
+                    transformOrigin: 'left',
+                    transition: 'transform 0.3s ease',
+                  },
                   "&:hover": {
-                    transform: "translateY(-2px)",
-                    boxShadow: theme.shadows[4],
+                    transform: "translateY(-4px)",
+                    boxShadow: '0 8px 30px rgba(0,0,0,0.2)',
+                    border: '1px solid rgba(255, 255, 255, 0.2)',
+                    '&::before': {
+                      transform: 'scaleX(1)',
+                    },
                   },
                 }}
-
               >
-                {/* Header */}
+                {/* Header with Icon */}
                 <Box
                   className="academic-header"
                   sx={{
                     display: 'flex',
                     justifyContent: 'space-between',
                     flexWrap: 'wrap',
-                    gap: theme.spacing(1),
-                    mb: theme.spacing(1.5),
+                    gap: 2,
+                    mb: 2,
                   }}
                 >
-                  <Box>
-                    <Typography
-                      variant="h6"
+                  <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1.5 }}>
+                    <Box
                       sx={{
-                        fontFamily: theme.typography.fontFamily,
-                        fontWeight: 700,
-                        color: theme.palette.text.primary,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: 55,
+                        height: 55,
+                        borderRadius: 2.5,
+                        background: 'linear-gradient(135deg, #5D91C3 0%, #2196f3 100%)',
+                        boxShadow: '0 4px 15px rgba(33, 150, 243, 0.3)',
+                        transition: 'all 0.3s ease',
+                        '&:hover': {
+                          transform: 'rotate(5deg) scale(1.05)',
+                          boxShadow: '0 6px 20px rgba(33, 150, 243, 0.4)',
+                        },
                       }}
                     >
-                      {item.position}
-                    </Typography>
-                    <Typography
-                      variant="subtitle1"
-                      sx={{
-                        fontFamily: theme.typography.fontFamily,
-                        color: theme.palette.text.secondary,
-                        fontStyle: 'italic',
-                        mt: 0.1,
-                      }}
-                    >
-                      {item.company}
-                    </Typography>
+                      <WorkIcon sx={{ color: '#ffffff', fontSize: '1.5rem' }} />
+                    </Box>
+                    <Box>
+                      <Typography
+                        variant="h6"
+                        sx={{
+                          fontFamily: theme.typography.fontFamily,
+                          fontWeight: 700,
+                          color: '#ffffff',
+                          fontSize: '1.1rem',
+                          mb: 0.5,
+                        }}
+                      >
+                        {item.position}
+                      </Typography>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                        <BusinessIcon sx={{ color: '#5D91C3', fontSize: '0.9rem' }} />
+                        <Typography
+                          variant="subtitle2"
+                          sx={{
+                            fontFamily: theme.typography.fontFamily,
+                            color: '#B1C7DE',
+                            fontStyle: 'italic',
+                          }}
+                        >
+                          {item.company}
+                        </Typography>
+                      </Box>
+                    </Box>
                   </Box>
 
                   <Box
@@ -82,27 +125,36 @@ const WorkExperienceSection = forwardRef(({ data }, ref) => {
                       display: 'flex',
                       flexDirection: 'column',
                       alignItems: 'flex-end',
+                      gap: 0.75,
                     }}
                   >
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        fontFamily: theme.typography.fontFamily,
-                        color: theme.palette.text.secondary,
-                      }}
-                    >
-                      {item.start_date} – {item.end_date}
-                    </Typography>
-                    {item.employment_type && (
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                      <CalendarTodayIcon sx={{ color: '#5D91C3', fontSize: '0.8rem' }} />
                       <Typography
-                        variant="body2"
+                        variant="caption"
                         sx={{
                           fontFamily: theme.typography.fontFamily,
-                          color: theme.palette.text.secondary,
+                          color: '#B1C7DE',
+                          fontWeight: 500,
                         }}
                       >
-                        {item.employment_type}
+                        {item.start_date} – {item.end_date}
                       </Typography>
+                    </Box>
+                    {item.employment_type && (
+                      <Chip
+                        label={item.employment_type}
+                        size="small"
+                        sx={{
+                          height: 22,
+                          fontSize: '0.65rem',
+                          fontWeight: 600,
+                          backgroundColor: 'rgba(93, 145, 195, 0.15)',
+                          color: '#5D91C3',
+                          border: '1px solid rgba(93, 145, 195, 0.3)',
+                          borderRadius: 1.5,
+                        }}
+                      />
                     )}
                   </Box>
                 </Box>
@@ -112,8 +164,8 @@ const WorkExperienceSection = forwardRef(({ data }, ref) => {
                   sx={{
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: theme.spacing(0.6),
-                    mt: theme.spacing(1),
+                    gap: 0.75,
+                    mt: 1,
                   }}
                 >
                   {item.responsibilities.map((resp, idx) => (
@@ -121,14 +173,20 @@ const WorkExperienceSection = forwardRef(({ data }, ref) => {
                       key={idx}
                       sx={{
                         display: 'flex',
-                        gap: theme.spacing(1),
+                        gap: 1,
                         alignItems: 'flex-start',
+                        transition: 'transform 0.2s ease',
+                        '&:hover': {
+                          transform: 'translateX(4px)',
+                        },
                       }}
                     >
                       <Typography
                         sx={{
-                          color: theme.palette.primary.main,
+                          color: '#5D91C3',
                           fontWeight: 700,
+                          fontSize: '1.1rem',
+                          lineHeight: 1.5,
                         }}
                       >
                         •
@@ -137,8 +195,8 @@ const WorkExperienceSection = forwardRef(({ data }, ref) => {
                         variant="body2"
                         sx={{
                           fontFamily: theme.typography.fontFamily,
-                          color: theme.palette.text.primary,
-                          lineHeight: 1.5,
+                          color: '#E0E8F0',
+                          lineHeight: 1.6,
                         }}
                       >
                         {resp}
@@ -149,25 +207,27 @@ const WorkExperienceSection = forwardRef(({ data }, ref) => {
 
                 {/* Technologies */}
                 {item.technologies?.length > 0 && (
-                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mt: theme.spacing(1) }}>
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mt: 2 }}>
                     {item.technologies.map((tech, idx) => (
                       <Box
                         key={idx}
                         sx={{
                           px: 1.5,
-                          py: 0.3,
-                          bgcolor: theme.palette.primary.main + '1A', 
-                          fontSize: '0.8rem',
-                          fontWeight: 500,
+                          py: 0.6,
+                          background: 'rgba(93, 145, 195, 0.12)',
+                          fontSize: '0.75rem',
+                          fontWeight: 600,
                           fontFamily: theme.typography.fontFamily,
-                          borderRadius: 1,
-                          border: `1px solid ${theme.palette.primary.main}`,
-                          boxShadow: `0 0 4px ${theme.palette.primary.main}`,
+                          borderRadius: 2,
+                          border: '1px solid rgba(93, 145, 195, 0.3)',
+                          color: '#5D91C3',
+                          transition: 'all 0.2s ease',
+                          cursor: 'default',
                           "&:hover": {
-                          transform: "translateY(-1px)",
-                          boxShadow: `
-                            0 0 6px ${theme.palette.primary.main},
-                          `,
+                            transform: "translateY(-2px)",
+                            borderColor: '#5D91C3',
+                            background: 'rgba(93, 145, 195, 0.2)',
+                            boxShadow: '0 2px 8px rgba(93, 145, 195, 0.2)',
                           },
                         }}
                       >
@@ -184,9 +244,9 @@ const WorkExperienceSection = forwardRef(({ data }, ref) => {
             variant="body2"
             sx={{
               fontFamily: theme.typography.fontFamily,
-              color: theme.palette.text.disabled,
+              color: '#B1C7DE',
               textAlign: 'center',
-              py: theme.spacing(2),
+              py: 4,
             }}
           >
             No work experiences provided.

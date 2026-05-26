@@ -1,66 +1,118 @@
-import React from 'react';
-import { Box, IconButton, CssBaseline } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Box, IconButton, CssBaseline, Tooltip, Fade } from '@mui/material';
 import './styles/Taskbar.css';
 
 const Taskbar = ({ data, activeSection, onSectionChange, sections, sectionIcons }) => {
+  const [visible, setVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  // Hide taskbar when scrolling down, show when scrolling up
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setVisible(false);
+      } else {
+        setVisible(true);
+      }
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
+
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '10vh' }}>
       <CssBaseline />
-      <Box
-        sx={{
-          display: 'flex',
-          position: 'fixed',
-          bottom: 12,
-          left: '50%',
-          transform: 'translateX(-50%)',
-          zIndex: 1200,
-        }}
-        className="taskbar"
-      >
+      <Fade in={visible} timeout={300}>
         <Box
           sx={{
             display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            bgcolor: 'transparent',
-            backdropFilter: 'blur(8px)',
-            p: 0.5,
-            gap: 0.5,
-            borderRadius: '40px',
-            transition: 'all 0.3s ease-in-out',
+            position: 'fixed',
+            bottom: 24,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 1200,
+            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
           }}
+          className="taskbar"
         >
-          {sections.map((section) => {
-            const { icon: Icon, color } = sectionIcons[section.id] || {
-              icon: IconButton,
-              color: '#666',
-            };
-            return (
-              <IconButton
-                key={section.id}
-                onClick={() => onSectionChange(section.id)}
-                sx={{
-                  color: activeSection === section.id ? color : '#5D91C3',
-                  bgcolor:
-                    activeSection === section.id
-                      ? 'rgba(93, 145, 195, 1)'
-                      : 'transparent',
-                  '&:hover': {
-                    bgcolor: 'rgba(93, 145, 195, 1)',
-                    color,
-                  },
-                  borderRadius: '50%',
-                  width: { xs: 25, sm: 25, md: 32, lg: 32, xl: 32 },
-                  height: { xs: 25, sm: 25, md: 32, lg: 32, xl: 32 },
-                }}
-                title={section.label}
-              >
-                <Icon sx={{ fontSize: 20 }} />
-              </IconButton>
-            );
-          })}
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              background: 'rgba(26, 58, 92, 0.85)',
+              backdropFilter: 'blur(12px)',
+              p: 1,
+              gap: 0.75,
+              borderRadius: '60px',
+              transition: 'all 0.3s ease-in-out',
+              border: '1px solid rgba(93, 145, 195, 0.3)',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
+              '&:hover': {
+                border: '1px solid rgba(93, 145, 195, 0.6)',
+                boxShadow: '0 6px 25px rgba(0,0,0,0.25)',
+              },
+            }}
+          >
+            {sections.map((section, index) => {
+              const { icon: Icon, color } = sectionIcons[section.id] || {
+                icon: IconButton,
+                color: '#5D91C3',
+              };
+              const isActive = activeSection === section.id;
+              
+              return (
+                <Tooltip
+                  key={section.id}
+                  title={section.label}
+                  arrow
+                  placement="top"
+                  TransitionComponent={Fade}
+                  TransitionProps={{ timeout: 200 }}
+                >
+                  <IconButton
+                    onClick={() => onSectionChange(section.id)}
+                    sx={{
+                      color: isActive ? '#ffffff' : '#B1C7DE',
+                      background: isActive
+                        ? 'linear-gradient(135deg, #5D91C3, #2196f3)'
+                        : 'transparent',
+                      '&:hover': {
+                        background: 'linear-gradient(135deg, #5D91C3, #2196f3)',
+                        color: '#ffffff',
+                        transform: 'translateY(-3px)',
+                        boxShadow: '0 4px 12px rgba(93, 145, 195, 0.4)',
+                      },
+                      borderRadius: '50%',
+                      width: { xs: 36, sm: 36, md: 40, lg: 40 },
+                      height: { xs: 36, sm: 36, md: 40, lg: 40 },
+                      transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                      position: 'relative',
+                      '&::after': isActive ? {
+                        content: '""',
+                        position: 'absolute',
+                        bottom: -4,
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        width: '6px',
+                        height: '6px',
+                        borderRadius: '50%',
+                        background: '#5D91C3',
+                        boxShadow: '0 0 8px #5D91C3',
+                      } : {},
+                    }}
+                  >
+                    <Icon sx={{ fontSize: { xs: 18, sm: 18, md: 20, lg: 20 } }} />
+                  </IconButton>
+                </Tooltip>
+              );
+            })}
+          </Box>
         </Box>
-      </Box>
+      </Fade>
     </Box>
   );
 };

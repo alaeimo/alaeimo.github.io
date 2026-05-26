@@ -1,54 +1,75 @@
-.header {
-  position: relative;
-  overflow: hidden;
-}
-
-.face-image {
-  transition: transform 0.3s ease;
-}
-
-.face-image:hover {
-  transform: scale(1.05);
-}
-
-.contact-info {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  gap: 1px;
-  transition: all 0.3s ease;
-}
-
-.contact-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  gap: 1px;
-}
-
-.social-button {
-  transition: all 0.3s ease;
-}
+/* Header.print.css - Print Styles */
 
 @media print {
   .header {
-    background: #fff !important;
-    color: #000 !important;
+    background: white !important;
+    color: black !important;
+    padding: 20px !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
+  .header::before,
+  .header::after,
+  .header .animated-bg,
+  .header .particles,
+  .header .social-button,
+  .header .status-indicator,
+  .header button:not(.no-print) {
+    display: none !important;
+  }
+
+  .avatar-ring {
+    display: none !important;
+  }
+
+  .avatar {
+    border: 2px solid #ddd !important;
     box-shadow: none !important;
   }
 
-  .header canvas {
+  .contact-info a,
+  .social-links a {
+    color: black !important;
+    text-decoration: none !important;
+  }
+
+  .download-cv-btn {
     display: none !important;
   }
 
-  .social-button {
-    display: none !important;
+  .gradient-text {
+    color: black !important;
+    background: none !important;
+    -webkit-text-fill-color: black !important;
   }
 
-  .header-footer {
-    border-top: none !important;
+  .header-divider {
+    background: #ddd !important;
   }
+}
+
+/* Smooth scrolling for the whole page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #764ba2, #667eea);
 }

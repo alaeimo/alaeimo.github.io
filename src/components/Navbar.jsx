@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 
 import MenuIcon from '@mui/icons-material/Menu';
-import HomeIcon from '@mui/icons-material/Home'; 
+import HomeIcon from '@mui/icons-material/Home';
 
 const Navbar = ({ sections, activeTab, onTabChange, sectionIcons }) => {
   const theme = useTheme();
@@ -31,13 +31,15 @@ const Navbar = ({ sections, activeTab, onTabChange, sectionIcons }) => {
         {/* Home button in drawer */}
         <ListItem button key="home" onClick={() => onTabChange('home')}>
           <ListItemIcon
-            sx={{ color: activeTab === 'home' ? theme.palette.primary.main : theme.palette.secondary.main }}
+            sx={{ color: activeTab === 'home' ? theme.palette.primary.main : theme.palette.text.secondary }}
           >
             <HomeIcon />
           </ListItemIcon>
           <ListItemText
             primary="Home"
-            sx={{ color: activeTab === 'home' ? theme.palette.primary.main : theme.palette.secondary.main }}
+            primaryTypographyProps={{
+              sx: { color: activeTab === 'home' ? theme.palette.primary.main : theme.palette.text.primary, fontWeight: activeTab === 'home' ? 600 : 400 }
+            }}
           />
         </ListItem>
 
@@ -48,13 +50,15 @@ const Navbar = ({ sections, activeTab, onTabChange, sectionIcons }) => {
           return (
             <ListItem button key={id} onClick={() => onTabChange(id)}>
               {Icon && (
-                <ListItemIcon sx={{ color: isActive ? theme.palette.primary.main : theme.palette.secondary.main }}>
+                <ListItemIcon sx={{ color: isActive ? theme.palette.primary.main : theme.palette.text.secondary }}>
                   <Icon />
                 </ListItemIcon>
               )}
               <ListItemText
                 primary={label}
-                sx={{ color: isActive ? theme.palette.primary.main : theme.palette.secondary.main }}
+                primaryTypographyProps={{
+                  sx: { color: isActive ? theme.palette.primary.main : theme.palette.text.primary, fontWeight: isActive ? 600 : 400 }
+                }}
               />
             </ListItem>
           );
@@ -71,9 +75,9 @@ const Navbar = ({ sections, activeTab, onTabChange, sectionIcons }) => {
           backgroundColor: theme.palette.background.default,
           borderBottom: `1px solid ${theme.palette.divider}`,
         }}
-        elevation={1}
+        elevation={0}
       >
-        <Toolbar sx={{ justifyContent: 'space-between' }}>
+        <Toolbar sx={{ justifyContent: 'space-between', px: { xs: 2, md: 3 } }}>
           {/* Mobile hamburger */}
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton edge="start" onClick={handleDrawerToggle} sx={{ color: theme.palette.primary.main }}>
@@ -85,7 +89,7 @@ const Navbar = ({ sections, activeTab, onTabChange, sectionIcons }) => {
           <Box
             sx={{
               display: { xs: 'none', md: 'flex' },
-              gap: 2,
+              gap: 1,
               overflowX: 'auto',
               justifyContent: 'center',
               width: '100%',
@@ -100,22 +104,24 @@ const Navbar = ({ sections, activeTab, onTabChange, sectionIcons }) => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                fontSize: 11,
-                color: activeTab === 'home' ? theme.palette.primary.main : theme.palette.secondary.main,
-                fontWeight: activeTab === 'home' ? 700 : 500,
-                minWidth: 70,
-                borderBottom:
-                  activeTab === 'home' ? `1px solid ${theme.palette.primary.main}` : '1px solid transparent',
+                fontSize: '0.7rem',
+                color: activeTab === 'home' ? theme.palette.primary.main : theme.palette.text.secondary,
+                fontWeight: activeTab === 'home' ? 600 : 500,
+                minWidth: 65,
+                py: 1,
+                textTransform: 'none',
+                borderBottom: activeTab === 'home' ? `2px solid ${theme.palette.primary.main}` : '2px solid transparent',
+                borderRadius: 0,
                 '&:hover': {
                   backgroundColor: 'transparent',
-                  color: theme.palette.primary.light,
+                  color: theme.palette.primary.main,
                 },
               }}
             >
               <HomeIcon
                 sx={{
-                  fontSize: activeTab === 'home' ? 30 : 24,
-                  color: activeTab === 'home' ? theme.palette.primary.main : theme.palette.secondary.main,
+                  fontSize: activeTab === 'home' ? 24 : 20,
+                  color: activeTab === 'home' ? theme.palette.primary.main : theme.palette.text.secondary,
                   mb: 0.5,
                 }}
               />
@@ -136,23 +142,25 @@ const Navbar = ({ sections, activeTab, onTabChange, sectionIcons }) => {
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    fontSize: 11,
-                    color: isActive ? theme.palette.primary.main : theme.palette.secondary.main,
-                    fontWeight: isActive ? 700 : 500,
-                    minWidth: 70,
-                    borderBottom:
-                      isActive ? `1px solid ${theme.palette.primary.main}` : '1px solid transparent',
+                    fontSize: '0.7rem',
+                    color: isActive ? theme.palette.primary.main : theme.palette.text.secondary,
+                    fontWeight: isActive ? 600 : 500,
+                    minWidth: 65,
+                    py: 1,
+                    textTransform: 'none',
+                    borderBottom: isActive ? `2px solid ${theme.palette.primary.main}` : '2px solid transparent',
+                    borderRadius: 0,
                     '&:hover': {
                       backgroundColor: 'transparent',
-                      color: theme.palette.primary.light,
+                      color: theme.palette.primary.main,
                     },
                   }}
                 >
                   {Icon && (
                     <Icon
                       sx={{
-                        fontSize: isActive ? 30 : 24,
-                        color: isActive ? theme.palette.primary.main : theme.palette.secondary.main,
+                        fontSize: isActive ? 24 : 20,
+                        color: isActive ? theme.palette.primary.main : theme.palette.text.secondary,
                         mb: 0.5,
                       }}
                     />
