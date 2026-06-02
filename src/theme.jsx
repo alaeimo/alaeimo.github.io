@@ -3,60 +3,92 @@ import { createTheme } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
     background: {
-      default: '#0B2536', // main background
-      paper: '#0B2536',   // surfaces, cards, etc.
+      default: '#F8FAFC', // academic white (soft, not pure white)
+      paper: '#FFFFFF',
     },
+
     primary: {
-      main: '#B1C7DE', // for buttons, icons, links
-      contrastText: '#0B2536',
+      main: '#1E3A8A', // deep academic blue (authority, trust)
+      contrastText: '#FFFFFF',
     },
+
     secondary: {
-      main: '#5D91C3',
+      main: '#3B82F6', // interaction blue (links, highlights)
     },
+
     text: {
-      primary: '#B1C7DE',
-      secondary: '#6C8C9C',
+      primary: '#0F172A',   // strong readable navy-black
+      secondary: '#475569', // muted scholarly gray-blue
     },
-    divider: '#6C8C9C',
+
+    divider: '#E2E8F0',
   },
+
   typography: {
-    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    fontFamily: '"IBM Plex Sans", "Roboto", "Helvetica", "Arial", sans-serif',
     allVariants: {
-      color: '#B1C7DE', // default typography color
+      letterSpacing: '0.2px',
     },
+
+    h1: { fontWeight: 700, color: '#0F172A' },
+    h2: { fontWeight: 600, color: '#0F172A' },
+    h3: { fontWeight: 600 },
+    body1: { lineHeight: 1.7 },
   },
+
   components: {
-    MuiTabs: {
+    MuiButton: {
       styleOverrides: {
         root: {
-          backgroundColor: '#0B2536',
+          borderRadius: 8,
+          textTransform: 'none',
+          fontWeight: 500,
         },
-      },
-    },
-    MuiTab: {
-      styleOverrides: {
-        root: {
-          color: '#6C8C9C',
-          '&.Mui-selected': {
-            color: '#B1C7DE',
+
+        containedPrimary: {
+          backgroundColor: '#1E3A8A',
+
+          '&:hover': {
+            backgroundColor: '#162F73',
           },
         },
       },
     },
-    MuiButton: {
+
+    MuiTabs: {
+      styleOverrides: {
+        indicator: {
+          backgroundColor: '#1E3A8A',
+        },
+      },
+    },
+
+    MuiTab: {
       styleOverrides: {
         root: {
-          borderRadius: 6,
+          color: '#475569',
           textTransform: 'none',
+          fontWeight: 500,
+
+          '&.Mui-selected': {
+            color: '#0F172A',
+            fontWeight: 600,
+          },
         },
       },
     },
   },
+
   custom: {
-    headerCard: {
-      background: '#B1C7DE',
-      text: '#0B2536',
-      glow: '#B1C7DE',
+    accent: {
+      primary: '#1E3A8A',
+      highlight: '#3B82F6',
+      soft: '#E6F0FF',
+    },
+
+    surface: {
+      card: '#FFFFFF',
+      subtle: '#F1F5F9',
     },
   },
 });

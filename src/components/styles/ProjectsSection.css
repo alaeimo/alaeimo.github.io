@@ -2,20 +2,14 @@
   text-align: center;
 }
 
+/* ensure grid content doesn't break centering alignment */
+.projects-container .MuiGrid-root {
+  justify-content: center;
+}
+
+/* card wrapper alignment reset consistency */
 .project-card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.project-responsibilities {
-  margin: 0.5rem 0 0.5rem 1rem;
-  padding: 0;
-  color: #334155;
-  font-family: "Inter", sans-serif;
-  font-size: 0.85rem;
-}
-
-.project-responsibilities li {
-  margin-bottom: 0.2rem;
+  border-radius: 12px;
+  margin: 0 auto;
+  text-align: center;
 }

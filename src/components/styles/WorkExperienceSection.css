@@ -7,6 +7,7 @@
   padding: 0.5rem 0;
 }
 
+/* TIMELINE ITEM */
 .timeline-item {
   position: relative;
   display: flex;
@@ -14,64 +15,61 @@
   align-items: flex-start;
 }
 
+/* SOFT ACADEMIC LINE (matches Education) */
 .timeline-line {
   position: absolute;
   left: -1.2rem;
   width: 2px;
   height: calc(100% + 1.5rem);
-  background: linear-gradient(to bottom, #d3e6f5 0%, #2196f3 50%, #d3e6f5 100%);
-  background-size: 100% 200%;
-  z-index: 0;
-  animation: flow 2s linear infinite;
+  background: linear-gradient(
+    to bottom,
+    #E2E8F0,
+    #1E3A8A,
+    #E2E8F0
+  );
+  opacity: 0.6;
 }
 
+/* NODE (no pulse, no glow) */
 .timeline-node {
   position: absolute;
   left: -1.52rem;
-  width: 12px;
-  height: 12px;
-  background: #2196f3;
+  width: 10px;
+  height: 10px;
+  background: #1E3A8A;
   border-radius: 50%;
-  border: 3px solid #e3f2fd;
-  box-shadow: 0 0 6px rgba(33, 150, 243, 0.4);
-  z-index: 2;
-  animation: pulse 1.5s ease-in-out infinite;
+  border: 2px solid #F8FAFC;
+  box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.08);
 }
 
-@keyframes flow {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 0% 100%; }
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); box-shadow: 0 0 6px rgba(33, 150, 243, 0.4); }
-  50% { transform: scale(1.2); box-shadow: 0 0 12px rgba(33, 150, 243, 0.6); }
-}
-
+/* CARD (academic paper style like Education) */
 .work-card {
-  position: relative;
-  border-radius: 10px;
-  padding: 1rem 1.3rem;
   width: 100%;
-  background: rgba(255,255,255,0.65);
-  border: 1px solid rgba(33,150,243,0.15);
-  box-shadow: 0 2px 8px rgba(33,150,243,0.06);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 10px;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+
+  padding: 1rem 1.3rem;
+  transition: all 0.25s ease;
 }
 
+/* HOVER (subtle elevation only) */
 .work-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(33,150,243,0.12);
+  transform: translateY(-3px);
+  border-color: #CBD5E1;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
 }
 
+/* HEADER STRUCTURE */
 .academic-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
   gap: 1.5rem;
   flex-wrap: wrap;
 }
 
+/* DATE BLOCK */
 .academic-dates {
   text-align: right;
   display: flex;
@@ -79,11 +77,13 @@
   align-items: flex-end;
 }
 
+/* MOBILE */
 @media (max-width: 600px) {
   .academic-header {
     flex-direction: column;
     align-items: flex-start;
   }
+
   .academic-dates {
     text-align: left;
     align-items: flex-start;

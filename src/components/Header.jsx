@@ -17,67 +17,63 @@ import { ReactComponent as TelegramIcon } from '../assets/icon/social/telegram.s
 
 const Header = ({ data = {} }) => {
   const socialIcons = {
-    GitHub: { icon: GitHubIcon, color: '#2d3748' },
-    LinkedIn: { icon: LinkedInIcon, color: '#0A66C2' },
-    Instagram: { icon: InstagramIcon, color: '#E4405F' },
-    Twitter: { icon: TwitterIcon, color: '#1DA1F2' },
-    Facebook: { icon: FacebookIcon, color: '#1877F2' },
-    YouTube: { icon: YouTubeIcon, color: '#FF0000' },
-    GoogleScholar: { icon: GoogleScholarIcon, color: '#2c5e8c' },
-    Telegram: { icon: TelegramIcon, color: '#0088cc' },
+    GitHub: { icon: GitHubIcon, color: '#1E3A8A' },
+    LinkedIn: { icon: LinkedInIcon, color: '#1E3A8A' },
+    Instagram: { icon: InstagramIcon, color: '#1E3A8A' },
+    Twitter: { icon: TwitterIcon, color: '#1E3A8A' },
+    Facebook: { icon: FacebookIcon, color: '#1E3A8A' },
+    YouTube: { icon: YouTubeIcon, color: '#1E3A8A' },
+    GoogleScholar: { icon: GoogleScholarIcon, color: '#1E3A8A' },
+    Telegram: { icon: TelegramIcon, color: '#1E3A8A' },
   };
 
-  const contactIcons = { email: EmailIcon, phone: PhoneIcon, location_on: LocationOnIcon };
+  const contactIcons = {
+    email: EmailIcon,
+    phone: PhoneIcon,
+    location_on: LocationOnIcon
+  };
 
   return (
     <Box
       component="header"
-      className="header"
       sx={{
         position: 'relative',
-        py: { xs: 3, sm: 3, md: 4 },
-        borderRadius: { xs: 0, sm: 0, md: 4 },
-        overflow: 'hidden',
-        background: 'linear-gradient(135deg, #1a3a5c 0%, #2c5e8c 100%)',
-        color: '#ffffff',
-        boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+        py: { xs: 3, md: 5 },
+        backgroundColor: '#F8FAFC',
+        color: '#0F172A',
+        borderBottom: '1px solid #E2E8F0',
       }}
     >
-      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 3 }}>
-        {/* === TOP ROW: Avatar + Bio === */}
-        <Grid container spacing={{ xs: 3, sm: 3, md: 4 }} alignItems="flex-start">
-          {/* Avatar Column - Full width on mobile/tablet, auto on desktop */}
-          <Grid item xs={12} sm={12} md={3} lg={2.5}>
+      <Container maxWidth="lg">
+
+        {/* TOP SECTION */}
+        <Grid container spacing={4} alignItems="center">
+
+          {/* Avatar */}
+          <Grid item xs={12} md={3}>
             <Box sx={{ textAlign: 'center' }}>
               <Avatar
                 src="/static/img/face.jpg"
                 alt={data.name || 'Profile'}
                 sx={{
-                  width: { xs: 120, sm: 140, md: 150, lg: 170 },
-                  height: { xs: 120, sm: 140, md: 150, lg: 170 },
+                  width: { xs: 120, md: 150 },
+                  height: { xs: 120, md: 150 },
                   mx: 'auto',
-                  border: '3px solid #ffffff',
-                  boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
-                  transition: 'transform 0.3s ease',
-                  '&:hover': {
-                    transform: 'scale(1.02)',
-                  },
+                  border: '2px solid #E2E8F0',
                 }}
               />
+
               <Button
                 variant="contained"
                 startIcon={<DownloadIcon />}
                 sx={{
                   mt: 3,
-                  mb: { xs: 1, sm: 1, md: 0 },
-                  display: 'inline-flex',
-                  backgroundColor: '#ffffff',
-                  color: '#1a3a5c',
+                  backgroundColor: '#1E3A8A',
+                  color: '#ffffff',
+                  textTransform: 'none',
                   '&:hover': {
-                    backgroundColor: '#e8f0f8',
-                    transform: 'translateY(-2px)',
+                    backgroundColor: '#162F73',
                   },
-                  transition: 'all 0.3s ease',
                 }}
                 component="a"
                 href="/static/pdf/MohammadAlaei-CV.pdf"
@@ -88,158 +84,107 @@ const Header = ({ data = {} }) => {
             </Box>
           </Grid>
 
-          {/* Bio Column - Full width on mobile/tablet, remaining on desktop */}
-          <Grid item xs={12} sm={12} md={9} lg={9.5}>
-            <Box sx={{ textAlign: { xs: 'center', sm: 'center', md: 'left' } }}>
-              <Typography
-                variant="h1"
-                sx={{
-                  fontSize: { xs: '1.75rem', sm: '2rem', md: '2.2rem', lg: '2.5rem' },
-                  fontWeight: 700,
-                  color: '#ffffff',
-                  mb: 1,
-                }}
-              >
-                {data.name || 'Your Name'}
-              </Typography>
-              <Typography
-                variant="h5"
-                sx={{
-                  fontWeight: 400,
-                  mb: 2,
-                  color: '#e0e8f0',
-                  fontSize: { xs: '1.1rem', sm: '1.2rem', md: '1.3rem', lg: '1.5rem' },
-                }}
-              >
-                {data.title || 'Your Role'}
-              </Typography>
-              {data.description && (
-                <Typography
-                  variant="body2"
-                  sx={{
-                    fontSize: { xs: '0.9rem', sm: '0.95rem', md: '1rem', lg: '1.125rem' },
-                    color: '#e0e8f0',
-                    lineHeight: 1.6,
-                    px: { xs: 2, sm: 2, md: 0 },
-                  }}
-                >
-                  {data.description}
-                </Typography>
-              )}
-            </Box>
+          {/* Info */}
+          <Grid item xs={12} md={9}>
+            <Typography
+              variant="h1"
+              sx={{
+                fontSize: { xs: '1.8rem', md: '2.4rem' },
+                fontWeight: 700,
+                color: '#0F172A',
+                mb: 1,
+              }}
+            >
+              {data.name || 'Your Name'}
+            </Typography>
+
+            <Typography
+              variant="h5"
+              sx={{
+                fontWeight: 500,
+                color: '#1E3A8A',
+                mb: 2,
+              }}
+            >
+              {data.title || 'Your Role'}
+            </Typography>
+
+            <Typography
+              variant="body1"
+              sx={{
+                color: '#475569',
+                lineHeight: 1.7,
+                maxWidth: '700px',
+              }}
+            >
+              {data.description}
+            </Typography>
           </Grid>
         </Grid>
 
-        {/* === SPLIT LINE === */}
+        {/* CONTACT + SOCIAL */}
         <Box
           sx={{
-            mt: 3,
-            mb: 2,
-            width: '100%',
-            height: '1px',
-            background: 'rgba(255, 255, 255, 0.2)',
+            mt: 4,
+            pt: 3,
+            borderTop: '1px solid #E2E8F0',
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between',
+            gap: 3,
           }}
-        />
-
-        {/* === CONTACT + SOCIAL ROW === */}
-        <Grid
-          container
-          spacing={2}
-          alignItems="center"
-          justifyContent="space-between"
-          sx={{ mt: 1 }}
         >
-          {/* Contact Info (left) */}
-          <Grid item xs={12} sm={12} md={6}>
-            {data.contact?.length > 0 && (
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: { xs: 'center', sm: 'center', md: 'flex-start' },
-                  gap: 1,
-                }}
-              >
-                {data.contact.map((item, index) => {
-                  if (!item || !item.icon || !item.value) return null;
-                  const Icon = contactIcons[item.icon] || EmailIcon;
-                  return (
-                    <Box
-                      key={index}
-                      sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 1,
-                        transition: 'transform 0.2s ease',
-                        '&:hover': {
-                          transform: 'translateX(4px)',
-                        },
-                      }}
-                    >
-                      <Icon sx={{ color: '#ffffff', fontSize: '1.1rem' }} />
-                      <Link
-                        href={item.link || '#'}
-                        color="#ffffff"
-                        underline="hover"
-                        target={item.link && !item.link.startsWith('mailto:') ? '_blank' : '_self'}
-                        sx={{
-                          opacity: 0.9,
-                          '&:hover': { opacity: 1 },
-                        }}
-                      >
-                        {item.value}
-                      </Link>
-                    </Box>
-                  );
-                })}
-              </Box>
-            )}
-          </Grid>
 
-          {/* Social Media (right) */}
-          <Grid item xs={12} sm={12} md={6}>
-            {data.social?.length > 0 && (
-              <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: { xs: 'center', sm: 'center', md: 'flex-end' },
-                  gap: 1.5,
-                  flexWrap: 'wrap',
-                  mt: { xs: 2, sm: 2, md: 0 },
-                }}
-              >
-                {data.social.map((social, index) => {
-                  if (!social?.platform || !social?.link) return null;
-                  const { icon: Icon, color } = socialIcons[social.platform] || { icon: GitHubIcon, color: '#ffffff' };
-                  return (
-                    <IconButton
-                      key={index}
-                      href={social.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      sx={{
-                        bgcolor: 'rgba(255, 255, 255, 0.1)',
-                        color: '#ffffff',
-                        width: { xs: 36, sm: 38, md: 40 },
-                        height: { xs: 36, sm: 38, md: 40 },
-                        borderRadius: '50%',
-                        transition: 'all 0.3s ease',
-                        '&:hover': {
-                          bgcolor: color,
-                          color: '#ffffff',
-                          transform: 'translateY(-3px)',
-                          boxShadow: `0 4px 12px ${color}60`,
-                        },
-                      }}
-                    >
-                      <Icon sx={{ fontSize: { xs: '1rem', sm: '1.1rem', md: '1.2rem' } }} />
-                    </IconButton>
-                  );
-                })}
-              </Box>
-            )}
-          </Grid>
-        </Grid>
+          {/* Contact */}
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+            {data.contact?.map((item, i) => {
+              if (!item?.icon || !item?.value) return null;
+              const Icon = contactIcons[item.icon] || EmailIcon;
+
+              return (
+                <Box key={i} sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <Icon sx={{ color: '#1E3A8A', fontSize: '1rem' }} />
+                  <Link
+                    href={item.link}
+                    underline="hover"
+                    sx={{ color: '#475569' }}
+                  >
+                    {item.value}
+                  </Link>
+                </Box>
+              );
+            })}
+          </Box>
+
+          {/* Social */}
+          <Box sx={{ display: 'flex', gap: 1.5, flexWrap: 'wrap' }}>
+            {data.social?.map((social, i) => {
+              const { icon: Icon } =
+                socialIcons[social.platform] || { icon: GitHubIcon };
+
+              return (
+                <IconButton
+                  key={i}
+                  href={social.link}
+                  target="_blank"
+                  sx={{
+                    width: { xs: 36, sm: 38, md: 40 }, 
+                    height: { xs: 36, sm: 38, md: 40 },
+                    backgroundColor: '#EEF2FF',
+                    color: '#1E3A8A',
+                    '&:hover': {
+                      backgroundColor: '#1E3A8A',
+                      color: '#FFFFFF',
+                    },
+                  }}
+                >
+                  <Icon />
+                </IconButton>
+              );
+            })}
+          </Box>
+
+        </Box>
       </Container>
     </Box>
   );

@@ -5,176 +5,183 @@ import {
   IconButton,
   Drawer,
   List,
-  ListItem,
-  ListItemIcon,
+  ListItemButton,
   ListItemText,
   Button,
   Box,
-  useTheme,
+  Typography,
 } from '@mui/material';
 
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
 
 const Navbar = ({ sections, activeTab, onTabChange, sectionIcons }) => {
-  const theme = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
 
+  const iconBox = (Icon, active) => (
+    <Box
+      sx={{
+        width: 30,
+        height: 30,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 1.5,
+        backgroundColor: active ? '#EEF2FF' : 'transparent',
+        border: active ? '1px solid #CBD5E1' : '1px solid transparent',
+      }}
+    >
+      {Icon && (
+        <Icon
+          sx={{
+            fontSize: 16,
+            color: active ? '#1E3A8A' : '#64748B',
+          }}
+        />
+      )}
+    </Box>
+  );
+
   const drawer = (
     <Box
-      onClick={handleDrawerToggle}
-      sx={{ width: 250, backgroundColor: theme.palette.background.default, height: '100%' }}
+      sx={{
+        width: 260,
+        height: '100%',
+        backgroundColor: '#FFFFFF',
+        borderRight: '1px solid #E2E8F0',
+      }}
     >
-      <List>
-        {/* Home button in drawer */}
-        <ListItem button key="home" onClick={() => onTabChange('home')}>
-          <ListItemIcon
-            sx={{ color: activeTab === 'home' ? theme.palette.primary.main : theme.palette.text.secondary }}
-          >
-            <HomeIcon />
-          </ListItemIcon>
+      <List sx={{ px: 1.2, py: 1.5 }}>
+        <ListItemButton
+          onClick={() => onTabChange('home')}
+          sx={{
+            borderRadius: 2,
+            mb: 0.8,
+            py: 1,
+            backgroundColor: activeTab === 'home' ? '#EEF2FF' : 'transparent',
+            '&:hover': { backgroundColor: '#F8FAFC' },
+          }}
+        >
+          {iconBox(HomeIcon, activeTab === 'home')}
           <ListItemText
             primary="Home"
             primaryTypographyProps={{
-              sx: { color: activeTab === 'home' ? theme.palette.primary.main : theme.palette.text.primary, fontWeight: activeTab === 'home' ? 600 : 400 }
+              sx: {
+                color: activeTab === 'home' ? '#0F172A' : '#475569',
+                fontWeight: activeTab === 'home' ? 700 : 500,
+                fontSize: '0.9rem',
+              },
             }}
           />
-        </ListItem>
+        </ListItemButton>
 
-        {/* Other sections */}
         {sections.map(({ id, label }) => {
           const Icon = sectionIcons[id]?.icon;
           const isActive = activeTab === id;
+
           return (
-            <ListItem button key={id} onClick={() => onTabChange(id)}>
-              {Icon && (
-                <ListItemIcon sx={{ color: isActive ? theme.palette.primary.main : theme.palette.text.secondary }}>
-                  <Icon />
-                </ListItemIcon>
-              )}
+            <ListItemButton
+              key={id}
+              onClick={() => onTabChange(id)}
+              sx={{
+                borderRadius: 2,
+                mb: 0.8,
+                py: 1,
+                backgroundColor: isActive ? '#EEF2FF' : 'transparent',
+                '&:hover': { backgroundColor: '#F8FAFC' },
+              }}
+            >
+              {iconBox(Icon, isActive)}
               <ListItemText
                 primary={label}
                 primaryTypographyProps={{
-                  sx: { color: isActive ? theme.palette.primary.main : theme.palette.text.primary, fontWeight: isActive ? 600 : 400 }
+                  sx: {
+                    color: isActive ? '#0F172A' : '#475569',
+                    fontWeight: isActive ? 700 : 500,
+                    fontSize: '0.9rem',
+                  },
                 }}
               />
-            </ListItem>
+            </ListItemButton>
           );
         })}
       </List>
     </Box>
   );
 
+  const navButton = (id, label, Icon) => {
+    const isActive = activeTab === id;
+
+    return (
+      <Button
+        onClick={() => onTabChange(id)}
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 0.3,
+          minWidth: 72,
+          px: 1.5,
+          py: 0.9,
+          borderRadius: 2.5,
+          textTransform: 'none',
+          backgroundColor: isActive ? '#EEF2FF' : 'transparent',
+          border: isActive ? '1px solid #CBD5E1' : '1px solid transparent',
+          '&:hover': { backgroundColor: '#F8FAFC' },
+        }}
+      >
+        {iconBox(Icon, isActive)}
+        <Typography
+          sx={{
+            fontSize: '0.7rem',
+            fontWeight: isActive ? 700 : 500,
+            color: isActive ? '#0F172A' : '#475569',
+          }}
+        >
+          {label}
+        </Typography>
+      </Button>
+    );
+  };
+
   return (
     <>
       <AppBar
         position="sticky"
-        sx={{
-          backgroundColor: theme.palette.background.default,
-          borderBottom: `1px solid ${theme.palette.divider}`,
-        }}
         elevation={0}
+        sx={{
+          backgroundColor: '#FFFFFF',
+          borderBottom: '1px solid #E2E8F0',
+        }}
       >
-        <Toolbar sx={{ justifyContent: 'space-between', px: { xs: 2, md: 3 } }}>
-          {/* Mobile hamburger */}
+        <Toolbar sx={{ justifyContent: 'space-between', px: 3, minHeight: 64 }}>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <IconButton edge="start" onClick={handleDrawerToggle} sx={{ color: theme.palette.primary.main }}>
-              <MenuIcon />
+            <IconButton onClick={handleDrawerToggle}>
+              <MenuIcon sx={{ color: '#1E3A8A', fontSize: 20 }} />
             </IconButton>
           </Box>
 
-          {/* Desktop navbar */}
           <Box
             sx={{
               display: { xs: 'none', md: 'flex' },
-              gap: 1,
-              overflowX: 'auto',
               justifyContent: 'center',
               width: '100%',
+              gap: 0.5,
             }}
           >
-            {/* Home button */}
-            <Button
-              key="home"
-              onClick={() => onTabChange('home')}
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '0.7rem',
-                color: activeTab === 'home' ? theme.palette.primary.main : theme.palette.text.secondary,
-                fontWeight: activeTab === 'home' ? 600 : 500,
-                minWidth: 65,
-                py: 1,
-                textTransform: 'none',
-                borderBottom: activeTab === 'home' ? `2px solid ${theme.palette.primary.main}` : '2px solid transparent',
-                borderRadius: 0,
-                '&:hover': {
-                  backgroundColor: 'transparent',
-                  color: theme.palette.primary.main,
-                },
-              }}
-            >
-              <HomeIcon
-                sx={{
-                  fontSize: activeTab === 'home' ? 24 : 20,
-                  color: activeTab === 'home' ? theme.palette.primary.main : theme.palette.text.secondary,
-                  mb: 0.5,
-                }}
-              />
-              Home
-            </Button>
-
-            {/* Other sections */}
+            {navButton('home', 'Home', HomeIcon)}
             {sections.map(({ id, label }) => {
               const Icon = sectionIcons[id]?.icon;
-              const isActive = activeTab === id;
-
-              return (
-                <Button
-                  key={id}
-                  onClick={() => onTabChange(id)}
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '0.7rem',
-                    color: isActive ? theme.palette.primary.main : theme.palette.text.secondary,
-                    fontWeight: isActive ? 600 : 500,
-                    minWidth: 65,
-                    py: 1,
-                    textTransform: 'none',
-                    borderBottom: isActive ? `2px solid ${theme.palette.primary.main}` : '2px solid transparent',
-                    borderRadius: 0,
-                    '&:hover': {
-                      backgroundColor: 'transparent',
-                      color: theme.palette.primary.main,
-                    },
-                  }}
-                >
-                  {Icon && (
-                    <Icon
-                      sx={{
-                        fontSize: isActive ? 24 : 20,
-                        color: isActive ? theme.palette.primary.main : theme.palette.text.secondary,
-                        mb: 0.5,
-                      }}
-                    />
-                  )}
-                  {label}
-                </Button>
-              );
+              return navButton(id, label, Icon);
             })}
           </Box>
         </Toolbar>
       </AppBar>
 
-      {/* Mobile drawer */}
-      <Drawer anchor="left" open={mobileOpen} onClose={handleDrawerToggle} ModalProps={{ keepMounted: true }}>
+      <Drawer open={mobileOpen} onClose={handleDrawerToggle}>
         {drawer}
       </Drawer>
     </>

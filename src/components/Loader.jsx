@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, keyframes, Typography } from '@mui/material';
 
-// Define the spinning animation
 const spin = keyframes`
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
@@ -14,9 +13,9 @@ const pulse = keyframes`
 `;
 
 const glow = keyframes`
-  0% { box-shadow: 0 0 0px rgba(45, 85, 125, 0.3); }
-  50% { box-shadow: 0 0 20px rgba(45, 85, 125, 0.6); }
-  100% { box-shadow: 0 0 0px rgba(45, 85, 125, 0.3); }
+  0% { box-shadow: 0 0 0px rgba(30, 58, 138, 0.15); }
+  50% { box-shadow: 0 0 18px rgba(30, 58, 138, 0.25); }
+  100% { box-shadow: 0 0 0px rgba(30, 58, 138, 0.15); }
 `;
 
 const Loader = () => {
@@ -28,64 +27,49 @@ const Loader = () => {
         justifyContent: 'center',
         alignItems: 'center',
         height: '100vh',
-        backgroundColor: '#f5f7fa',
+        backgroundColor: '#F8FAFC',
         gap: 3,
       }}
     >
-      <Box
-        sx={{
-          position: 'relative',
-          width: 140,
-          height: 140,
-        }}
-      >
-        {/* Outer animated ring */}
+      <Box sx={{ position: 'relative', width: 130, height: 130 }}>
+
+        {/* OUTER RING */}
         <Box
           sx={{
             position: 'absolute',
-            top: -4,
-            left: -4,
-            right: -4,
-            bottom: -4,
-            border: '3px solid #e0e8f0',
-            borderTop: '3px solid #1a3a5c',
-            borderRight: '3px solid #2c5e8c',
+            inset: -4,
             borderRadius: '50%',
-            animation: `${spin} 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite`,
+            border: '3px solid #E2E8F0',
+            borderTop: '3px solid #1E3A8A',
+            borderRight: '3px solid #3B82F6',
+            animation: `${spin} 1.2s linear infinite`,
           }}
         />
 
-        {/* Middle ring */}
+        {/* MIDDLE RING */}
         <Box
           sx={{
             position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            border: '3px solid #e0e8f0',
-            borderBottom: '3px solid #2c5e8c',
+            inset: 0,
             borderRadius: '50%',
-            animation: `${spin} 1.5s linear infinite reverse`,
+            border: '2px solid #EEF2FF',
+            borderBottom: '2px solid #1E3A8A',
+            animation: `${spin} 1.6s linear infinite reverse`,
           }}
         />
 
-        {/* Inner solid ring */}
+        {/* INNER GLOW */}
         <Box
           sx={{
             position: 'absolute',
-            top: '50%',
-            left: '50%',
-            width: '100%',
-            height: '100%',
-            transform: 'translate(-50%, -50%)',
+            inset: '18%',
             borderRadius: '50%',
-            background: 'linear-gradient(135deg, #1a3a5c, #2c5e8c)',
+            backgroundColor: '#EEF2FF',
             animation: `${glow} 2s ease-in-out infinite`,
           }}
         />
 
-        {/* Profile picture */}
+        {/* PROFILE IMAGE */}
         <Box
           component="img"
           src="/static/img/alaeimo.jpg"
@@ -94,53 +78,41 @@ const Loader = () => {
             position: 'absolute',
             top: '50%',
             left: '50%',
-            width: 80,
-            height: 80,
+            width: 72,
+            height: 72,
             borderRadius: '50%',
             transform: 'translate(-50%, -50%)',
             objectFit: 'cover',
-            border: '2px solid #ffffff',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+            border: '2px solid #FFFFFF',
+            boxShadow: '0 4px 12px rgba(15, 23, 42, 0.08)',
           }}
         />
       </Box>
 
-      {/* Loading text */}
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: 1,
-        }}
-      >
+      {/* TEXT */}
+      <Box sx={{ textAlign: 'center' }}>
         <Typography
-          variant="body2"
           sx={{
-            color: '#1a3a5c',
-            fontWeight: 500,
-            letterSpacing: '0.5px',
+            color: '#0F172A',
+            fontWeight: 600,
+            letterSpacing: 0.4,
             animation: `${pulse} 1.5s ease-in-out infinite`,
           }}
         >
           Loading
         </Typography>
-        <Box
-          sx={{
-            display: 'flex',
-            gap: 0.8,
-          }}
-        >
-          {[0, 1, 2].map((dot) => (
+
+        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 0.8, mt: 1 }}>
+          {[0, 1, 2].map((i) => (
             <Box
-              key={dot}
+              key={i}
               sx={{
                 width: 6,
                 height: 6,
                 borderRadius: '50%',
-                backgroundColor: '#2c5e8c',
-                animation: `${pulse} 1.5s ease-in-out infinite`,
-                animationDelay: `${dot * 0.2}s`,
+                backgroundColor: '#1E3A8A',
+                animation: `${pulse} 1.4s ease-in-out infinite`,
+                animationDelay: `${i * 0.15}s`,
               }}
             />
           ))}

@@ -1,66 +1,66 @@
 import React, { forwardRef } from 'react';
-import { Box, Typography, useTheme, Chip } from '@mui/material';
+import { Box, Typography, Chip } from '@mui/material';
 import WorkIcon from '@mui/icons-material/Work';
 import BusinessIcon from '@mui/icons-material/Business';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
-import './styles/AcademicExperienceSection.css';
 import AnimatedUnderlineTitle from './AnimatedUnderlineTitle';
+import './styles/AcademicExperienceSection.css';
 
 const WorkExperienceSection = forwardRef(({ data }, ref) => {
-  const theme = useTheme();
 
   return (
     <div ref={ref}>
       <AnimatedUnderlineTitle title="Work Experiences" />
+
       <Box className="academic-timeline">
         {data.work_experiences?.length > 0 ? (
           data.work_experiences.map((item, index) => (
             <Box key={index} className="timeline-item">
-              <Box className="timeline-line" />
-              <Box className="timeline-node" />
 
-              {/* Card */}
+              {/* TIMELINE LINE */}
+              <Box
+                className="timeline-line"
+                sx={{
+                  background: 'linear-gradient(to bottom, #E2E8F0, #1E3A8A, #E2E8F0)',
+                  opacity: 0.6,
+                }}
+              />
+
+              {/* TIMELINE NODE */}
+              <Box
+                className="timeline-node"
+                sx={{
+                  backgroundColor: '#1E3A8A',
+                  border: '3px solid #F8FAFC',
+                  boxShadow: '0 0 0 3px rgba(30, 58, 138, 0.08)',
+                }}
+              />
+
+              {/* CARD */}
               <Box
                 className="academic-card"
                 sx={{
                   flexGrow: 1,
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "flex-start",
-                  width: "100%",
+                  display: 'flex',
+                  flexDirection: 'column',
+                  width: '100%',
                   borderRadius: 3,
-                  background: 'transparent',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
-                  boxShadow: 'none',
-                  overflow: "hidden",
+                  backgroundColor: '#FFFFFF',
+                  border: '1px solid #E2E8F0',
+                  boxShadow: '0 2px 10px rgba(15, 23, 42, 0.04)',
                   p: { xs: 2, sm: 3 },
-                  transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                  position: 'relative',
-                  '&::before': {
-                    content: '""',
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    height: '3px',
-                    background: 'linear-gradient(90deg, #5D91C3, #2196f3, #5D91C3)',
-                    transform: 'scaleX(0)',
-                    transformOrigin: 'left',
-                    transition: 'transform 0.3s ease',
-                  },
-                  "&:hover": {
-                    transform: "translateY(-4px)",
-                    boxShadow: '0 8px 30px rgba(0,0,0,0.2)',
-                    border: '1px solid rgba(255, 255, 255, 0.2)',
-                    '&::before': {
-                      transform: 'scaleX(1)',
-                    },
+                  transition: 'all 0.25s ease',
+
+                  '&:hover': {
+                    transform: 'translateY(-3px)',
+                    boxShadow: '0 6px 18px rgba(15, 23, 42, 0.08)',
+                    borderColor: '#CBD5E1',
                   },
                 }}
               >
-                {/* Header with Icon */}
+
+                {/* HEADER */}
                 <Box
-                  className="academic-header"
                   sx={{
                     display: 'flex',
                     justifyContent: 'space-between',
@@ -69,166 +69,98 @@ const WorkExperienceSection = forwardRef(({ data }, ref) => {
                     mb: 2,
                   }}
                 >
-                  <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1.5 }}>
+
+                  {/* LEFT */}
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+
                     <Box
                       sx={{
+                        width: 48,
+                        height: 48,
+                        borderRadius: 2,
+                        backgroundColor: '#EEF2FF',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        width: 55,
-                        height: 55,
-                        borderRadius: 2.5,
-                        background: 'linear-gradient(135deg, #5D91C3 0%, #2196f3 100%)',
-                        boxShadow: '0 4px 15px rgba(33, 150, 243, 0.3)',
-                        transition: 'all 0.3s ease',
-                        '&:hover': {
-                          transform: 'rotate(5deg) scale(1.05)',
-                          boxShadow: '0 6px 20px rgba(33, 150, 243, 0.4)',
-                        },
                       }}
                     >
-                      <WorkIcon sx={{ color: '#ffffff', fontSize: '1.5rem' }} />
+                      <WorkIcon sx={{ color: '#1E3A8A', fontSize: '1.4rem' }} />
                     </Box>
+
                     <Box>
                       <Typography
-                        variant="h6"
                         sx={{
-                          fontFamily: theme.typography.fontFamily,
                           fontWeight: 700,
-                          color: '#ffffff',
-                          fontSize: '1.1rem',
-                          mb: 0.5,
+                          color: '#0F172A',
+                          fontSize: '1rem',
                         }}
                       >
                         {item.position}
                       </Typography>
+
                       <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                        <BusinessIcon sx={{ color: '#5D91C3', fontSize: '0.9rem' }} />
-                        <Typography
-                          variant="subtitle2"
-                          sx={{
-                            fontFamily: theme.typography.fontFamily,
-                            color: '#B1C7DE',
-                            fontStyle: 'italic',
-                          }}
-                        >
+                        <BusinessIcon sx={{ fontSize: '0.85rem', color: '#1E3A8A' }} />
+                        <Typography sx={{ color: '#475569', fontSize: '0.9rem' }}>
                           {item.company}
                         </Typography>
                       </Box>
                     </Box>
                   </Box>
 
-                  <Box
-                    className="academic-dates"
-                    sx={{
-                      textAlign: 'right',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'flex-end',
-                      gap: 0.75,
-                    }}
-                  >
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                      <CalendarTodayIcon sx={{ color: '#5D91C3', fontSize: '0.8rem' }} />
-                      <Typography
-                        variant="caption"
-                        sx={{
-                          fontFamily: theme.typography.fontFamily,
-                          color: '#B1C7DE',
-                          fontWeight: 500,
-                        }}
-                      >
+                  {/* RIGHT */}
+                  <Box sx={{ textAlign: 'right' }}>
+
+                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 0.5 }}>
+                      <CalendarTodayIcon sx={{ fontSize: '0.85rem', color: '#1E3A8A' }} />
+                      <Typography sx={{ color: '#64748B', fontSize: '0.85rem' }}>
                         {item.start_date} – {item.end_date}
                       </Typography>
                     </Box>
+
                     {item.employment_type && (
-                      <Chip
-                        label={item.employment_type}
-                        size="small"
+                      <Typography
                         sx={{
-                          height: 22,
-                          fontSize: '0.65rem',
+                          mt: 0.5,
+                          fontSize: '0.75rem',
+                          color: '#1E3A8A',
                           fontWeight: 600,
-                          backgroundColor: 'rgba(93, 145, 195, 0.15)',
-                          color: '#5D91C3',
-                          border: '1px solid rgba(93, 145, 195, 0.3)',
-                          borderRadius: 1.5,
                         }}
-                      />
+                      >
+                        {item.employment_type}
+                      </Typography>
                     )}
                   </Box>
                 </Box>
 
-                {/* Responsibilities */}
-                <Box
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 0.75,
-                    mt: 1,
-                  }}
-                >
-                  {item.responsibilities.map((resp, idx) => (
-                    <Box
-                      key={idx}
-                      sx={{
-                        display: 'flex',
-                        gap: 1,
-                        alignItems: 'flex-start',
-                        transition: 'transform 0.2s ease',
-                        '&:hover': {
-                          transform: 'translateX(4px)',
-                        },
-                      }}
-                    >
-                      <Typography
-                        sx={{
-                          color: '#5D91C3',
-                          fontWeight: 700,
-                          fontSize: '1.1rem',
-                          lineHeight: 1.5,
-                        }}
-                      >
+                {/* RESPONSIBILITIES */}
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                  {item.responsibilities?.map((resp, idx) => (
+                    <Box key={idx} sx={{ display: 'flex', gap: 1 }}>
+                      <Typography sx={{ color: '#1E3A8A', fontWeight: 700 }}>
                         •
                       </Typography>
-                      <Typography
-                        variant="body2"
-                        sx={{
-                          fontFamily: theme.typography.fontFamily,
-                          color: '#E0E8F0',
-                          lineHeight: 1.6,
-                        }}
-                      >
+                      <Typography sx={{ color: '#475569', lineHeight: 1.6 }}>
                         {resp}
                       </Typography>
                     </Box>
                   ))}
                 </Box>
 
-                {/* Technologies */}
+                {/* TECHNOLOGIES */}
                 {item.technologies?.length > 0 && (
                   <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mt: 2 }}>
                     {item.technologies.map((tech, idx) => (
                       <Box
                         key={idx}
                         sx={{
-                          px: 1.5,
-                          py: 0.6,
-                          background: 'rgba(93, 145, 195, 0.12)',
-                          fontSize: '0.75rem',
-                          fontWeight: 600,
-                          fontFamily: theme.typography.fontFamily,
+                          px: 1.2,
+                          py: 0.5,
                           borderRadius: 2,
-                          border: '1px solid rgba(93, 145, 195, 0.3)',
-                          color: '#5D91C3',
-                          transition: 'all 0.2s ease',
-                          cursor: 'default',
-                          "&:hover": {
-                            transform: "translateY(-2px)",
-                            borderColor: '#5D91C3',
-                            background: 'rgba(93, 145, 195, 0.2)',
-                            boxShadow: '0 2px 8px rgba(93, 145, 195, 0.2)',
-                          },
+                          fontSize: '0.75rem',
+                          fontWeight: 500,
+                          backgroundColor: '#F1F5F9',
+                          border: '1px solid #E2E8F0',
+                          color: '#1E3A8A',
                         }}
                       >
                         {tech}
@@ -236,19 +168,12 @@ const WorkExperienceSection = forwardRef(({ data }, ref) => {
                     ))}
                   </Box>
                 )}
+
               </Box>
             </Box>
           ))
         ) : (
-          <Typography
-            variant="body2"
-            sx={{
-              fontFamily: theme.typography.fontFamily,
-              color: '#B1C7DE',
-              textAlign: 'center',
-              py: 4,
-            }}
-          >
+          <Typography sx={{ color: '#64748B', textAlign: 'center', py: 4 }}>
             No work experiences provided.
           </Typography>
         )}

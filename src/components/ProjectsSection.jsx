@@ -6,25 +6,22 @@ import {
   Grid,
   Chip,
   Collapse,
-  useTheme
 } from "@mui/material";
+
 import GitHubIcon from "@mui/icons-material/GitHub";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import FolderIcon from "@mui/icons-material/Folder";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-import "./styles/ProjectsSection.css";
-import AnimatedUnderlineTitle from './AnimatedUnderlineTitle';
+import FullscreenIcon from "@mui/icons-material/Fullscreen";
+import CloseIcon from "@mui/icons-material/Close";
+
+import AnimatedUnderlineTitle from "./AnimatedUnderlineTitle";
 
 const ProjectsSection = forwardRef(({ data }, ref) => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [expandedProjects, setExpandedProjects] = useState({});
   const [zoomImage, setZoomImage] = useState(null);
-  const [zoomPos, setZoomPos] = useState({ x: 0, y: 0 });
-  const [hoverTimer, setHoverTimer] = useState(null);
 
-  const theme = useTheme();
-
-  // Extract unique categories
   const categories = [
     "All",
     ...new Set(
@@ -34,14 +31,12 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
     ),
   ];
 
-  // SORT DESCENDING BY DATE (Primary: end_date, fallback: start_date)
   const sortedProjects = [...data.projects].sort((a, b) => {
     const dateA = new Date(a.end_date || a.start_date);
     const dateB = new Date(b.end_date || b.start_date);
     return dateB - dateA;
   });
 
-  // Filter projects
   const filteredProjects =
     selectedCategory === "All"
       ? sortedProjects
@@ -51,7 +46,7 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
             .map((c) => c.trim())
             .includes(selectedCategory)
         );
-          
+
   const toggleExpand = (i) => {
     setExpandedProjects((prev) => ({
       ...prev,
@@ -61,35 +56,57 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
 
   return (
     <div ref={ref}>
+
+      {/* FULLSCREEN IMAGE */}
       {zoomImage && (
         <Box
           sx={{
             position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100vw",
-            height: "100vh",
-            pointerEvents: "none",
+            inset: 0,
+            backgroundColor: "rgba(15,23,42,0.88)",
+            backdropFilter: "blur(4px)",
+            zIndex: 9999,
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            zIndex: 9999,
+            p: 3,
           }}
         >
+
+          {/* CLOSE */}
+          <Button
+            onClick={() => setZoomImage(null)}
+            sx={{
+              position: "absolute",
+              top: 20,
+              right: 20,
+              minWidth: "unset",
+              width: 42,
+              height: 42,
+              borderRadius: "50%",
+              backgroundColor: "rgba(255,255,255,0.12)",
+              color: "#FFFFFF",
+
+              "&:hover": {
+                backgroundColor: "rgba(255,255,255,0.2)",
+              },
+            }}
+          >
+            <CloseIcon />
+          </Button>
+
+          {/* IMAGE */}
           <Box
             sx={{
-              width: "70vw",
-              height: "70vh",
-              overflow: "hidden",
-              borderRadius: 2,
-              boxShadow: "0 0 20px rgba(0,0,0,0.5)",
+              width: "90vw",
+              height: "90vh",
+              borderRadius: 3,
               backgroundImage: `url(${zoomImage})`,
+              backgroundSize: "contain",
               backgroundRepeat: "no-repeat",
-              backgroundSize: "200%",
-              backgroundPosition: `${zoomPos.x}% ${zoomPos.y}%`,
-              cursor: "zoom-out",
+              backgroundPosition: "center",
+              boxShadow: "0 10px 40px rgba(0,0,0,0.35)",
             }}
-            onClick={() => setZoomImage(null)}
           />
         </Box>
       )}
@@ -97,7 +114,8 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
       <AnimatedUnderlineTitle title="Projects" />
 
       <Box className="projects-container">
-        {/* Category Buttons */}
+
+        {/* CATEGORY BUTTONS */}
         <Box
           sx={{
             display: "flex",
@@ -114,28 +132,22 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
               variant={selectedCategory === cat ? "contained" : "outlined"}
               sx={{
                 textTransform: "none",
-                fontFamily: theme.typography.fontFamily,
                 fontWeight: 600,
-                borderRadius: "10px",
+                borderRadius: 2,
                 px: 2,
                 py: 0.5,
                 fontSize: "0.85rem",
-                border: selectedCategory === cat
-                  ? "none"
-                  : `1.5px solid rgba(93, 145, 195, 0.5)`,
-                color: selectedCategory === cat
-                  ? "#ffffff"
-                  : "#B1C7DE",
-                backgroundColor: selectedCategory === cat
-                  ? "linear-gradient(135deg, #5D91C3, #2196f3)"
-                  : "transparent",
-                transition: "all 0.25s ease",
+                border: "1px solid #CBD5E1",
+                color: selectedCategory === cat ? "#FFFFFF" : "#1E3A8A",
+                backgroundColor:
+                  selectedCategory === cat ? "#1E3A8A" : "#FFFFFF",
+
                 "&:hover": {
-                  backgroundColor: selectedCategory === cat
-                    ? "linear-gradient(135deg, #4a7aaa, #1a7bc3)"
-                    : "rgba(93, 145, 195, 0.15)",
-                  borderColor: "#5D91C3",
-                  transform: "translateY(-1px)",
+                  backgroundColor:
+                    selectedCategory === cat
+                      ? "#1E3A8A"
+                      : "#EEF2FF",
+                  borderColor: "#1E3A8A",
                 },
               }}
             >
@@ -144,220 +156,230 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
           ))}
         </Box>
 
-        {/* Project Grid */}
+        {/* GRID */}
         <Grid container spacing={3}>
           {filteredProjects.map((item, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
+
+              {/* CARD */}
               <Box
                 sx={{
                   display: "flex",
                   flexDirection: "column",
                   height: "100%",
                   borderRadius: 3,
+                  backgroundColor: "#FFFFFF",
+                  border: "1px solid #E2E8F0",
+                  boxShadow: "0 2px 10px rgba(15,23,42,0.04)",
                   overflow: "hidden",
-                  background: "transparent",
-                  border: "1px solid rgba(255, 255, 255, 0.1)",
-                  transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                  position: 'relative',
-                  '&::before': {
-                    content: '""',
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    height: '3px',
-                    background: 'linear-gradient(90deg, #5D91C3, #2196f3, #5D91C3)',
-                    transform: 'scaleX(0)',
-                    transformOrigin: 'left',
-                    transition: 'transform 0.3s ease',
-                  },
+                  transition: "all 0.25s ease",
+
                   "&:hover": {
-                    transform: "translateY(-4px)",
-                    boxShadow: "0 8px 30px rgba(0,0,0,0.2)",
-                    border: "1px solid rgba(255, 255, 255, 0.2)",
-                    '&::before': {
-                      transform: 'scaleX(1)',
-                    },
+                    transform: "translateY(-3px)",
+                    boxShadow: "0 6px 18px rgba(15,23,42,0.08)",
+                    borderColor: "#CBD5E1",
                   },
                 }}
               >
-                {/* Project Image */}
+
+                {/* IMAGE */}
                 <Box
                   sx={{
+                    position: "relative",
                     height: 200,
                     backgroundImage: `url(${item.image})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                    flexShrink: 0,
-                    cursor: "zoom-in",
-                    position: 'relative',
-                    '&::after': {
-                      content: '""',
-                      position: 'absolute',
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      height: '60px',
-                      background: 'linear-gradient(to top, rgba(0,0,0,0.6), transparent)',
-                    },
+                    overflow: "hidden",
                   }}
-                  onMouseEnter={() => {
-                    const timer = setTimeout(() => {
-                      setZoomImage(item.image);
-                    }, 3000);
-                    setHoverTimer(timer);
-                  }}
-                  onMouseLeave={() => {
-                    clearTimeout(hoverTimer);
-                    setZoomImage(null);
-                  }}
-                  onMouseMove={(e) => {
-                    const rect = e.currentTarget.getBoundingClientRect();
-                    const x = ((e.clientX - rect.left) / rect.width) * 100;
-                    const y = ((e.clientY - rect.top) / rect.height) * 100;
-                    setZoomPos({ x, y });
-                  }}
-                  onClick={() => setZoomImage(item.image)}
-                />
+                >
 
-                {/* Content */}
-                <Box sx={{ p: 2.5, textAlign: "center" }}>
-                  <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1, mb: 1 }}>
-                    <FolderIcon sx={{ color: '#5D91C3', fontSize: '1rem' }} />
+                  {/* FULLSCREEN BUTTON */}
+                  <Button
+                    onClick={() => setZoomImage(item.image)}
+                    startIcon={<FullscreenIcon sx={{ fontSize: "0.95rem" }} />}
+                    sx={{
+                      position: "absolute",
+                      left: 12,
+                      bottom: 12,
+                      minWidth: "unset",
+                      px: 1.2,
+                      py: 0.45,
+                      borderRadius: 2,
+                      backgroundColor: "rgba(255,255,255,0.92)",
+                      color: "#0F172A",
+                      fontSize: "0.72rem",
+                      fontWeight: 600,
+                      textTransform: "none",
+                      backdropFilter: "blur(6px)",
+                      border: "1px solid rgba(226,232,240,0.9)",
+
+                      "&:hover": {
+                        backgroundColor: "#FFFFFF",
+                      },
+                    }}
+                  >
+                    Full View
+                  </Button>
+
+                </Box>
+
+                {/* CONTENT */}
+                <Box sx={{ p: 2.5 }}>
+
+                  {/* TITLE */}
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: 1,
+                      textAlign: "center",
+                    }}
+                  >
+                    <FolderIcon
+                      sx={{
+                        color: "#1E3A8A",
+                        fontSize: "1.2rem",
+                      }}
+                    />
+
                     <Typography
-                      variant="subtitle1"
                       sx={{
                         fontWeight: 700,
-                        color: '#ffffff',
-                        fontSize: '1rem',
+                        color: "#0F172A",
                       }}
                     >
                       {item.title}
                     </Typography>
                   </Box>
 
-                  <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 0.5, mb: 1 }}>
-                    <CalendarTodayIcon sx={{ color: '#5D91C3', fontSize: '0.7rem' }} />
-                    <Typography
-                      variant="caption"
+                  {/* DATE */}
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: 1,
+                      mt: 0.5,
+                      textAlign: "center",
+                    }}
+                  >
+                    <CalendarTodayIcon
                       sx={{
-                        fontFamily: theme.typography.fontFamily,
-                        color: '#B1C7DE',
+                        color: "#1E3A8A",
+                        fontSize: "0.9rem",
+                      }}
+                    />
+
+                    <Typography
+                      sx={{
+                        color: "#475569",
+                        fontSize: "0.85rem",
                       }}
                     >
-                      {item.start_date === item.end_date
-                        ? item.start_date
-                        : `${item.start_date} – ${item.end_date}`}
+                      {item.start_date} – {item.end_date}
                     </Typography>
                   </Box>
 
+                  {/* SUBTITLE */}
                   <Typography
-                    variant="body2"
                     sx={{
-                      fontFamily: theme.typography.fontFamily,
-                      color: '#B1C7DE',
+                      color: "#64748B",
                       fontStyle: "italic",
-                      mb: 1.5,
-                      fontSize: '0.85rem',
+                      mt: 1,
+                      textAlign: "center",
                     }}
                   >
                     {item.subtitle}
                   </Typography>
 
-                  {/* Expand / Collapse Button */}
-                  <Button
-                    size="small"
-                    variant="text"
-                    onClick={() => toggleExpand(index)}
-                    sx={{ 
-                      mb: 1.5,
-                      color: '#5D91C3',
-                      textTransform: 'none',
-                      fontWeight: 600,
-                      '&:hover': {
-                        backgroundColor: 'rgba(93, 145, 195, 0.1)',
-                      },
-                    }}
-                  >
-                    {expandedProjects[index] ? "Show Less ▲" : "Show More ▼"}
-                  </Button>
+                  {/* EXPAND */}
+                  <Box sx={{ textAlign: "center", mt: 1 }}>
+                    <Button
+                      size="small"
+                      onClick={() => toggleExpand(index)}
+                      sx={{
+                        color: "#1E3A8A",
+                        textTransform: "none",
+                        fontWeight: 600,
+                      }}
+                    >
+                      {expandedProjects[index]
+                        ? "Show Less ▲"
+                        : "Show More ▼"}
+                    </Button>
+                  </Box>
 
-                  {/* COLLAPSIBLE SECTION */}
+                  {/* COLLAPSE */}
                   <Collapse in={expandedProjects[index]}>
-                    {/* Responsibilities */}
-                    <Box sx={{ textAlign: "left", mt: 1 }}>
-                      {item.responsibilities.map((resp, i) => (
-                        <Box key={i} sx={{ display: 'flex', gap: 1, mb: 0.75 }}>
-                          <Typography sx={{ color: '#5D91C3', fontWeight: 700 }}>•</Typography>
-                          <Typography variant="body2" sx={{ color: '#E0E8F0', fontSize: '0.8rem' }}>
-                            {resp}
-                          </Typography>
-                        </Box>
+
+                    {/* RESPONSIBILITIES */}
+                    <Box sx={{ mt: 1 }}>
+                      {item.responsibilities.map((r, i) => (
+                        <Typography
+                          key={i}
+                          sx={{
+                            color: "#475569",
+                            fontSize: "0.85rem",
+                            mb: 0.7,
+                          }}
+                        >
+                          • {r}
+                        </Typography>
                       ))}
                     </Box>
 
-                    {/* Technologies */}
+                    {/* TECH */}
                     <Box
                       sx={{
                         display: "flex",
-                        justifyContent: "center",
                         flexWrap: "wrap",
-                        gap: 0.8,
+                        gap: 1,
                         mt: 2,
                       }}
                     >
-                      {item.technologies.map((tech, i) => (
+                      {item.technologies.map((t, i) => (
                         <Chip
                           key={i}
-                          label={tech}
+                          label={t}
                           size="small"
                           sx={{
-                            backgroundColor: 'rgba(93, 145, 195, 0.12)',
-                            fontSize: "0.7rem",
-                            fontWeight: 600,
-                            fontFamily: theme.typography.fontFamily,
-                            borderRadius: 1.5,
-                            border: "1px solid rgba(93, 145, 195, 0.3)",
-                            color: '#5D91C3',
-                            "&:hover": {
-                              transform: "translateY(-1px)",
-                              borderColor: '#5D91C3',
-                              backgroundColor: 'rgba(93, 145, 195, 0.2)',
-                            },
-                            transition: 'all 0.2s ease',
+                            backgroundColor: "#EEF2FF",
+                            color: "#1E3A8A",
+                            border: "1px solid #CBD5E1",
+                            fontWeight: 500,
                           }}
                         />
                       ))}
                     </Box>
 
-                    {/* Buttons */}
+                    {/* BUTTONS */}
                     <Box
                       sx={{
                         display: "flex",
-                        justifyContent: "center",
                         gap: 1.5,
                         mt: 2.5,
+                        flexWrap: "wrap",
                       }}
                     >
+
                       {item.code && (
                         <Button
                           href={item.code}
                           target="_blank"
                           rel="noopener noreferrer"
-                          startIcon={<GitHubIcon sx={{ fontSize: 16 }} />}
+                          startIcon={<GitHubIcon />}
                           variant="outlined"
-                          size="small"
                           sx={{
-                            color: '#B1C7DE',
-                            borderColor: 'rgba(177, 199, 222, 0.5)',
+                            color: "#1E3A8A",
+                            border: "1px solid #CBD5E1",
                             textTransform: "none",
                             fontWeight: 600,
-                            borderRadius: 2,
-                            '&:hover': {
-                              backgroundColor: 'rgba(177, 199, 222, 0.15)',
-                              borderColor: '#B1C7DE',
-                              transform: 'translateY(-2px)',
+
+                            "&:hover": {
+                              backgroundColor: "#EEF2FF",
+                              borderColor: "#1E3A8A",
                             },
                           }}
                         >
@@ -370,26 +392,26 @@ const ProjectsSection = forwardRef(({ data }, ref) => {
                           href={item.pdf}
                           target="_blank"
                           rel="noopener noreferrer"
-                          startIcon={<PictureAsPdfIcon sx={{ fontSize: 16 }} />}
+                          startIcon={<PictureAsPdfIcon />}
                           variant="outlined"
-                          size="small"
                           sx={{
-                            color: "#f57c00",
-                            borderColor: "rgba(245, 124, 0, 0.5)",
+                            color: "#1E3A8A",
+                            border: "1px solid #CBD5E1",
                             textTransform: "none",
                             fontWeight: 600,
-                            borderRadius: 2,
+
                             "&:hover": {
-                              backgroundColor: "rgba(245, 124, 0, 0.15)",
-                              borderColor: "#f57c00",
-                              transform: "translateY(-2px)",
+                              backgroundColor: "#EEF2FF",
+                              borderColor: "#1E3A8A",
                             },
                           }}
                         >
                           Report
                         </Button>
                       )}
+
                     </Box>
+
                   </Collapse>
                 </Box>
               </Box>

@@ -76,36 +76,46 @@ const Taskbar = ({ data, activeSection, onSectionChange, sections, sectionIcons 
                   <IconButton
                     onClick={() => onSectionChange(section.id)}
                     sx={{
-                      color: isActive ? '#ffffff' : '#B1C7DE',
+                      width: 40,
+                      height: 40,
+                      minWidth: 40,
+                      minHeight: 40,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+
+                      color: isActive ? "#ffffff" : "#B1C7DE",
                       background: isActive
-                        ? 'linear-gradient(135deg, #5D91C3, #2196f3)'
-                        : 'transparent',
-                      '&:hover': {
-                        background: 'linear-gradient(135deg, #5D91C3, #2196f3)',
-                        color: '#ffffff',
-                        transform: 'translateY(-3px)',
-                        boxShadow: '0 4px 12px rgba(93, 145, 195, 0.4)',
+                        ? "linear-gradient(135deg, #5D91C3, #2196f3)"
+                        : "transparent",
+
+                      borderRadius: "50%",
+                      transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
+
+                      "&:hover": {
+                        background: "linear-gradient(135deg, #5D91C3, #2196f3)",
+                        color: "#ffffff",
+                        transform: "translateY(-3px)",
+                        boxShadow: "0 4px 12px rgba(93, 145, 195, 0.4)",
                       },
-                      borderRadius: '50%',
-                      width: { xs: 36, sm: 36, md: 40, lg: 40 },
-                      height: { xs: 36, sm: 36, md: 40, lg: 40 },
-                      transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
-                      position: 'relative',
-                      '&::after': isActive ? {
-                        content: '""',
-                        position: 'absolute',
-                        bottom: -4,
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        width: '6px',
-                        height: '6px',
-                        borderRadius: '50%',
-                        background: '#5D91C3',
-                        boxShadow: '0 0 8px #5D91C3',
-                      } : {},
+
+                      "&::after": isActive
+                        ? {
+                            content: '""',
+                            position: "absolute",
+                            bottom: -4,
+                            left: "50%",
+                            transform: "translateX(-50%)",
+                            width: 6,
+                            height: 6,
+                            borderRadius: "50%",
+                            background: "#5D91C3",
+                            boxShadow: "0 0 8px #5D91C3",
+                          }
+                        : {},
                     }}
                   >
-                    <Icon sx={{ fontSize: { xs: 18, sm: 18, md: 20, lg: 20 } }} />
+                    <Icon sx={{ fontSize: 20 }} />
                   </IconButton>
                 </Tooltip>
               );
