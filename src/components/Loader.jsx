@@ -72,14 +72,14 @@ const Loader = () => {
         {/* PROFILE IMAGE */}
         <Box
           component="img"
-          src="/static/img/alaeimo.jpg"
+          src="/static/img/alaeimo.png"
           alt="Profile"
           sx={{
             position: 'absolute',
             top: '50%',
             left: '50%',
-            width: 72,
-            height: 72,
+            width: 100,
+            height: 100,
             borderRadius: '50%',
             transform: 'translate(-50%, -50%)',
             objectFit: 'cover',

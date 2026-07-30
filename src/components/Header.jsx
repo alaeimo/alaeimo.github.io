@@ -56,10 +56,10 @@ const Header = ({ data = {} }) => {
                 src="/static/img/face.jpg"
                 alt={data.name || 'Profile'}
                 sx={{
-                  width: { xs: 120, md: 150 },
-                  height: { xs: 120, md: 150 },
+                  width: { xs: 200, md: 250 },
+                  height: { xs: 200, md: 250 },
                   mx: 'auto',
-                  border: '2px solid #E2E8F0',
+                  border: '1px solid #E2E8F0',
                 }}
               />
 
