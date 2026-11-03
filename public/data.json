@@ -375,6 +375,36 @@
         }
     ],
     "projects": [
+    {
+        "title": "ApplyTools – Smart Academic Position Matcher",
+        "category": "Full-Stack AI Application",
+        "subtitle": "Django-based PhD position scraper & AI-powered CV matcher with DeepSeek",
+        "responsibilities": [
+            "Built an async scraper with TLS/JA3 fingerprint impersonation (curl_cffi), Playwright browser fallback, and JSON-LD JobPosting auto-extraction (extruct) to scrape PhD positions from Cloudflare-protected job boards",
+            "Integrated the DeepSeek chat API (with PoW challenge solving) to match candidate CVs against positions, supporting multi-language output (English, Persian, German) and conversation continuity across multiple positions",
+            "Implemented real-time SSE progress streaming with stop/cancel controls, reconnect-after-refresh, and a CV management module supporting pasted text, PDF, and TXT uploads with persistent match-session tracking",
+            "Developed an AI website auto-analyzer that captures XHR responses via Playwright network interception and uses DeepSeek to detect the correct CSS selectors or API endpoints from page HTML"
+        ],
+        "technologies": [
+            "Python",
+            "Django / DRF",
+            "Asyncio / asgiref",
+            "curl_cffi (TLS impersonation)",
+            "Playwright",
+            "extruct / jmespath / selectolax",
+            "Pydantic v2",
+            "Tenacity",
+            "pdfplumber",
+            "DeepSeek Chat API",
+            "Server-Sent Events (SSE)",
+            "Bootstrap 5 / Vanilla JS"
+        ],
+        "start_date": "Aug 2026",
+        "end_date": "Nov 2026",
+        "image": "static/img/projects/ApplyTools.png",
+        "code": "https://github.com/alaeimo/ApplyTools",
+        "pdf": ""
+    },
         {
             "title": "Hybrid Fashion Recommendation System",
             "category": "Recommender Systems",
